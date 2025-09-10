@@ -24,7 +24,7 @@
 </head>
 <body class="min-h-screen bg-gradient-to-br from-amber-50 via-orange-100 to-orange-50">
     <!-- EN EL HEADER SE ENCUENTRA EL LOGO DE POLICAFÉ, LA BARRA DE NAVEGACIÓN, UN INPUT PARA BUSQUEDA Y LOS ICONOS DE CARRITO Y PERFIL -->
-    <header class="py-6 px-6">
+    <header class="py-6 px-6" id="#">
         <div class="container mx-auto flex items-center justify-between">
             <div class="flex items-center">
                 <img src="./img/policafe-logo.png" alt="PoliCafé Logo" class="h-16 w-auto">
@@ -55,6 +55,7 @@
         </div>
     </header>
     <!-- FIN DE HEADER -->
+     
     <!-- AQUÍ COMIENZA LA SECCIÓN DE INICIO DONDE SE PRESENTA A LA CAFETERIA -->
     <main class="bg-main">
         <div class="container mx-auto px-6 py-16">
@@ -218,16 +219,15 @@
     <section id="horario" class="bg-main py-16">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-gray-800 text-center mb-12">Horario</h2>
-            <div class="flex flex-row lg:flex-row items-center justify-between">
-                <div class="lg:w-1/2 mb-12 lg:mb-0">
-                    <div class="mb-8">
-                        <div class="flex flex-col space-x-4 items-center">
-                            <h3 class="text-lg font-bold text-gray-800 mb-1">Estamos</h3>
-                            <br>
-                            <h1 class="text-8xl font-bold text-orange-500 mb-4">ABIERTOS</h1>
-                        </div>
+            <div class="flex flex-col lg:flex-row items-center justify-between">
+                <div class="lg:w-1/2 mb-14 lg:mb-0 mb-8">
+                    <div class="flex flex-col space-x-4 items-center">
+                        <h3 class="text-lg font-bold text-gray-800 mb-1">Estamos</h3>
+                        <br>
+                        <h1 class="text-7xl font-bold text-orange-500 mb-4">ABIERTOS</h1>
                     </div>
-                    <div class="flex flex-row lg:flex-row items-center justify-between">
+                        
+                    <div class="flex flex-row lg:flex-row items-center space-x-4">
                         <div class="bg-amber-50 rounded-2xl p-8 border-black border-2 opacity-95 text-center">
                             <p class="text-gray-500 text-2xl mb-4">
                                 Lunes a Viernes<br>
@@ -242,11 +242,20 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="lg:w-1/2 flex justify-center lg:justify-end">
+                <div class="lg:w-1/2 flex justify-center">
                     <!-- Iframe es una etiqueta que sirve para anidar otro documento HTML dentro del documento principal.
                          en este caso estamos usando GOOGLE MAPS para mostrar un mapa de la poli :3 -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1613.9174763795033!2d-99.07797293476135!3d23.729026411286448!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x867951c2ca0e664b%3A0x11ec782b4c5df556!2sCafeter%C3%ADa%20UPV!5e0!3m2!1ses!2smx!4v1757509421304!5m2!1ses!2smx" width="800" height="600" style="border:1px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="mx-6"></iframe><br/>
+                    <iframe 
+                        class="object-contain"
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1613.9174763795033!2d-99.07797293476135!3d23.729026411286448!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x867951c2ca0e664b%3A0x11ec782b4c5df556!2sCafeter%C3%ADa%20UPV!5e0!3m2!1ses!2smx!4v1757509421304!5m2!1ses!2smx" 
+                        width="400" 
+                        height="400" 
+                        style="border:1px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade" 
+                        class="mx-6">
+                    </iframe>
                 </div>
             </div>
         </div>
@@ -254,7 +263,7 @@
     <!-- FIN DE SECCIÓN DE HORARIO :3-->
 
     <!-- INICIO DE SECCION DE CONTACTO -->
-    <section id="contacto" class="bg-main py-10">
+    <section id="contacto" class="">
         <div class="container mx-auto px-6 py-16">
             <div class="flex flex-col lg:flex-row items-center justify-between">
                 <div class="lg:w-1/2 mb-12 lg:mb-0">
@@ -287,8 +296,12 @@
     <!-- FIN DE SECCIÓN DE CONTACTO -->
 
     <!-- INICIO DE FOOTER-->
-    <footer class="flex justify-center lg:justify-center bg-gray-800 text-white font-semibold p-5 px-10">
-        PoliCafé - 2025
+    <footer class="bg-gray-800 text-white font-semibold p-5 px-10 justify-center">
+        <div class="flex justify-center">
+            <button class="bg-gray-800 text-white font-semibold py-3 px-8 rounded-full text-center hover:bg-gray-700 transition-colors duration-300 shadow-lg" onclick="location.href='#'">
+                Volver
+            </button>
+        </div>
     </footer>
     <!-- FINAL DE FOOTER -->
 </body>
