@@ -5,7 +5,7 @@ Practica hecha en equipo con Angel Gabriel Coronado Sanchez sobre la elaboracion
 - Horarios
 - Contactos
 
-## Link al repositorio:
+## Link al repositorio del caso:
 Georgina Reta Limas:
 - [https://github.com/GeorginaRetaLimas/2430043-AW/tree/main/Caso1](https://github.com/GeorginaRetaLimas/2430043-AW/tree/main/Caso1) 
 
