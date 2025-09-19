@@ -13,21 +13,103 @@
     <!-- Inicio Punto 17 -->
     <h2>17.  ¿Cómo se declara un objeto y cómo se accede a sus propiedades?</h2>
     <p>
-        
+        Con el tipo de variable y tipo de dato, corchetes y contenido.
+        <pre>
+            var nombreObjeto = {
+                dato: "Wa",
+                numero: 48
+            };
+
+            var nombreObjeto = new Object();
+            nombreObjeto.dato = "Wa";
+            nombreObjeto.numero = 4;
+
+            console.log(nombreObjeto);
+        </pre>
     </p>
     <!-- Fin punto 17 -->
 
     <!-- Inicio Punto 18 -->
     <h2>18. ¿Qué diferencia hay entre una propiedad y un método en un objeto?</h2>
     <p>
-        
+        Una <strong>propiedad</strong> es un valor o dato (numerico, candeno,
+        boolean) que esta asociado a un objeto, mientras que los metodos es una función
+        que esta asignada a una propiedad, ejecutandose para realizar la accion o 
+        comportamiento.
+
+        <pre>
+            const persona = {
+                nombre = "Fabian",      // Esto es una propiedad
+                edad: 30,
+                llorar: function(){     // Esta es una propiedad cuyo valor es una función
+                    console.log("pipipi " + this.nombre);
+                }
+            }
+
+            // Accede a la propiedad
+            console.log(persona.nombre);
+
+            // Invoca al método
+            console.log(persona.llorar);
+        </pre>
     </p>
     <!-- Fin Punto 18 -->
 
     <!-- Inicio punto 19 -->
     <h2>19. Menciona al menos 3 métodos básicos de los arrays (push, pop, map, etc.) y explica cómo funcionan.</h2>
+    <h3>push(... items)()</h3>
     <p>
+        Agrega uno o mas elementos al final del array y devuelve la nueva longitud
         
+        <pre>
+            let animaless = ["Elefante", "Jirafa", "Mono"];
+
+            let cantidad = animales.push("vaca");
+            console.log(cantidad); // Aqui devolvera 4
+            console.log(animales); // Aqui: ["Elefante", "Jirafa", "Mono", "vaca"]
+        </pre>
+    </p>
+
+    <h3>pop()()</h3>
+    <p>
+        Elimina el elemento de un array y lo devuelve
+        <pre>
+            let animaless = ["Elefante", "Jirafa", "Mono"];
+
+            let animalito = animales.push("Jirafa");
+            console.log(animalito); // Aqui devolvera Jirafa
+            console.log(animales); // Aqui: ["Elefante", "Mono"]
+        </pre>
+    </p>
+
+    <h3>includes(element)</h3>
+    <p>
+        Devuelve <strong>true</strong> si el elemento está en el
+        array cumple con la condición.
+        <pre>
+            let animaless = ["Elefante", "Jirafa", "Mono", "Vaca"];
+
+            if ( animales.includes("Vaca") ){
+                console.log("Incluye vaquita");
+            }
+
+            let animal = "Mono";
+
+            console.log(animales.includes(animal)); // Aqui devolvera true
+        </pre>
+    </p>
+
+
+    <h3>map()</h3>
+    <p>
+        Crea un nuevo array en base al original aplicando un metodo
+        <pre>
+            let numeros = [1, 5, 10, 15];
+
+            var doble = numeros.map(function (x){
+                return x *2;
+            });
+        </pre>
     </p>
     <!-- Fin punto 19 -->
 
