@@ -13,28 +13,81 @@
     <!-- Inicio Punto 13 -->
     <h2>13. ¿Cómo se declara una función y cómo se llama en JavaScript?</h2>
     <p>
-        
+        Se utiliza la palabra reservada de <strong>function</strong> seguido del nombre
+        de la funcion, parentesis con o sin los parametros, corchetes y contenido
+
+        <pre>
+            function nombreFuncion(){
+                // Contenido ...
+            }
+
+            funcion suma(a, b){
+                let resultado = a + b;
+                return resultado;
+            }
+
+            let total = suma(10, 20); // Asi es como se llama a una función
+        </pre>
     </p>
     <!-- Fin punto 13 -->
 
     <!-- Inicio Punto 14 -->
     <h2>14. ¿Qué significa que una función tenga parámetros y un valor de retorno?</h2>
     <p>
-        
+        Los parametros son las variables que una funcion puede recibir para realizar
+        sus acciones, el valor de retorno es el contenido que va despues de la palabra 
+        reservada <strong>return</strong> es usualmente el resultado o lo generado por
+        la función.
+
+        <pre>
+            // Funcion con parametros y sin retorno
+            function saludar (nombre){
+                console.log ("Holi " + nombre);
+            } 
+
+            // Función con parametros y return
+            function saludarLog (nombre){
+                let saludo = "Holi " + nombre;
+                return saludo;
+            } 
+            console.log (saludarLog("Gina"));
+        </pre>
     </p>
     <!-- Fin Punto 14 -->
 
     <!-- Inicio punto 15 -->
     <h2>15. ¿Qué son las funciones flecha (=>) y qué ventajas tienen?</h2>
     <p>
-        
+        Las funciones flechas son una sintaxis básica a la hora de definir funciones
+        para que el código sea más sencillo y legible. Ofrece ventajas como mejor sintaxis
+        retorno implicito, sin embargo no es adecuada para todos los casos.
+
+        <pre>
+            // Función simple de una sola linea
+            let sumar = (a, b) => a + b;
+
+            // Función de más de una línea
+            let sumar = (a, b) => {let resultado, a + b, return resultado};
+
+        </pre>
     </p>
     <!-- Fin punto 15 -->
 
     <!-- Inicio punto 16 -->
     <h2>16.  ¿Qué es el scope en JavaScript y cómo afecta a las variables?</h2>
     <p>
-        
+        El scope (o alcance) en JavaScript define el tiempo de vida de una variable, donde
+        es vista y es accesible, esta afecta a las variables de JavaScript porque
+        las variables no pueden ser usadas fuera del bloque de donde se crearon, por
+        eso es importante definir bien el ciclo de vida de las variables.
+
+        <pre>
+            var variableglobal = "Puedo ser usada en cualquier parte";
+
+            function unaFuncion(){
+                var variableLocal = "Solo puedo ser usada dentro de mi funcion";
+            }
+        </pre>
     </p>
     <!-- Fin punto 16 -->
 
