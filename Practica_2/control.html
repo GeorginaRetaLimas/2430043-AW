@@ -13,21 +13,91 @@
     <!-- Inicio Punto 10 -->
     <h2>10. ¿Cómo funcionan las sentencias condicionales if, else y switch?</h2>
     <p>
-        
+        Estas sentencias controlan el flujo de la ejecución. Las sentencias <strong>if</strong>
+        y <strong>else</strong> se usan para ejecutar sentencias de codigo en base a la
+        condicion boleana: if si es verdadero, else es una alterativa y else if contiene más
+        condiciones.
+
+        <pre>
+            let numero = 10;
+
+            if (numero >= 10){
+                console.log("True");
+            } else {
+                console.log("False");
+            }
+        </pre>
+
+        Mientras que el <strong>switch</strong> se usa para la seleccion entre varias
+        opciones.
+
+        <pre>
+            opcion = 1;
+
+            switch(opcion){
+                case 1: 
+                    console.log("Se ingreso 1");
+                break;
+                case 2: 
+                    console.log("Se ingreso 2");
+                break;
+                defautl: 
+                    console.log("Ingreso algo bien raro");
+                break;
+            }
+        </pre>
     </p>
     <!-- Fin punto 10 -->
 
     <!-- Inicio Punto 11 -->
     <h2>11. ¿Cuáles son las diferencias entre los bucles for, while y do...while?</h2>
+    <h3>For</h3>
     <p>
-        
+        Es una estructura definida con iteraciones, es ideal cuando se tiene un número
+        definido de iteraciones que se van a realizar, como en el recorrido de un array.
+
+        <pre>
+            for (int i = 0; i <= 10; i++) {
+                 // Contenido
+            }
+        </pre>
     </p>
+
+    <h3>While</h3>
+    <p>
+        El ciclo while es un control de flujo que repetira que se declara con una condición,
+        este ciclo se va a estar iterando hasta que la condicion se rompa. Es ideal cuando
+        no sabemos que tantas veces se va a repetir el codigo, si ninguna o muchas.
+
+        <pre>
+            while (condicion) {
+                 // Contenido
+            }
+        </pre>
+    </p>
+
+    <h3>Do... While</h3>
+    <p>
+        A diferencia del while en el do while tenemos definido que el contenido del ciclo
+        se va a ejecutar al menos una vez sin importar la condición, después se evalua 
+        la condicion.
+
+        <pre>
+            do {
+                 // Contenido
+            } while (condicion);
+        </pre>
+    </p>
+
     <!-- Fin Punto 11 -->
 
     <!-- Inicio punto 12 -->
     <h2>12. ¿Para qué sirven las palabras clave break y continue?</h2>
     <p>
-        
+        Las palabras clave de break y continuo se usan para controlar el flujo del 
+        programa. El <strong>break</strong> se sale completamente del blucle,
+        mientras que <strong>continue</strong> omite el resto del codigo de la
+        iteración actual pasansose a la siguiente.
     </p>
     <!-- Fin punto 12 -->
 
