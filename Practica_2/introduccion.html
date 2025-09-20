@@ -1,139 +1,202 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="estilos.css" >
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <title>Introducción</title>
 </head>
-<body>
+<body class="container mx-auto px-6 py-16">
     <!-- Nota a mi yo del futuro: Poner aqui un nav -->
 
-    <h1>Introducción y contexto</h1>
+    <header class="py-1 px-6">
+        <nav class="flex-1 flex justify-center">
+            <a href="introduccion.html" class="px-5 py-2 text-black-600 font-medium hover:text-red-400 transition-colors">Introducción y contexto</a>
+            <a href="fundamentos.html" class="px-5 py-2 text-black-600 font-medium hover:text-red-400 transition-colors">Fundamentos del lenguaje</a>
+            <a href="control.html" class="px-5 py-2 text-black-600 font-medium hover:text-red-400 transition-colors">Control de flujo</a>
+            <a href="funciones.html" class="px-5 py-2 text-black-600 font-medium hover:text-red-400 transition-colors">Funciones</a>
+            <a href="objetos.html" class="px-5 py-2 text-black-600 font-medium hover:text-red-400 transition-colors">Objetos y colecciones</a>
+            <a href="otros.html" class="px-5 py-2 text-black-600 font-medium hover:text-red-400 transition-colors">Otros temas básicos</a>
+        </nav>
+    </header>
+
+    <h1 class="text-4xl font-bold text-black-500 mb-4 text-center">Introducción y contexto</h1>
     
     <!-- Inicio Punto 1 -->
-    <h2>1. ¿Qué es JavaScript y cuáles son sus principales usos en la web?</h2>
-    <p>
-        JavaScript o JS es un lenguaje de programacion que se utiliza en conjunto 
-        con HTML y CSS con el fin de hacer páginas web interactivas. Anteriormente
-        las páginas eran estáticas y es gracias a JS que las páginas pueden empezar
-        a ser dinámicas, entre sus usos: 
-        <br>
-        Responder a la interaccion de usurios
-        <ul>
-            <li>Creación de menus desplegables con click</li>
-            <li>Funciones especiales con clicks</li>
-            <li>Hacer click en una imagen para cambiarla</li>
-        </ul>
+    <div class="bg-amber-50 rounded-2xl p-6 border-black border-2 opacity-95">
+        <h2 class="text-2xl font-bold text-orange-500 mb-4 text-center">
+            1. ¿Qué es JavaScript y cuáles son sus principales usos en la web?
+        </h2>
 
-        <br>
-        Cambiar la distribución del contenido de la pagina web
-        <ul>
-            <li>Mostrar un carrusel de imagenes</li>
-            <li>Mantener elementos en pantalla</li>
-        </ul>
-    </p>
+        <div class="flex flex-col lg:flex-row justify-between items-center">
+            <div class="lg:w-1/2 mb-10 lg:mb-0">
+                <p class="text-black-700 mb-4 text-lg">
+                    JavaScript o JS es un lenguaje de programacion que se utiliza en conjunto 
+                    con HTML y CSS con el fin de hacer páginas web interactivas. Anteriormente
+                    las páginas eran estáticas y es gracias a JS que las páginas pueden empezar
+                    a ser dinámicas, entre sus usos: 
+                    <br>
+                    🌟Responder a la interaccion de usurios
+                    <ul class="list-disc list-inside ml-4 text-gray-600">
+                        <li>Creación de menus desplegables con click</li>
+                        <li>Funciones especiales con clicks</li>
+                        <li>Hacer click en una imagen para cambiarla</li>
+                    </ul>
+
+                    <br>
+                    🌟Cambiar la distribución del contenido de la pagina web
+                    <ul class="list-disc list-inside ml-4 text-gray-600">
+                        <li>Mostrar un carrusel de imagenes</li>
+                        <li>Mantener elementos en pantalla</li>
+                    </ul>
+                </p>
+            </div>
+            <div class="lg:w-1/2 flex justify-center lg:justify-end">
+                <img src="./img/javascript.jpg" alt="JavaScript" class="w-[300px] h-[300px] object-contain">
+            </div>
+        </div>
+    </div>
     <!-- Fin punto 1 -->
 
+    <br>
+
     <!-- Inicio Punto 2 -->
-    <h2>2. ¿En qué año y con qué propósito se creó JavaScript?</h2>
-    <p>
-        El lenguaje fue creado por Brendan Eich en 1995 para una empresa de software (Netscape),
-        lo creo con el proposito de hacer paginas web más interactivas y dinámicas, dando oportunidad 
-        de la inclusión de funciones como las validaciones de formularios o actualizaciones sin recarga.
+    <div class="bg-amber-50 rounded-2xl p-6 border-black border-2 opacity-95">
+        <h2 class="text-2xl font-bold text-orange-500 mb-4 text-center">
+            2. ¿En qué año y con qué propósito se creó JavaScript?
+        </h2>
 
-        <br>
+        <div class="flex flex-col lg:flex-row justify-between items-center">
+            <div class="lg:w-1/2 mb-10 lg:mb-0">
+                <p class="text-black-700 mb-4 text-lg">
+                    El lenguaje fue creado por Brendan Eich en 1995 para una empresa de software (Netscape),
+                    lo creo con el proposito de hacer paginas web más interactivas y dinámicas, dando oportunidad 
+                    de la inclusión de funciones como las validaciones de formularios o actualizaciones sin recarga.
 
-        Este tenia tres propositos principales:
+                    <br>
 
-        <ol>
-            <li>
-                <strong>Interactividad: </strong>Se buscaba que las acciones de los usuarios
-                puedan dar pie a diferents eventos como el ejemplo del menu desplegable
-            </li>
-            <li>
-                <strong>Validación: </strong>Otro objetivo era llevar a cabo verificaciones 
-                que no requieran envios de datos para saber si estos datos eran correctos o no.
-            </li>
-            <li>
-                <strong>Contenido dinámico: </strong>Se buscaba que las páginas puedan ser modificadas
-                a tiempo real y personalizadas.
-            </li>
-        </ol>
-    </p>
-    <img src="img/Brendan_Eich.jpg" width="150px" height="150px">
+                    Este tenia tres propositos principales:
+
+                    <ol class="list-disc list-inside ml-4 text-gray-600">
+                        <li>
+                            <strong>Interactividad: </strong>Se buscaba que las acciones de los usuarios
+                            puedan dar pie a diferents eventos como el ejemplo del menu desplegable
+                        </li>
+                        <li>
+                            <strong>Validación: </strong>Otro objetivo era llevar a cabo verificaciones 
+                            que no requieran envios de datos para saber si estos datos eran correctos o no.
+                        </li>
+                        <li>
+                            <strong>Contenido dinámico: </strong>Se buscaba que las páginas puedan ser modificadas
+                            a tiempo real y personalizadas.
+                        </li>
+                    </ol>
+                </p>
+            </div>
+        </div>
+        <div class="lg:w-2/2 lg:justify-end">
+            <img  src="img/Brendan_Eich.jpg" class="w-[150px] h-[150px] object-contain">
+        </div>
+    </div>
     <!-- Fin Punto 2 -->
 
+    <br>
+
     <!-- Inicio punto 3 -->
-    <h2>3. ¿Por qué JavaScript no es lo mismo que Java?</h2>
-    <p>
-        Principalmente porque son dos lenguajes de programación diferente, ademas que manejan
-        propositos diferentes.
+    <div class="bg-amber-50 rounded-2xl p-6 border-black border-2 opacity-95">
+        <h2 class="text-2xl font-bold text-orange-500 mb-4 text-center">
+            3. ¿Por qué JavaScript no es lo mismo que Java?
+        </h2>
 
-        <table border="1px">
-            <tr>
-                <th>Diferencias</th>
-                <th>Java</th>
-                <th>JavaScript</th>
-            </tr>
-            <tr>
-                <td>Proposito</td>
-                <td>
-                    Se usa para crear aplicaciones en escritorio o telefonos, sistemas o
-                    manejo de backend con fines profesionales
-                </td>
-                <td>
-                    Se usa para crear sitios web interactivos con los usuarios
-                </td>
-            </tr>
+        <div class="flex flex-col lg:flex-row justify-between items-center">
+            <div class="lg:w-1/2 mb-10 lg:mb-0">
+                <p class="text-black-700 mb-4 text-lg">
+                    Principalmente porque son dos lenguajes de programación diferente, ademas que manejan
+                    propositos diferentes.
 
-            <tr>
-                <td>Ejecucion</td>
-                <td>
-                    Es un lenguaje compilado e independiente de una plataforma.
-                </td>
-                <td>
-                    Es un lenguaje interprado, se ejecuta directamente en el navegador.
-                </td>
-            </tr>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left table-auto">
+                            <thead>
+                            <tr class="bg-yellow-200">
+                                <th class="px-4 py-2">Diferencias</th>
+                                <th class="px-4 py-2">Java</th>
+                                <th class="px-4 py-2">JavaScript</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border px-4 py-2">Proposito</td>
+                                    <td class="border px-4 py-2">
+                                        Se usa para crear aplicaciones en escritorio o telefonos, sistemas o
+                                        manejo de backend con fines profesionales
+                                    </td>
+                                    <td class="border px-4 py-2">
+                                        Se usa para crear sitios web interactivos con los usuarios
+                                    </td>
+                                </tr>
 
-            <tr>
-                <td>Estructura</td>
-                <td>
-                    El lenguaje es más fuerte y da más miedo, requiere el tipo de datos
-                    de variables.
-                </td>
-                <td>
-                    El lenguaje es dinamico y los datos se determinan hasta que el 
-                    programa se ejecuta, facilitando escritura.
-                </td>
-            </tr>
+                                <tr>
+                                    <td class="border px-4 py-2">Ejecucion</td>
+                                    <td class="border px-4 py-2">
+                                        Es un lenguaje compilado e independiente de una plataforma.
+                                    </td>
+                                    <td class="border px-4 py-2">
+                                        Es un lenguaje interprado, se ejecuta directamente en el navegador.
+                                    </td>
+                                </tr>
 
-            <tr>
-                <td>Codigo</td>
-                <td>
-                    <pre>
-                        int numero = 10;                // Declaracion de tipo numerico
-                        String saludo = "Hola profe";   // Declaración de tipo string
-                    </pre>
-                </td>
-                <td>
-                    <pre>
-                        var numero = 10;                // Se infiere que es int automaticamente
-                        var saludo = "Hola profe";      // del mismo modo con string
-                    </pre>
-                </td>
-            </tr>
-        </table>
-    </p>
+                                <tr>
+                                    <td class="border px-4 py-2">Estructura</td>
+                                    <td class="border px-4 py-2">
+                                        El lenguaje es más fuerte y da más miedo, requiere el tipo de datos
+                                        de variables.
+                                    </td>
+                                    <td class="border px-4 py-2">
+                                        El lenguaje es dinamico y los datos se determinan hasta que el 
+                                        programa se ejecuta, facilitando escritura.
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="border px-4 py-2">Codigo</td>
+                                    <td class="border px-4 py-2">
+                                        <pre>// Declaracion de tipo numerico <br> int numero = 10; <br><br>// Declaración de tipo string <br>String saludo = "Hola profe";</pre>
+                                    </td>
+                                    <td class="border px-4 py-2">
+                                        <pre>// Se infiere que es int automaticamente<br>var numero = 10; <br><br>// del mismo modo con string<br>var saludo = "Hola profe";</pre>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </p>
+            </div>
+        </div>
+    </div>
     <!-- Fin punto 3 -->
 
+    <br>
+
     <!-- Inicio punto 4 -->
-    <h2>4. ¿Cómo se complementa JavaScript con HTML y CSS?</h2>
-    <p>
-        Se complementan a la hora de desarrollar una página web: HTML crea la estructura 
-        de la pagina, CSS da los estilos y JavaScript le da las interacciones, dinámicas 
-        y funcionalidad.
-    </p>
+    <div class="bg-amber-50 rounded-2xl p-6 border-black border-2 opacity-95">
+        <h2 class="text-2xl font-bold text-orange-500 mb-4 text-center">
+            4. ¿Cómo se complementa JavaScript con HTML y CSS?
+        </h2>
+
+        <div class="flex flex-col lg:flex-row justify-between items-center">
+            <div class="lg:w-1/2 mb-10 lg:mb-0">
+                <p class="text-black-700 mb-4 text-lg">
+                    Se complementan a la hora de desarrollar una página web: HTML crea la estructura 
+                    de la pagina, CSS da los estilos y JavaScript le da las interacciones, dinámicas 
+                    y funcionalidad.
+                </p>
+            </div>
+        </div>
+    </div>
     <!-- Fin punto 4 -->
 
     <!-- Nota a mi yo del futuro: Poner un siguiente pagina aqui en el footer -->
