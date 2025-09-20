@@ -1,215 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" type="text/css" href="estilos.css" >
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <title>Introducción</title>
 </head>
-<body>
-    <!-- Nota a mi yo del futuro: Poner aqui un nav -->
+<body class="min-h-screen via-white to-purple-50">
+    <!-- Inicio Navegador -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-gray-200 shadow-sm">
+        <nav class="flex items-center justify-between">
+            
+            <div class="hidden md:flex items-center space-x-1">
+                <a href="introduccion.html" class="nav-item px-4 py-2 text-gray-700 font-medium rounded-lg hover:bg-orange-100 transition-all duration-300">
+                    <i class="fas fa-home mr-2"></i>Introducción y concepto
+                </a>
+                <a href="fundamentos.html" class="nav-item px-4 py-2 text-gray-700 font-medium rounded-lg bg-orange-100 text-orange-700 transition-all duration-300">
+                    <i class="fas fa-code mr-2"></i>Fundamentos del lenguaje
+                </a>
+                <a href="control.html" class="nav-item px-4 py-2 text-gray-700 font-medium rounded-lg hover:bg-orange-100 transition-all duration-300">
+                    <i class="fas fa-code mr-2"></i>Control de flujo
+                </a>
+                <a href="funciones.html" class="nav-item px-4 py-2 text-gray-700 font-medium rounded-lg hover:bg-orange-100 transition-all duration-300">
+                    <i class="fas fa-code mr-2"></i>Funciones
+                </a>
+                <a href="objetos.html" class="nav-item px-4 py-2 text-gray-700 font-medium rounded-lg hover:bg-orange-100 transition-all duration-300">
+                    <i class="fas fa-code mr-2"></i>Objetos y colecciones
+                </a>
+                <a href="otros.html" class="nav-item px-4 py-2 text-gray-700 font-medium rounded-lg hover:bg-orange-100 transition-all duration-300">
+                   <i class="fas fa-code mr-2"></i>Otros temas básicos
+                </a>
+            </div>
+        </nav>
+    </header>
+    <!-- Fin Navegador -->
 
-    <h1>Fundamentos del lenguaje</h1>
+    <br>
+    <h1 class="text-4xl font-bold text-black-500 mb-4 text-center">Fundamentos del lenguaje</h1>
     
     <!-- Inicio Punto 5 -->
-    <h2>5. ¿Cuál es la sintaxis básica de JavaScript y cómo se escriben comentarios?</h2>
-    <p>
-        La sintacis básica de JavaScript inclute uso de declaraciones, funciones, objetis y es sencibles a mayúsculas y minúsculas, usa puntos y comas.
+    <div class="bg-amber-50 rounded-2xl p-6 border-black border-2 opacity-95">
+        <h2 class="text-2xl font-bold text-orange-500 mb-4 text-center">
+            5. ¿Cuál es la sintaxis básica de JavaScript y cómo se escriben comentarios?
+        </h2>
 
-        <pre>
-            // Asi es como se pone un comentario simple
+        <p class="text-black-700 mb-4 text-lg">
+            La sintacis básica de JavaScript inclute uso de declaraciones, funciones, objetis y es sencibles a mayúsculas y minúsculas, usa puntos y comas.
 
-            // Declaracion de variables
-            let x = "Gina";     
-            let y = 3.25;
-            let z = 4;
+            <pre>
+                // Asi es como se pone un comentario simple
 
-            // Manipulación de datos
-            let a = y + z;
+                // Declaracion de variables
+                let x = "Gina";     
+                let y = 3.25;
+                let z = 4;
 
-            /*
-                También podemos crear comentarios así, 
-                permite manejar mas espacio y texto
-            */
-        </pre>
-    </p>
+                // Manipulación de datos
+                let a = y + z;
+
+                /*
+                    También podemos crear comentarios así, 
+                    permite manejar mas espacio y texto
+                */
+            </pre>
+        </p>
+    </div>
     <!-- Fin punto 5 -->
 
+    <br>
+
     <!-- Inicio Punto 6 -->
-    <h2>6. ¿Qué diferencias hay entre var, let y const?</h2>
+    <div class="bg-amber-50 rounded-2xl p-6 border-black border-2 opacity-95">
+        <h2 class="text-2xl font-bold text-orange-500 mb-4 text-center">
+            6. ¿Qué diferencias hay entre var, let y const?
+        </h2>
     
-    <h3>Var</h3>
-    <p>
-        Tiene el alcance de una sola función, solo se puede usar dentro
-        de la función en la que se cree, puede ser reasignada y redeclarada
-        sin problemas
+        <h3 class="text-2xl font-bold text-red-500 mb-4">Var</h3>
+        <p class="text-black-700 mb-4 text-lg">
+            Tiene el alcance de una sola función, solo se puede usar dentro
+            de la función en la que se cree, puede ser reasignada y redeclarada
+            sin problemas
 
-        <pre>
-             var saludar = "Hola salon :D";
-    
-            function ejemplo() {
-                var hola = "hola";
-                //este var solo podra ser usado dentro
-            }
-        </pre>
-    </p>
+            <pre>
+                var saludar = "Hola salon :D";
+        
+                function ejemplo() {
+                    var hola = "hola";
+                    //este var solo podra ser usado dentro
+                }
+            </pre>
+        </p>
 
-    <h3>Var</h3>
-    <p>
-        Su alcance es de un bloque, solo es accedible dentro de un código
-        rodeado por corchetes ({}), se permite la reasignacion y no se 
-        puede redeclarar
+        <h3 class="text-2xl font-bold text-red-500 mb-4">Let</h3>
+        <p>
+            Su alcance es de un bloque, solo es accedible dentro de un código
+            rodeado por corchetes ({}), se permite la reasignacion y no se 
+            puede redeclarar
 
-        <pre>
-            let saludar = "Hola salon :D";
-            let numero = 4;
-    
-            if (numero > 3) {
-                let nombre = "Gina";
-                console.log(nombre); // Se ejecuta con "Gina"
-            }
-            console.log(nombre);     // nombre no esta definido
-        </pre>
-    </p>
+            <pre>
+                let saludar = "Hola salon :D";
+                let numero = 4;
+        
+                if (numero > 3) {
+                    let nombre = "Gina";
+                    console.log(nombre); // Se ejecuta con "Gina"
+                }
+                console.log(nombre);     // nombre no esta definido
+            </pre>
+        </p>
 
-    <h3>Const</h3>
-    <p>
-        Las variables const mantienen valores contantes, solo se accede
-        dentro del bloque que se declare y no puede modificarse luego
-        de declararse
+        <h3 class="text-2xl font-bold text-red-500 mb-4">Const</h3>
+        <p class="text-black-700 mb-4 text-lg">
+            Las variables const mantienen valores contantes, solo se accede
+            dentro del bloque que se declare y no puede modificarse luego
+            de declararse
 
-        <pre>
-            const holi = "Holiii :D";
-            holi = "Hola mundo"; // Esto marcara error
-        </pre>
-    </p>
+            <pre>
+                const holi = "Holiii :D";
+                holi = "Hola mundo"; // Esto marcara error
+            </pre>
+        </p>
+    </div>
     <!-- Fin Punto 6 -->
 
+    <br>
+
     <!-- Inicio punto 7 -->
-    <h2>7. ¿Cuáles son los tipos de datos primitivos en JavaScript? Da un ejemplo de cada uno.</h2>
-    
-    <h3>Number</h3>
-    <p>
-        Tipos numericos
+    <div class="bg-amber-50 rounded-2xl p-6 border-black border-2 opacity-95">
+        <h2 class="text-2xl font-bold text-orange-500 mb-4 text-center">
+            7. ¿Cuáles son los tipos de datos primitivos en JavaScript? Da un ejemplo de cada uno.
+        </h2>
+        
+        <h3 class="text-2xl font-bold text-red-500 mb-4">Number</h3>
+        <p class="text-black-700 mb-4 text-lg">
+            Tipos numericos
 
-        <pre>
-            let entero = 10;
-            let decimal = 3.14159861562;
+            <pre>
+                let entero = 10;
+                let decimal = 3.14159861562;
 
-            var a = Number("123");
+                var a = Number("123");
 
-            Number("123");          // retorna el número 123
-            Number("123") === 123;  // retorna true
+                Number("123");          // retorna el número 123
+                Number("123") === 123;  // retorna true
 
-            Number("Crepper");      // NaN
-            Number(undefined);      // NaN
-        </pre>
-    </p>
+                Number("Crepper");      // NaN
+                Number(undefined);      // NaN
+            </pre>
+        </p>
 
-    <h3>String</h3>
-    <p>
-        Secuencia de caracteres para texto
+        <h3 class="text-2xl font-bold text-red-500 mb-4">String</h3>
+        <p class="text-black-700 mb-4 text-lg">
+            Secuencia de caracteres para texto
 
-        <pre>
-            let texto1 = "Hola";
-            let texto2 = 'Holii';
+            <pre>
+                let texto1 = "Hola";
+                let texto2 = 'Holii';
 
-            let string = new String("Un objeto String"); 
-        </pre>
-    </p>
+                let string = new String("Un objeto String"); 
+            </pre>
+        </p>
 
-    <h3>Boolean</h3>
-    <p>
-        Solo tiene los <strong>true</strong> o <strong>false</strong>.
+        <h3 class="text-2xl font-bold text-red-500 mb-4">Boolean</h3>
+        <p>
+            Solo tiene los <strong>true</strong> o <strong>false</strong>.
 
-        <pre>
-            let sensor = true;
-            sensor = false;
+            <pre>
+                let sensor = true;
+                sensor = false;
 
-            var x = new Boolean(false);
+                var x = new Boolean(false);
 
-            if(x){
-                // Esto se ejecuta
-            }
-        </pre>
-    </p>
+                if(x){
+                    // Esto se ejecuta
+                }
+            </pre>
+        </p>
 
-    <h3>BigInt</h3>
-    <p>
-        Representacion de numeros de tamaño grande
+        <h3 class="text-2xl font-bold text-red-500 mb-4">BigInt</h3>
+        <p class="text-black-700 mb-4 text-lg">
+            Representacion de numeros de tamaño grande
 
-        <pre>
-            let numerote = BigInt(9007199254740991);
-        </pre>
-    </p>
+            <pre>
+                let numerote = BigInt(9007199254740991);
+            </pre>
+        </p>
 
-    <h3>Undefined</h3>
-    <p>
-        Representa un valor que es desconocido o aun no se inicializa
+        <h3 class="text-2xl font-bold text-red-500 mb-4">Undefined</h3>
+        <p class="text-black-700 mb-4 text-lg">
+            Representa un valor que es desconocido o aun no se inicializa
 
-        <pre>
-            let miVariable;
-            console.log(miVariable); // Este dato esta indefinido
-        </pre>
-    </p>
+            <pre>
+                let miVariable;
+                console.log(miVariable); // Este dato esta indefinido
+            </pre>
+        </p>
 
-    <h3>Symbol</h3>
-    <p>
-        Representa un identidicador unico e inmutable.
+        <h3 class="text-2xl font-bold text-red-500 mb-4">Symbol</h3>
+        <p class="text-black-700 mb-4 text-lg">
+            Representa un identidicador unico e inmutable.
 
-        <pre>
-            let sym1 = Symbol();
-            let sym2 = Symbol("foo");
-        </pre>
-    </p>
+            <pre>
+                let sym1 = Symbol();
+                let sym2 = Symbol("foo");
+            </pre>
+        </p>
 
-    <h3>Null</h3>
-    <p>
-        Es un valor que representa la ausencia de un valor
+        <h3 class="text-2xl font-bold text-red-500 mb-4">Null</h3>
+        <p class="text-black-700 mb-4 text-lg">
+            Es un valor que representa la ausencia de un valor
 
-        <pre>
-            let valor = null;
-           console.log(valor); // Lo que se imprime es "object"
-        </pre>
-    </p>
+            <pre>
+                let valor = null;
+            console.log(valor); // Lo que se imprime es "object"
+            </pre>
+        </p>
+    </div>
     <!-- Fin punto 7 -->
+    
+    <br>
 
     <!-- Inicio punto 8 -->
-    <h2>8. ¿Qué diferencia hay entre un array y un objeto en JavaScript?</h2>
-    <p>
-        Un array es una coleccion de datos ordenados del mismo tipo
-        con los que se accede a travez de un indice, mientras que los 
-        objetos son colecciones desordenadas que se organizan por clave y valor
+    <div class="bg-amber-50 rounded-2xl p-6 border-black border-2 opacity-95">
+        <h2 class="text-2xl font-bold text-orange-500 mb-4 text-center">
+            8. ¿Qué diferencia hay entre un array y un objeto en JavaScript?
+        </h2>
 
-        <pre>
-            // Array
-            let colores = ["Rojo", "Naranja", "Amarillo", "Verde"];
+        <p class="text-black-700 mb-4 text-lg">
+            Un array es una coleccion de datos ordenados del mismo tipo
+            con los que se accede a travez de un indice, mientras que los 
+            objetos son colecciones desordenadas que se organizan por clave y valor
 
-            // Objetos
-            let cajaColores = {
-                color: "Rojo",
-                cantidad: 2,
-                paquete: "Pequeño"
-            };
-        </pre>
-    </p>
+            <pre>
+                // Array
+                let colores = ["Rojo", "Naranja", "Amarillo", "Verde"];
+
+                // Objetos
+                let cajaColores = {
+                    color: "Rojo",
+                    cantidad: 2,
+                    paquete: "Pequeño"
+                };
+            </pre>
+        </p>
+    </div>
     <!-- Fin punto 8 -->
 
+    <br>
+    
     <!-- Inicio punto 9 -->
-    <h2>9. ¿Qué son y cómo se usan los operadores aritméticos, lógicos y relacionales?</h2>
-    <p>
-        Los <strong>opradores aritméticos</strong> son Suma(+), Resta(-), Multiplicación(*),
-        División(/), Módulo(%) son los que realizan los cálculos.
-        
-        <br>
+    <div class="bg-amber-50 rounded-2xl p-6 border-black border-2 opacity-95">
+        <h2 class="text-2xl font-bold text-orange-500 mb-4 text-center">
+            9. ¿Qué son y cómo se usan los operadores aritméticos, lógicos y relacionales?
+        </h2>
 
-        Los <strong>opradores lógicos</strong> son los usan expresiones
-        para dar resultados con un booleano: AND (&&) devuelve true si las
-        las condiciones presentadas son true, OR (||) devuelve true si 
-        cualquiera de las condiciones es verdadera, NOT(!) invierte el
-        valor del booleano
-    </p>
+        <p class="text-black-700 mb-4 text-lg">
+            Los <strong>opradores aritméticos</strong> son Suma(+), Resta(-), Multiplicación(*),
+            División(/), Módulo(%) son los que realizan los cálculos.
+            
+            <br>
+
+            Los <strong>opradores lógicos</strong> son los usan expresiones
+            para dar resultados con un booleano: AND (&&) devuelve true si las
+            las condiciones presentadas son true, OR (||) devuelve true si 
+            cualquiera de las condiciones es verdadera, NOT(!) invierte el
+            valor del booleano
+        </p>
+    </div>
     <!-- Fin punto 9 -->
-
-    <!-- Nota a mi yo del futuro: Poner un siguiente pagina aqui en el footer -->
 </body>
 </html>
