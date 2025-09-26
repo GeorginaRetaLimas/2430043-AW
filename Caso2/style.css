@@ -1,0 +1,38 @@
+body {
+    background-color: #f8f8fd;
+    padding-top: 20px;
+}
+        
+.header {
+    background-color: #051437;
+    color: white;
+    padding: 15px 0;
+    margin-bottom: 30px;
+    
+    border-radius: 5px;
+        
+}
+
+.card {
+    box-shadow: 0 4px 6px rgba(131, 131, 151, 0.497);
+    margin-bottom: 30px;
+}
+
+.card-header {
+    background-color: #334185;
+    color: white;
+    padding: 15px 0;
+    margin-bottom: 30px;
+
+    text-align: center;
+    
+    border-radius: 5px;
+}
+        
+.table-container {
+    overflow-x: auto;
+}
+        
+.btn-action {
+    margin-right: 5px;
+}
