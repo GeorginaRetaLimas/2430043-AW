@@ -36,3 +36,11 @@ body {
 .btn-action {
     margin-right: 5px;
 }
+
+.modal {
+    display: none;
+}
+
+.modal.mostrar {
+    display: block;
+}

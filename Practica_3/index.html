@@ -144,58 +144,65 @@
                 </div>
             </div>
 
-            <div class="modal">
-                <div div class="modal-contenido">
-                    <span class="cerrar-modal">x</span>
-                    <h2 class="card-title mb-0">Editar Alumno</h2>
-                    <form id="alumnosEditForm">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="matricula" class="form-label">Matricula</label>
-                                <input type="text" class="form-control" id="matricula" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="nombre" class="form-label">Nombre Completo</label>
-                                <input type="text" class="form-control" id="nombre" required>
-                            </div>
+            <div class="modal fade">
+                <div div class="modal-dialog">
+                    <div div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Editar Alumno</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
+                        <form id="alumnosForm_Editar">
+                            <div class="modal-body">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="matricula" class="form-label">Matricula</label>
+                                            <input type="text" class="form-control" id="matricula_Editar" required>
+                                        </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="carrera" class="form-label">Carrera</label>
-                                <select class="form-select" id="carrera" required>
+                                        <div class="col-md-6">
+                                            <label for="nombre" class="form-label">Nombre Completo</label>
+                                            <input type="text" class="form-control" id="nombre_Editar" required>
+                                        </div>
+                                    </div>
 
-                                    <option value="" selected disabled>Seleccionar carrera</option>
-                                    <option value="Ingeniería en Tecnologias de la Informacion e Innovacion Digital">Ingeniería en Tecnologias de la Informacion e Innovacion Digital</option>
-                                    <option value="Ingeniería en Comercio Internacional y aduanas">Ingeniería en Comercio Internacional y aduanas</option>
-                                    <option value="Ingeniería Mecatrónica">Ingeniería Mecatrónica</option>
-                                    <option value="Licenciatura en Administración y Gestion Empresarial">Licenciatura en Administración y Gestion Empresarial</option>
-                                </select>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="carrera" class="form-label">Carrera</label>
+                                            <select class="form-select" id="carrera_Editar" required>
+
+                                                <option value="" selected disabled>Seleccionar carrera</option>
+                                                <option value="Ingeniería en Tecnologias de la Informacion e Innovacion Digital">Ingeniería en Tecnologias de la Informacion e Innovacion Digital</option>
+                                                <option value="Ingeniería en Comercio Internacional y aduanas">Ingeniería en Comercio Internacional y aduanas</option>
+                                                <option value="Ingeniería Mecatrónica">Ingeniería Mecatrónica</option>
+                                                <option value="Licenciatura en Administración y Gestion Empresarial">Licenciatura en Administración y Gestion Empresarial</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="email_Editar" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="telefono" class="form-label">Telefono</label>
+                                            <input type="text" class="form-control" id="telefono_Editar" required>
+                                        </div>
+                                    </div>
+                                
                             </div>
-
-                            <div class="col-md-6">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" required>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <div class="d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-success me-2">
+                                        <i class="bi bi-check-circle me-1"></i>
+                                        Guardar
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label for="telefono" class="form-label">Telefono</label>
-                                <input type="text" class="form-control" id="telefono" required>
-                            </div>
-                        </div>
-
-                        <hr>
-
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" class="btn btn-success me-2">
-                                <i class="bi bi-check-circle me-1"></i>
-                                Guardar
-                            </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

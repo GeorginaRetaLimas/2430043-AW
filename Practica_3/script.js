@@ -2,24 +2,30 @@ console.log("Conexion exitosa");
 
 let alumnos = [];
 let dataTable;
+let indiceEdicionActual = null;
 
 // Inicializar la app con el dom
 document.addEventListener('DOMContentLoaded', function(){
-    // Cargar
+    // Cargar datos al iniciar
     if(localStorage.getItem('alumnos')){
         alumnos = JSON.parse(localStorage.getItem('alumnos'));
+        actualizarTabla();
     }
 
     document.getElementById('alumnosForm').addEventListener('submit', function(e){
         e.preventDefault(); 
-        guardarAlumno();
-        
+        validarAlumno();
     });
 
-    inicializarTabla();
+    document.getElementById('alumnosForm_Editar').addEventListener('submit', function(e){
+        e.preventDefault(); 
+        guardarEdicion();
+    });
 });
 
-function guardarAlumno(){
+function validarAlumno(){
+    let datosCorrectos = true;
+
     const matricula = document.getElementById('matricula').value;
     const nombre = document.getElementById('nombre').value;
     const carrera = document.getElementById('carrera').value;
@@ -27,24 +33,32 @@ function guardarAlumno(){
     const telefono = document.getElementById('telefono').value;
 
     // Validar que la matricula no este duplicada
-    if(alumnos.some(alumno => alumnos.matricula == matricula)){
+    if(alumnos.some(alumno => alumno.matricula == matricula)){
         alert('La matricula ya existe. Por favor, ingrese una matricula única');
+        datosCorrectos = false;
         return;
     }
 
     // Validar que la email no este duplicada
-    if(alumnos.some(alumno => alumnos.email == email)){
+    if(alumnos.some(alumno => alumno.email == email)){
         alert('El email ya existe. Por favor, ingrese un email único');
+        datosCorrectos = false;
         return;
     }
 
     // Validar que la telefono no este duplicada
-    if(alumnos.some(alumno => alumnos.telefono == telefono)){
-        alert('El telefono ya existe. Por favor, ingrese un email único');
+    if(alumnos.some(alumno => alumno.telefono == telefono)){
+        alert('El telefono ya existe. Por favor, ingrese un telefono único');
+        datosCorrectos = false;
         return;
     }
-        
-    
+
+    if(datosCorrectos == true){
+        guardarAlumno(matricula, nombre, carrera, email, telefono);
+    }
+}
+
+function guardarAlumno(matricula, nombre, carrera, email, telefono){
     // Crear un objeto de alumno
     const alumno = {
         matricula,
@@ -98,73 +112,69 @@ function actualizarTabla(){
 }
 
 function editarAlumno(index) {
-    const modal = document.querySelector('.modal');
-    const botonCerrar = document.querySelector('.cerrar-modal');
+    // Alumno a editar
+    const alumno = alumnos[index];
 
-    function cerrarModal() {
-        modal.classList.remove('mostrar');
-        document.body.style.overflow = 'auto'; // Restaurar scroll
-    }
+    document.getElementById('matricula_Editar').value = alumno.matricula;
+    document.getElementById('nombre_Editar').value = alumno.nombre;
+    document.getElementById('carrera_Editar').value = alumno.carrera;
+    document.getElementById('email_Editar').value = alumno.email;
+    document.getElementById('telefono_Editar').value = alumno.telefono;
 
-    botonCerrar.addEventListener('click', cerrarModal);
+    indiceEdicionActual = index;
 
-    // Cerrar
-    modal.addEventListener('click', (e) =>{
-        if(e.target === modal) {
-            cerrarModal();
-        }
-    });
-
-    // Cerrar con ESC
-    document.addEventListener('keydown', (e) =>{
-        if(e.key === 'Escape' && modal.classList.contains('mostrar')){
-            cerrarModal();
-        }
-    });
-
-    document.getElementById('alumnosEditForm').addEventListener('submit', function(e){
-        e.preventDefault(); 
-        
-        const matricula = document.getElementById('matricula').value;
-        const nombre = document.getElementById('nombre').value;
-        const carrera = document.getElementById('carrera').value;
-        const email = document.getElementById('email').value;
-        const telefono = document.getElementById('telefono').value;
-
-        // Validar que la matricula no este duplicada
-        if(alumnos.some(alumno => alumnos.matricula == matricula)){
-            alert('La matricula ya existe. Por favor, ingrese una matricula única');
-            return;
-        }
-
-        // Validar que la email no este duplicada
-        if(alumnos.some(alumno => alumnos.email == email)){
-            alert('El email ya existe. Por favor, ingrese un email único');
-            return;
-        }
-
-        // Validar que la telefono no este duplicada
-        if(alumnos.some(alumno => alumnos.telefono == telefono)){
-            alert('El telefono ya existe. Por favor, ingrese un email único');
-            return;
-        }
-
-        const alumno = {
-            matricula,
-            nombre, 
-            carrera, 
-            email,
-            telefono
-        };
-
-        alumnos.splice(index, 1, alumno);
-        actualizarTabla();
-
-    });
+    const modal = new bootstrap.Modal(document.querySelector('.modal'));
+    modal.show();
 }
 
+function guardarEdicion(){
+    const index = indiceEdicionActual;
+
+    const matricula = document.getElementById('matricula_Editar').value;
+    const nombre = document.getElementById('nombre_Editar').value;
+    const carrera = document.getElementById('carrera_Editar').value;
+    const email = document.getElementById('email_Editar').value;
+    const telefono = document.getElementById('telefono_Editar').value;
+
+    // Exluir al alumno en la validacion
+    if(alumnos.some((alumno, i) => i !== index && alumno.matricula == matricula) && alumnos[index] ){
+        alert('La matricula ya existe. Por favor, ingrese una matricula única');
+        return;
+    }
+
+    // Validar que la email no este duplicada
+    if(alumnos.some((alumno, i) => i !== index && alumno.email == email)){
+        alert('El email ya existe. Por favor, ingrese un email único');
+        return;
+    }
+
+    // Validar que la telefono no este duplicada
+    if(alumnos.some((alumno, i) => i !== index && alumno.telefono == telefono)){
+        alert('El telefono ya existe. Por favor, ingrese un telefono único');
+        return;
+    }
+
+    const alumnoActualizado  = {
+        matricula,
+        nombre, 
+        carrera, 
+        email,
+        telefono
+    };
+
+    alumnos.splice(index, 1, alumnoActualizado);
+    guardarEnLocalStorage();
+    actualizarTabla();
+
+    const modal = bootstrap.Modal.getInstance(document.querySelector('.modal'));
+    modal.hide();
+
+    indiceEdicionActual = null;
+}
+
+
 // Eliminar alumno
-function eliminarAlumnos(index){
+function eliminarAlumno(index){
     if(confirm('¿Está seguro de que desea eliminar este alumnos?')) {
         alumnos.splice(index, 1);
         guardarEnLocalStorage();
