@@ -1,26 +1,29 @@
+/* Cuerpo de la página */
 body {
-    background-color: #f8f8fd;
+    background-color: #a5a5bd;
     padding-top: 20px;
 }
-        
+
+/* Cabecera de la página */
 .header {
     background-color: #051437;
     color: white;
     padding: 15px 0;
     margin-bottom: 30px;
-    
     border-radius: 5px;
         
 }
 
+/* Card de los contenidos */
 .card {
-    box-shadow: 0 4px 6px rgba(131, 131, 151, 0.497);
+    box-shadow: 0 4px 6px rgba(50, 23, 255, 0.497);
     margin-bottom: 30px;
 }
 
+/* Cabecera de los cards */
 .card-header {
     background-color: #334185;
-    color: white;
+    color: rgb(225, 223, 235);
     padding: 15px 0;
     margin-bottom: 30px;
 
@@ -29,17 +32,22 @@ body {
     border-radius: 5px;
 }
         
+/* Contenido de la tabla */
 .table-container {
     overflow-x: auto;
 }
-        
+    
+/* Botón de acción*/
 .btn-action {
     margin-right: 5px;
 }
 
+/* Modal */
 .modal {
     display: none;
+    box-shadow: 0 4px 6px rgba(50, 23, 255, 0.497);
 }
+
 
 .modal.mostrar {
     display: block;

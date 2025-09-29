@@ -6,26 +6,31 @@ let indiceEdicionActual = null;
 
 // Inicializar la app con el dom
 document.addEventListener('DOMContentLoaded', function(){
+
     // Cargar datos al iniciar
     if(localStorage.getItem('alumnos')){
         alumnos = JSON.parse(localStorage.getItem('alumnos'));
         actualizarTabla();
     }
 
+    // Detección de registro de alumno
     document.getElementById('alumnosForm').addEventListener('submit', function(e){
         e.preventDefault(); 
         validarAlumno();
     });
 
+    // Deteccion de edición de alumno
     document.getElementById('alumnosForm_Editar').addEventListener('submit', function(e){
         e.preventDefault(); 
         guardarEdicion();
     });
 });
 
+// Validar registro
 function validarAlumno(){
     let datosCorrectos = true;
 
+    // Traer datos del html con las id
     const matricula = document.getElementById('matricula').value;
     const nombre = document.getElementById('nombre').value;
     const carrera = document.getElementById('carrera').value;
@@ -53,6 +58,7 @@ function validarAlumno(){
         return;
     }
 
+    // Si no detecto ningun error guarda
     if(datosCorrectos == true){
         guardarAlumno(matricula, nombre, carrera, email, telefono);
     }
@@ -70,19 +76,21 @@ function guardarAlumno(matricula, nombre, carrera, email, telefono){
 
     //Agregar a la lista y actualizar
     alumnos.push(alumno);
+
+    // Guardamos en localStorage y actualizamos tabla
     guardarEnLocalStorage();
     actualizarTabla();
         
+    // Limpiamos el fomr
     document.getElementById('alumnosForm').reset();
 }
 
-function inicializarTabla(){
-    actualizarTabla();
-}
-
+// Volvemos a hacer la tabla
 function actualizarTabla(){
-    const tbody = document.getElementById('studentTableBody');
+    // Obtenemos la tabla
+    const tbody = document.getElementById('contenido_Tabla');
 
+    // Si no hay registros manda un mensaje de no gay datos
     if(alumnos.length === 0){
         tbody.innerHTML = `
             <tr>
@@ -92,6 +100,7 @@ function actualizarTabla(){
         return;
     }
 
+    // Con un map obtenemos los datos del objeto y creamos las columnas y las filas
     tbody.innerHTML = alumnos.map((alumno, index) => `
         <tr>
             <td>${alumno.matricula}</td>
@@ -111,25 +120,32 @@ function actualizarTabla(){
     `).join('');
 }
 
+// Cuando se da click al boton de editar se invoca el modal de editar
 function editarAlumno(index) {
-    // Alumno a editar
+    // Obtenemo el alumno a editar
     const alumno = alumnos[index];
 
+    // Escribimos sus datos en el formulario
     document.getElementById('matricula_Editar').value = alumno.matricula;
     document.getElementById('nombre_Editar').value = alumno.nombre;
     document.getElementById('carrera_Editar').value = alumno.carrera;
     document.getElementById('email_Editar').value = alumno.email;
     document.getElementById('telefono_Editar').value = alumno.telefono;
 
+    // Establecemos el indice de edicion actual en la variable global
     indiceEdicionActual = index;
 
+    // Definimos el modal con los datos de bootstrap y mostramos
     const modal = new bootstrap.Modal(document.querySelector('.modal'));
     modal.show();
 }
 
+// Cuando se da click al submit del formulario editar_Alumno
 function guardarEdicion(){
+    // Pasamos el index como una constante
     const index = indiceEdicionActual;
 
+    // Obtenemos los datos del formulario
     const matricula = document.getElementById('matricula_Editar').value;
     const nombre = document.getElementById('nombre_Editar').value;
     const carrera = document.getElementById('carrera_Editar').value;
@@ -154,6 +170,7 @@ function guardarEdicion(){
         return;
     }
 
+    // Creamos el objeto del alumno Actualizado
     const alumnoActualizado  = {
         matricula,
         nombre, 
@@ -162,13 +179,19 @@ function guardarEdicion(){
         telefono
     };
 
+    // Con splice y el index cambiamos el valor de 
+    // esa posición con el objeto del alumno actualizado
     alumnos.splice(index, 1, alumnoActualizado);
+
+    // Guardamos y actualizamos la tabla
     guardarEnLocalStorage();
     actualizarTabla();
 
+    // Definimos el modal y lo ocultamos
     const modal = bootstrap.Modal.getInstance(document.querySelector('.modal'));
     modal.hide();
 
+    // Limpiamos el indice de edición
     indiceEdicionActual = null;
 }
 
@@ -176,9 +199,14 @@ function guardarEdicion(){
 // Eliminar alumno
 function eliminarAlumno(index){
     if(confirm('¿Está seguro de que desea eliminar este alumnos?')) {
+        // Lo borramos del array
         alumnos.splice(index, 1);
+
+        // Guardamos cambios y actualizamos la tabla
         guardarEnLocalStorage();
         actualizarTabla();
+        
+        // Mostramos el mensaje de exito
         alert('Alumno eliminado exitosamente')
     }
 }
