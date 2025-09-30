@@ -1,0 +1,39 @@
+:root {
+    --color_primary: #DA4686;
+    --color_primary_dark: #A0255B;
+    --color_primary_dark_hover: #d96597;
+    --color_primary_light: #EF94BB;
+
+    --color_secondary: #F9D489;
+    --color_secondary_dark: #DBA741;
+    --color_secondary_light: #FBE6B4;
+
+    --color-success: #b8f686;
+    --color-warning: #f6cb86;
+    --color-danger: #f68686;
+
+    --color_background: rgb(255, 245, 249);
+
+    --color_hover: rgba(255, 255, 255, 0.408);
+}
+
+body {
+    background-color: var(--color_background);
+}
+
+.sidebar_tema {
+    background-color: var(--color_primary) !important; /* Color del sidebar */
+}
+
+.active_nav_tema {
+    background-color: var(--color_primary_dark) !important; /* Color del enlace activo */
+    color: var(--color_background) !important;
+}
+
+.active_nav_tema:hover {
+    background-color: var(--color_hover) !important;
+}
+
+.nav-link.text-white:hover {
+    background-color:  var(--color_hover) !important;
+}
