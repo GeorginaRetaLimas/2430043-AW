@@ -14,6 +14,13 @@ document.addEventListener('DOMContentLoaded', function(){
     } else {
         window.location.href = "index.html";
     }
+
+    // Manejar cierre de sesión
+    document.getElementById('btn_cerrar_sesion').addEventListener('click', function(e) {
+        e.preventDefault();
+        localStorage.removeItem('sesion');
+        window.location.href = "index.html";
+    });
 });
 
 
