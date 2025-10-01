@@ -14,8 +14,14 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // Verificamos si en el localStorage hay datos de correos
     if(localStorage.getItem('usuarios')){
-        correos = JSON.parse(localStorage.getItem('usuarios'));
+        usuarios = JSON.parse(localStorage.getItem('usuarios'));
     }
+
+    // Verificamos si en el localStorage hay sesion
+    if(localStorage.getItem('sesion')){
+        localStorage.setItem('sesion', null);
+    }
+
     // Detección de envio de formulario 
     document.getElementById('form_inicio_Sesion').addEventListener('submit', function(e){
         e.preventDefault();
@@ -33,6 +39,13 @@ document.addEventListener('DOMContentLoaded', function(){
             console.log(`Usuario autentificado ${resultado.usuario.correo}!`);
             document.getElementById('mensajeExito').textContent = resultado.mensaje;
             document.getElementById('mensajeExito').style.display = 'block';
+
+            localStorage.setItem('sesion', JSON.stringify(resultado.usuario));
+
+            setTimeout(function() {
+                window.location.href = "home.html";
+            }, 1000);
+
         } else {
             document.getElementById('mensajeError').textContent = resultado.mensaje;
             document.getElementById('mensajeError').style.display = 'block';
@@ -60,7 +73,3 @@ function buscarRegistro(correo, contraseña){
         };
     }
 }
-
-
-//const resultado = buscarRegistro("admin@gmail.com", "admin");
-//console.log(resultado);

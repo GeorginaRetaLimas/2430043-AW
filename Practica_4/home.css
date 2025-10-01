@@ -51,8 +51,6 @@
 
 body {
     background-color: var(--color_background);
-    align-items: center;
-    align-self: center;
 }
 
 .content {
