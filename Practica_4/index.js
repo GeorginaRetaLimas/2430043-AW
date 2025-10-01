@@ -1,7 +1,7 @@
 console.log("Conexión exitosa");
 
 // Constructor de usurios
-const usuarios = [{
+let usuarios = [{
     correo : "admin@gmail.com",
     contraseña : "admin"
 }];
@@ -15,9 +15,10 @@ document.addEventListener('DOMContentLoaded', function(){
     // Verificamos si en el localStorage hay datos de correos
     if(localStorage.getItem('usuarios')){
         usuarios = JSON.parse(localStorage.getItem('usuarios'));
+        console.log(usuarios);
     }
 
-    // Verificamos si en el localStorage hay sesion
+    // Verificamos si en el localStorage hay datos de correos
     if(localStorage.getItem('sesion')){
         localStorage.setItem('sesion', null);
     }
