@@ -1,0 +1,92 @@
+/* Definición de paleta de colores */
+:root {
+    --color_primary: #DA4686;
+    --color_primary_dark: #A0255B;
+    --color_primary_light: #EF94BB;
+
+    --color_secondary: #F9D489;
+    --color_secondary_dark: #DBA741;
+    --color_secondary_light: #FBE6B4;
+
+    --color-success: #b8f686;
+    --color-warning: #f6cb86;
+    --color-danger: #f68686;
+
+    --color_background: rgb(255, 245, 249);
+    --color_black: rgb(12, 1, 5);
+
+    --color_hover: rgba(255, 255, 255, 0.408);
+
+    --color_seleccion: #be7595;
+}
+
+/* Definicion de fuentes */
+@font-face {
+  font-family: 'fuente_H1';
+  src: url("../fonts/TitanOne-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'fuente_P';
+  src: url("../fonts/AlanSans-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: 'fuente_A';
+  src: url("../fonts/BreeSerif-Regular.ttf");
+}
+
+/* Selección de texto */
+::selection {
+    background-color: var(--color_seleccion); 
+    color: var(--color_background);
+}
+
+ /* Para Firefox */
+::-moz-selection {
+    background-color: var(--color_seleccion); 
+    color: var(--color_background);
+}
+
+
+body {
+    background-color: var(--color_background);
+
+}
+
+.modal_fondo_tema {
+    background-color: var(--color_background) !important; /* Color del sidebar */
+}
+
+.boton_primary_tema {
+    background-color: var(--color_primary_dark) !important; /* Color del enlace activo */
+    color: var(--color_background) !important;
+    font-family: 'fuente_A' !important;
+    size: 20px !important;
+}
+
+.boton_primary_tema:hover {
+    background-color: var(--color_primary_light) !important;
+}
+
+.input_tema:hover {
+    box-shadow: var(--color_secondary_dark) !important;
+}
+
+h1 {
+    font-family: 'fuente_H1';
+    font-size: 50px;
+    text-align: center;
+    color: var(--color_primary);
+}
+
+p {
+    font-family: 'fuente_P';
+    font-size: 20px;
+    color: var(--color_black);
+}
+
+a {
+    font-family: 'fuente_A';
+    font-size: 20px;
+}

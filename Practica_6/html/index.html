@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicias Sesión</title>
+
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="../css/index.css" type="text/css">
+</head>
+
+<body class="d-flex">
+    <!-- Vista de inicio de sesión -->
+    <div id="vista_inicio">
+        <div class="modal modal-sheet modal_fondo_tema position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin"> 
+            <div class="modal-dialog"> 
+                <div class="modal-content rounded-4 shadow"> 
+                    <div class="modal-header p-5 pb-4 border-bottom-0 justify-content-center"> 
+                        <h1 class="fw-bold mb-0 fs-2 text-center">
+                            Inicio de Sesión
+                        </h1> 
+                    </div> 
+
+                    <div class="modal-body p-5 pt-0"> 
+                        <div id="mensajeError" class="alert alert-danger" role="alert">
+                        <!-- Mensaje de error se mostrará aquí -->
+                        </div>
+
+                        <div id="mensajeExito" class="alert alert-success" role="alert">
+                        <!-- Mensaje de exito se mostrará aquí -->
+                        </div>
+
+                        <form id="form_inicio_Sesion"> 
+                            <div class="form-floating mb-3"> 
+                                <input type="email" class="form-control rounded-3 input_tema" id="correo" placeholder="name@example.com" required> 
+                                <label for="correo">Correo Eléctronico</label> 
+                            </div> 
+                            
+                            <div class="form-floating mb-3"> 
+                                <input type="password" class="form-control rounded-3 input_tema" id="contraseña" placeholder="Password" required> 
+                                <label for="contraseña">Contraseña</label> 
+                            </div> 
+                            
+                            <button class="w-100 mb-2 btn btn-lg rounded-3 boton_primary_tema" type="submit">Iniciar</button> 
+                            <small class="text-body-secondary">
+                                Correo: admin@gmail.com <br>
+                                Contraseña: admin
+                            </small> 
+
+                            <hr>
+
+                            <small>¿No tienes cuenta? <a id="etiquetaActivarRegistro" onclick="activarVistaRegistro()">Registrate</a></small>    
+                        </form> 
+                    </div> 
+                </div> 
+            </div> 
+        </div>
+    </div>
+
+    <!-- vista de registro -->
+    <div id="vista_registro" class="d-none">
+        <div class="modal modal-sheet modal_fondo_tema position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin"> 
+            <div class="modal-dialog"> 
+                <div class="modal-content rounded-4 shadow"> 
+                    <div class="modal-header p-5 pb-4 border-bottom-0 justify-content-center"> 
+                        <h1 class="fw-bold mb-0 fs-2 text-center">
+                            Registro de usuarios
+                        </h1> 
+                    </div> 
+
+                    <div class="modal-body p-5 pt-0"> 
+                        <div id="mensajeError_registro" class="alert alert-danger d-none" role="alert">
+                        <!-- Mensaje de error se mostrará aquí -->
+                        </div>
+
+                        <form id="form_registro"> 
+                        <div class="form-floating mb-3"> 
+                            <input type="email" class="form-control rounded-3 input_tema" id="correo_registro" placeholder="name@example.com" required> 
+                            <label for="correo">Correo Eléctronico</label> 
+                        </div> 
+                            
+                        <div class="form-floating mb-3"> 
+                            <input type="password" class="form-control rounded-3 input_tema" id="contraseña_registro" placeholder="Password" required> 
+                            <label for="contraseña">Contraseña</label> 
+                        </div> 
+                            
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 boton_primary_tema" type="submit">Iniciar</button> 
+                        <hr>
+                        <small>¿Ya tienes una cuenta? <a id="etiquetaActivarRegistro" onclick="activarVistaInicio()">Iniciar Sesión</a></small>    
+                    </form> 
+                    </div> 
+                </div> 
+            </div> 
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript de inicio -->
+    <script src="../js/index.js"></script>
+</body>
+</html>
