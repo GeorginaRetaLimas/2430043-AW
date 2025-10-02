@@ -51,47 +51,61 @@
 
 body {
     background-color: var(--color_background);
-
 }
 
-.modal_fondo_tema {
-    background-color: var(--color_background) !important; /* Color del sidebar */
+.content {
     align-items: center;
+    align-content: center;
 }
 
-.modal-sheet .modal-dialog {
-    width: 380px;
-    transition: bottom .75s ease-in-out;
-}
-.modal-sheet .modal-footer {
-    padding-bottom: 2rem;
+.sidebar_tema {
+    background-color: var(--color_primary) !important; /* Color del sidebar */
 }
 
-.modal-sheet {
-    display: flex !important;
-    align-items: center;
-    min-height: 100vh;
+.active_nav_tema {
+    background-color: var(--color_primary_dark) !important; /* Color del enlace activo */
+    color: var(--color_background) !important;
+}
+
+.active_nav_tema:hover {
+    background-color: var(--color_hover) !important;
+}
+
+.nav-link.text-white:hover {
+    background-color:  var(--color_hover) !important;
+}
+
+/* Menu de cerrar sesión */
+.dropdown-menu_tema{
+    background-color: var(--color_primary_dark) !important;
+    color: var(--color_background) !important;
+}
+
+.dropdown-menu_tema:hover {
+    background-color:  var(--color_hover) !important;
 }
 
 .boton_primary_tema {
-    background-color: var(--color_primary_dark) !important; /* Color del enlace activo */
+    background-color: var(--color_primary_dark) !important; 
     color: var(--color_background) !important;
-    font-family: 'fuente_A' !important;
-    size: 20px !important;
 }
-
 .boton_primary_tema:hover {
-    background-color: var(--color_primary_light) !important;
+    background-color:  var(--color_primary_light) !important;
 }
 
-.input_tema:hover {
-    box-shadow: var(--color_secondary_dark) !important;
+.boton_danger_tema {
+    background-color: var(--color-danger) !important; 
+    color: var(--color_background) !important;
+}
+
+.boton_danger_tema:hover{
+    background-color: var(--color_seleccion) !important; 
 }
 
 h1 {
     font-family: 'fuente_H1';
     size: 50px;
-    text-align: center !important;
+    text-align: center;
     color: var(--color_primary);
 }
 

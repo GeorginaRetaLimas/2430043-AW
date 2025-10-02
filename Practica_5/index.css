@@ -56,21 +56,6 @@ body {
 
 .modal_fondo_tema {
     background-color: var(--color_background) !important; /* Color del sidebar */
-    align-items: center;
-}
-
-.modal-sheet .modal-dialog {
-    width: 380px;
-    transition: bottom .75s ease-in-out;
-}
-.modal-sheet .modal-footer {
-    padding-bottom: 2rem;
-}
-
-.modal-sheet {
-    display: flex !important;
-    align-items: center;
-    min-height: 100vh;
 }
 
 .boton_primary_tema {
