@@ -41,6 +41,7 @@ function agregarTarea(titulo, descripcion) {
     // Generar ID único cin e tamaño de tareas y Math.max
     const id = tareas.length > 0 ? Math.max(...tareas.map(t => t.id)) + 1 : 1;
     
+    // Creamos una nueva tarea
     const nuevaTarea = {
         id: id,
         titulo: titulo,
