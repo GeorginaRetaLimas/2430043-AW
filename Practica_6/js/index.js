@@ -215,11 +215,13 @@ function activarVistaInicio(){
     localStorage.setItem('inicioActivo', JSON.stringify(inicioActivo));
 }
 
+// Hola profe si ve mi codigo ayuda, no se como poner este modal pipipipip :C
 function activarSuccessModal(texto){
+    console.log("Entrar a activar success Model");
+    console.log("Texto ingresado: ", texto);
+
     document.getElementById('successMessage').value = texto;
-    const modalSuccess = new bootstrap.Modal(document.getElementById('successModal'), {
-        keyboard: false
-    })
+    const modalSuccess = new bootstrap.Modal(document.getElementById('successModal'), {});
 
     modalSuccess.show();
 }

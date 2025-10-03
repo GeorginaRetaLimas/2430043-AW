@@ -20,42 +20,38 @@
 <body class="d-flex">
     <!-- Vista de inicio de sesión -->
 
-    <div id="successModal" class="d-none">
-        <div class="modal fade modal_fondo_tema" tabindex="-1">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content border-success">
-                <div class="modal-body text-center py-4">
-                    <div class="mb-3">
-                    <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center" 
-                        style="width: 60px; height: 60px;">
-                        <span class="text-white fw-bold" style="font-size: 1.5rem;">✓</span>
-                    </div>
-                    </div>
-                    <h5 class="text-success mb-2">¡Éxito!</h5>
-                    <p id="successMessage" class="text-muted">Operación completada</p>
-                    <button class="btn btn-success mt-2" data-bs-dismiss="modal">OK</button>
+    <div class="modal fade modal_fondo_tema" id="successModal" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content border-success">
+            <div class="modal-body text-center py-4">
+                <div class="mb-3">
+                <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center" 
+                    style="width: 60px; height: 60px;">
+                    <span class="text-white fw-bold" style="font-size: 1.5rem;">✓</span>
                 </div>
                 </div>
+                <h5 class="text-success mb-2">¡Éxito!</h5>
+                <p id="successMessage" class="text-muted">Operación completada</p>
+                <button class="btn btn-success mt-2" data-bs-dismiss="modal">OK</button>
+            </div>
             </div>
         </div>
     </div>
 
-    <div id="errorModal">
-        <div class="modal fade modal_fondo_tema" tabindex="-1">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content border-danger">
-                <div class="modal-body text-center py-4">
-                    <div class="mb-3">
-                    <div class="bg-danger rounded-circle d-inline-flex align-items-center justify-content-center" 
-                        style="width: 60px; height: 60px;">
-                        <span class="text-white fw-bold" style="font-size: 1.5rem;">✗</span>
-                    </div>
-                    </div>
-                    <h5 class="text-danger mb-2">Error</h5>
-                    <p id="errorMessage" class="text-muted">Algo salió mal</p>
-                    <button class="btn btn-danger mt-2" data-bs-dismiss="modal">Cerrar</button>
+    <div class="modal fade modal_fondo_tema" id="errorModal" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content border-danger">
+            <div class="modal-body text-center py-4">
+                <div class="mb-3">
+                <div class="bg-danger rounded-circle d-inline-flex align-items-center justify-content-center" 
+                    style="width: 60px; height: 60px;">
+                    <span class="text-white fw-bold" style="font-size: 1.5rem;">✗</span>
                 </div>
                 </div>
+                <h5 class="text-danger mb-2">Error</h5>
+                <p id="errorMessage" class="text-muted">Algo salió mal</p>
+                <button class="btn btn-danger mt-2" data-bs-dismiss="modal">Cerrar</button>
+            </div>
             </div>
         </div>
     </div>
