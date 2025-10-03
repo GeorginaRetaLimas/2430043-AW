@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function(){
         mostrarUsuarios();
 
         // Limpiar el formulario
-        document.getElementById('form_inicio_Sesion').reset();
+        document.getElementById('form_registro').reset();
 
         console.log('Nuevo usuario registrado:', nuevoUsuario);
         console.log('Total de usuarios:', usuarios);
@@ -78,74 +78,7 @@ document.addEventListener('DOMContentLoaded', function(){
         localStorage.removeItem('sesion');
         window.location.href = "index.html";
     });
-
-    document.getElementById('form_registro').addEventListener('click', function(e) {
-        e.preventDefault();
-
-    // Ocultar mensajes previos
-    document.getElementById('mensajeError_registro').classList.add('d-none');
-
-        const correo = document.getElementById('correo_registro').value;
-        const contraseña = document.getElementById('contraseña_registro').value;
-
-        const resultado = registrarUsuario(correo, contraseña);
-
-        if(resultado.valido) {
-            console.log(`Usuario registrado: ${resultado.usuario.correo}!`);
-            
-            // Mostrar mensaje de éxito
-            const mensajeExito = document.createElement('div');
-            mensajeExito.className = 'alert alert-success';
-            mensajeExito.textContent = resultado.mensaje;
-            document.getElementById('form_registro').prepend(mensajeExito);
-
-            // Limpiar formulario
-            document.getElementById('form_registro').reset();
-
-            // Cambiar a vista de inicio después de 2 segundos
-            setTimeout(function() {
-                activarVistaInicio();
-            }, 2000);
-
-        } else {
-            document.getElementById('mensajeError_registro').textContent = resultado.mensaje;
-            document.getElementById('mensajeError_registro').classList.remove('d-none');
-        }
-    });
 });
-
-function registrarUsuario(correo, contraseña) {
-    console.log("Entrar a la función registrar");
-
-    // Verificar si el usuario ya existe
-    const usuarioExistente = usuarios.find(user => user.correo === correo);
-    
-    if (usuarioExistente) {
-        return {
-            valido: false,
-            mensaje: "Este correo ya está registrado"
-        };
-    }
-
-    // Crear nuevo usuario
-    const nuevoUsuario = {
-        correo: correo,
-        contraseña: contraseña,
-        tareas: []
-    };
-
-    // Agregar a la lista de usuarios
-    usuarios.push(nuevoUsuario);
-    
-    // Actualizar localStorage
-    localStorage.setItem('usuarios', JSON.stringify(usuarios));
-
-    return {
-        valido: true,
-        usuario: nuevoUsuario,
-        mensaje: "¡Usuario registrado exitosamente!"
-    };
-}
 
 // Función para mostrar usuarios en la tabla
 function mostrarUsuarios() {

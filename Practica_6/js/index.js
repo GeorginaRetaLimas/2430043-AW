@@ -1,15 +1,7 @@
 console.log("Conexión exitosa");
 
-// Constructor de usurios
-let usuarios = [{
-    correo : "admin@gmail.com",
-    contraseña : "admin",
-    tareas: [{
-        id: 0,
-        titulo: "Diseo de Vector",
-        descripcion: "Craer un nuevo vector de tareas"
-    }]
-}];
+// Constructor de usuarios
+let usuarios = [];
 
 // Vistas
 const vistaInicio = document.getElementById('vista_inicio');
@@ -38,16 +30,45 @@ document.addEventListener('DOMContentLoaded', function(){
 
     // Verificamos si en el localStorage hay datos de correos
     if(localStorage.getItem('usuarios')){
+        console.log("Obteniendo usuarios...");
         usuarios = JSON.parse(localStorage.getItem('usuarios'));
-        console.log(usuarios);
+    } else {
+        console.log("No hay usuarios en localStorage");
+        usuarios = [];
     }
 
-    // Verificamos si en el localStorage hay datos de correos
+    const adminExiste = usuarios.some(user => user.correo === "admin@gmail.com");
+    console.log("¿Admin existe?", adminExiste);
+
+    if(!adminExiste){
+        crearUsuarioAdmin();
+    }
+
+    // Creamos el usuario de Admin
+    function crearUsuarioAdmin(){
+        console.log("Creando cuenta admin...");
+        usuarios.push({
+            correo: "admin@gmail.com",
+            contraseña: "admin",
+            tareas: [{
+                id: 0,
+                titulo: "Diseño de Vector",
+                descripcion: "Crear un nuevo vector de tareas"
+            }]
+        });
+
+        localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        console.log("Admin creado y guardado en localStorage");
+    }
+    
+    console.log(usuarios);
+
+    // Verificamos si en el localStorage hay datos de sesion
     if(localStorage.getItem('sesion')){
         localStorage.setItem('sesion', null);
     }
 
-    // Detección de envio de formulario 
+    // Detección de envio de formulario de INICIO
     document.getElementById('form_inicio_Sesion').addEventListener('submit', function(e){
         e.preventDefault();
 
@@ -76,11 +97,47 @@ document.addEventListener('DOMContentLoaded', function(){
             document.getElementById('mensajeError').style.display = 'block';
         }
     });
-});
 
+    // Detección de envio de formulario de REGISTRO
+    document.getElementById('form_registro').addEventListener('submit', function(e){
+        e.preventDefault();
+
+        // Ocultar mensajes previos
+        const mensajeErrorRegistro = document.getElementById('mensajeError_registro');
+        mensajeErrorRegistro.style.display = 'none';
+
+        const correo = document.getElementById('correo_registro').value;
+        const contraseña = document.getElementById('contraseña_registro').value;
+
+        const resultado = registrarUsuario(correo, contraseña);
+
+        if(resultado.valido) {
+            console.log(`Usuario registrado: ${resultado.usuario.correo}!`);
+            
+            // Mostrar mensaje de éxito
+            const mensajeExito = document.createElement('div');
+            mensajeExito.className = 'alert alert-success';
+            mensajeExito.textContent = resultado.mensaje;
+            document.getElementById('form_registro').prepend(mensajeExito);
+
+            // Limpiar formulario
+            document.getElementById('form_registro').reset();
+
+            // Cambiar a vista de inicio después de 2 segundos
+            setTimeout(function() {
+                activarVistaInicio();
+            }, 2000);
+
+        } else {
+            mensajeErrorRegistro.textContent = resultado.mensaje;
+            mensajeErrorRegistro.style.display = 'block';
+        }
+    });
+});
 
 function buscarRegistro(correo, contraseña){
     console.log("Entrar a la funcion buscar");
+    console.log(usuarios);
 
     const usuario = usuarios.find(user => user.correo === correo);
 
@@ -93,10 +150,43 @@ function buscarRegistro(correo, contraseña){
     } else {
         return {
             valido: false,
-            usuario: usuario,
+            usuario: null,
             mensaje: "Ese usuario no esta en los registros"
         };
     }
+}
+
+function registrarUsuario(correo, contraseña) {
+    console.log("Entrar a la función registrar");
+
+    // Verificar si el usuario ya existe
+    const usuarioExistente = usuarios.find(user => user.correo === correo);
+    
+    if (usuarioExistente) {
+        return {
+            valido: false,
+            mensaje: "Este correo ya está registrado"
+        };
+    }
+
+    // Crear nuevo usuario
+    const nuevoUsuario = {
+        correo: correo,
+        contraseña: contraseña,
+        tareas: []
+    };
+
+    // Agregar a la lista de usuarios
+    usuarios.push(nuevoUsuario);
+    
+    // Actualizar localStorage
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
+    return {
+        valido: true,
+        usuario: nuevoUsuario,
+        mensaje: "¡Usuario registrado exitosamente!"
+    };
 }
 
 // Funcion que va a activar los datos de registro, desplegar y ocultar
