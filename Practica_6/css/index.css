@@ -90,3 +90,8 @@ a {
     font-family: 'fuente_A';
     font-size: 20px;
 }
+
+a:hover{
+    color: var(--color_primary)!important;
+}
+

@@ -13,6 +13,8 @@ var inicioActivo;
 // Cuando se inicializa
 document.addEventListener('DOMContentLoaded', function(){
     // Ocultamos los mensajes cuando recargamos
+    document.getElementById('mensajeError_registro').style.display = 'none';
+
     document.getElementById('mensajeError').style.display = 'none';
     document.getElementById('mensajeExito').style.display = 'none';
 
@@ -194,6 +196,9 @@ function activarVistaRegistro(){
     vistaInicio.classList.add("d-none"); 
     vistaRegistro.classList.remove("d-none");
 
+    document.getElementById('mensajeError').style.display = 'none';
+    document.getElementById('mensajeExito').style.display = 'none';
+
     inicioActivo = false;
     localStorage.setItem('inicioActivo', JSON.stringify(inicioActivo));
 }
@@ -205,4 +210,8 @@ function activarVistaInicio(){
 
     inicioActivo = true;
     localStorage.setItem('inicioActivo', JSON.stringify(inicioActivo));
+}
+
+function activarSuccessModal(texto){
+
 }
