@@ -120,6 +120,9 @@ document.addEventListener('DOMContentLoaded', function(){
             const mensajeExito = document.createElement('div');
             mensajeExito.className = 'alert alert-success';
             mensajeExito.textContent = resultado.mensaje;
+
+            activarSuccessModal("Usuario registrado");
+
             document.getElementById('form_registro').prepend(mensajeExito);
 
             // Limpiar formulario
@@ -128,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function(){
             // Cambiar a vista de inicio después de 2 segundos
             setTimeout(function() {
                 activarVistaInicio();
-            }, 2000);
+            }, 1000);
 
         } else {
             mensajeErrorRegistro.textContent = resultado.mensaje;
@@ -213,5 +216,10 @@ function activarVistaInicio(){
 }
 
 function activarSuccessModal(texto){
+    document.getElementById('successMessage').value = texto;
+    const modalSuccess = new bootstrap.Modal(document.getElementById('successModal'), {
+        keyboard: false
+    })
 
+    modalSuccess.show();
 }

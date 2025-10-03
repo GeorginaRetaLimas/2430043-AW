@@ -19,6 +19,43 @@
 
 <body class="d-flex">
     <!-- Vista de inicio de sesión -->
+
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content border-success">
+            <div class="modal-body text-center py-4">
+                <div class="mb-3">
+                <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center" 
+                    style="width: 60px; height: 60px;">
+                    <span class="text-white fw-bold" style="font-size: 1.5rem;">✓</span>
+                </div>
+                </div>
+                <h5 class="text-success mb-2">¡Éxito!</h5>
+                <p id="successMessage" class="text-muted">Operación completada</p>
+                <button class="btn btn-success mt-2" data-bs-dismiss="modal">OK</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="errorModal" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content border-danger">
+            <div class="modal-body text-center py-4">
+                <div class="mb-3">
+                <div class="bg-danger rounded-circle d-inline-flex align-items-center justify-content-center" 
+                    style="width: 60px; height: 60px;">
+                    <span class="text-white fw-bold" style="font-size: 1.5rem;">✗</span>
+                </div>
+                </div>
+                <h5 class="text-danger mb-2">Error</h5>
+                <p id="errorMessage" class="text-muted">Algo salió mal</p>
+                <button class="btn btn-danger mt-2" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+            </div>
+        </div>
+    </div>
+
     <div id="vista_inicio">
         <div class="modal modal-sheet modal_fondo_tema d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin"> 
             <div class="modal-dialog modal-dialog-centered"> 
@@ -92,49 +129,13 @@
                             <label for="contraseña">Contraseña</label> 
                         </div> 
                             
-                        <button class="w-100 mb-2 btn btn-lg rounded-3 boton_primary_tema" type="submit">Iniciar</button> 
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 boton_primary_tema" type="submit">Registrar</button> 
                         <hr>
                         <small>¿Ya tienes una cuenta? <a id="etiquetaActivarRegistro" onclick="activarVistaInicio()">Iniciar Sesión</a></small>    
                     </form> 
                     </div> 
                 </div> 
             </div> 
-        </div>
-    </div>
-
-    <div class="modal fade" id="successModal" tabindex="-1">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content border-success">
-            <div class="modal-body text-center py-4">
-                <div class="mb-3">
-                <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center" 
-                    style="width: 60px; height: 60px;">
-                    <span class="text-white fw-bold" style="font-size: 1.5rem;">✓</span>
-                </div>
-                </div>
-                <h5 class="text-success mb-2">¡Éxito!</h5>
-                <p id="successMessage" class="text-muted">Operación completada</p>
-                <button class="btn btn-success mt-2" data-bs-dismiss="modal">OK</button>
-            </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="errorModal" tabindex="-1">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content border-danger">
-            <div class="modal-body text-center py-4">
-                <div class="mb-3">
-                <div class="bg-danger rounded-circle d-inline-flex align-items-center justify-content-center" 
-                    style="width: 60px; height: 60px;">
-                    <span class="text-white fw-bold" style="font-size: 1.5rem;">✗</span>
-                </div>
-                </div>
-                <h5 class="text-danger mb-2">Error</h5>
-                <p id="errorMessage" class="text-muted">Algo salió mal</p>
-                <button class="btn btn-danger mt-2" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-            </div>
         </div>
     </div>
 
