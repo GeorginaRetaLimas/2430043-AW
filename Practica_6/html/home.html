@@ -75,13 +75,38 @@
 
     
     <main class="flex-grow-1 p-4">
-        <h1>Contenido Principal</h1>
-        <p>
-            Soy una prueba de texto wawawawa
-        </p>
+        <h1>Panel de Tareas</h1>
+        
+        <div class="card card-body mb-4">
+            <p id="datos_sesion" class="mb-0"></p>
+        </div>
 
-        <div class="card card-body">
-            <p id="datos_sesion"></p>
+        <div class="card">
+            <div class="card-body">
+                <h3 class="mb-4">
+                    <i class="bi bi-list-task me-2"></i>
+                    Organizar Tareas por Prioridad
+                </h3>
+                
+                <div class="proyecto-select">
+                    <label for="select-proyecto" class="form-label">Seleccionar Proyecto:</label>
+                    <select class="form-select" id="select-proyecto">
+                        <option value="todos">Todas las tareas</option>
+                    </select>
+                </div>
+
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Instrucciones:</strong> Arrastra las tareas para cambiar su orden de prioridad. El orden se guarda automáticamente.
+                </div>
+
+                <div id="lista-tareas">
+                    <div class="no-tareas">
+                        <i class="bi bi-inbox" style="font-size: 3rem;"></i>
+                        <p>No hay tareas disponibles</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </main>
 
