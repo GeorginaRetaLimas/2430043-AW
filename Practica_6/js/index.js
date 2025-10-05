@@ -1,9 +1,14 @@
 console.log("Conexión exitosa");
 
-// Constructor de usuarios
-let usuarios = [];
+// Limpiar local storage 
+// localStorage.clear();
 
-// Vistas
+// Variables globales
+let usuarios = [];
+let proyectos = [];
+let tareas = [];
+
+// Referencias a elementos
 const vistaInicio = document.getElementById('vista_inicio');
 const vistaRegistro = document.getElementById('vista_registro');
 
@@ -12,12 +17,6 @@ var inicioActivo;
 
 // Cuando se inicializa
 document.addEventListener('DOMContentLoaded', function(){
-    // Ocultamos los mensajes cuando recargamos
-    document.getElementById('mensajeError_registro').style.display = 'none';
-
-    document.getElementById('mensajeError').style.display = 'none';
-    document.getElementById('mensajeExito').style.display = 'none';
-
     // Verificamos que vista inicio esta activa
     if(localStorage.getItem('inicioActivo')){
         inicioActivo = JSON.parse(localStorage.getItem('inicioActivo'));
@@ -50,16 +49,40 @@ document.addEventListener('DOMContentLoaded', function(){
     function crearUsuarioAdmin(){
         console.log("Creando cuenta admin...");
         usuarios.push({
+            id_usuario: 0,
             correo: "admin@gmail.com",
             contraseña: "admin",
-            tareas: [{
-                id: 0,
-                titulo: "Diseño de Vector",
-                descripcion: "Crear un nuevo vector de tareas"
+        });
+
+        proyectos.push({
+            id_proyecto: 0,
+            titulo: "Practica 6",
+            descripcion: "Pagina web que nos permita registrar alumnos, darles tareas y proyectos",
+            estado: "pendiente",
+            prioridad: "maxima",
+            fecha_vencimiento: "",
+            asignado_a: [{
+                id_usuario_asignado: 0
             }]
         });
 
+        tareas.push({
+            id_tarea: 0,
+            id_proyecto_asignado: 0,
+            titulo: "Agregar Proyectos a las tareas",
+            descripcion: "A lo visto en la practica 5 añadirle la funcionalidad de tareas y proyectos"
+        }, {
+            id_tarea: 1,
+            id_proyecto_asignado: 0,
+            titulo: "Implementar drag and drop",
+            descripcion: "A lo visto en la practica 5 añadirle drag and drop"
+        });
+
+    
         localStorage.setItem('usuarios', JSON.stringify(usuarios));
+        localStorage.setItem('proyectos', JSON.stringify(proyectos));
+        localStorage.setItem('tareas', JSON.stringify(tareas));
+        
         console.log("Admin creado y guardado en localStorage");
     }
     
@@ -71,42 +94,32 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     // Detección de envio de formulario de INICIO
-    document.getElementById('form_inicio_Sesion').addEventListener('submit', function(e){
+    document.getElementById('form_inicio_sesion').addEventListener('submit', function(e) {
         e.preventDefault();
-
-        // Ocultar mensajes previos
-        document.getElementById('mensajeError').style.display = 'none';
-        document.getElementById('mensajeExito').style.display = 'none';
-
+                
         const correo = document.getElementById('correo').value;
         const contraseña = document.getElementById('contraseña').value;
-
+                
         const resultado = buscarRegistro(correo, contraseña);
-
-        if(resultado.valido) {
-            console.log(`Usuario autentificado ${resultado.usuario.correo}!`);
-            document.getElementById('mensajeExito').textContent = resultado.mensaje;
-            document.getElementById('mensajeExito').style.display = 'block';
-
+                
+        if (resultado.valido) {
+            console.log(`Usuario autentificado: ${resultado.usuario.correo}`);
+            mostrarSuccess(resultado.mensaje);
+                    
             localStorage.setItem('sesion', JSON.stringify(resultado.usuario));
-
+                    
             setTimeout(function() {
+                console.log("Redirigiendo a home...");
                 window.location.href = "../html/home.html";
-            }, 1000);
-
+            }, 1500);
         } else {
-            document.getElementById('mensajeError').textContent = resultado.mensaje;
-            document.getElementById('mensajeError').style.display = 'block';
+            mostrarError(resultado.mensaje);
         }
     });
 
     // Detección de envio de formulario de REGISTRO
     document.getElementById('form_registro').addEventListener('submit', function(e){
         e.preventDefault();
-
-        // Ocultar mensajes previos
-        const mensajeErrorRegistro = document.getElementById('mensajeError_registro');
-        mensajeErrorRegistro.style.display = 'none';
 
         const correo = document.getElementById('correo_registro').value;
         const contraseña = document.getElementById('contraseña_registro').value;
@@ -117,13 +130,7 @@ document.addEventListener('DOMContentLoaded', function(){
             console.log(`Usuario registrado: ${resultado.usuario.correo}!`);
             
             // Mostrar mensaje de éxito
-            const mensajeExito = document.createElement('div');
-            mensajeExito.className = 'alert alert-success';
-            mensajeExito.textContent = resultado.mensaje;
-
-            activarSuccessModal("Usuario registrado");
-
-            document.getElementById('form_registro').prepend(mensajeExito);
+            mostrarSuccess(resultado.mensaje);
 
             // Limpiar formulario
             document.getElementById('form_registro').reset();
@@ -131,11 +138,10 @@ document.addEventListener('DOMContentLoaded', function(){
             // Cambiar a vista de inicio después de 2 segundos
             setTimeout(function() {
                 activarVistaInicio();
-            }, 1000);
+            }, 1500);
 
         } else {
-            mensajeErrorRegistro.textContent = resultado.mensaje;
-            mensajeErrorRegistro.style.display = 'block';
+            mostrarError(resultado.mensaje);
         }
     });
 });
@@ -174,11 +180,13 @@ function registrarUsuario(correo, contraseña) {
         };
     }
 
+    const id = usuarios.length > 0 ? Math.max(...usuarios.map(u => u.id_usuario)) + 1 : 1;
+
     // Crear nuevo usuario
     const nuevoUsuario = {
+        id: id,
         correo: correo,
-        contraseña: contraseña,
-        tareas: []
+        contraseña: contraseña
     };
 
     // Agregar a la lista de usuarios
@@ -195,33 +203,93 @@ function registrarUsuario(correo, contraseña) {
 }
 
 // Funcion que va a activar los datos de registro, desplegar y ocultar
-function activarVistaRegistro(){
-    vistaInicio.classList.add("d-none"); 
-    vistaRegistro.classList.remove("d-none");
-
-    document.getElementById('mensajeError').style.display = 'none';
-    document.getElementById('mensajeExito').style.display = 'none';
-
-    inicioActivo = false;
-    localStorage.setItem('inicioActivo', JSON.stringify(inicioActivo));
+function activarVistaRegistro() {
+    vistaInicio.classList.add('d-none');
+    vistaRegistro.classList.remove('d-none');
+    localStorage.setItem('inicioActivo', 'false');
 }
 
-// Funcion que va a activar los datos de inicio, desplegar y ocultar
-function activarVistaInicio(){
-    vistaInicio.classList.remove("d-none"); 
-    vistaRegistro.classList.add("d-none");
-
-    inicioActivo = true;
-    localStorage.setItem('inicioActivo', JSON.stringify(inicioActivo));
+function activarVistaInicio() {
+    vistaRegistro.classList.add('d-none');
+    vistaInicio.classList.remove('d-none');
+    localStorage.setItem('inicioActivo', 'true');
 }
 
-// Hola profe si ve mi codigo ayuda, no se como poner este modal pipipipip :C
-function activarSuccessModal(texto){
-    console.log("Entrar a activar success Model");
-    console.log("Texto ingresado: ", texto);
+function mostrarSuccess(mensaje) {
+    mostrarModal(mensaje, 'success');
+}
 
-    document.getElementById('successMessage').value = texto;
-    const modalSuccess = new bootstrap.Modal(document.getElementById('successModal'), {});
+function mostrarError(mensaje) {
+    mostrarModal(mensaje, 'error');
+}
 
-    modalSuccess.show();
+function mostrarModal(mensaje, tipo) {
+    // Crear el contenedor del modal si no existe
+    let modalContainer = document.getElementById('modal-container');
+    if (!modalContainer) {
+        modalContainer = document.createElement('div');
+        modalContainer.id = 'modal-container';
+        document.body.appendChild(modalContainer);
+    }
+
+    // Determinar el icono y color según el tipo
+    const iconos = {
+        success: '<i class="bi bi-check-circle-fill"></i>',
+        error: '<i class="bi bi-x-circle-fill"></i>'
+    };
+
+    const colores = {
+        success: 'modal-success',
+        error: 'modal-error'
+    };
+
+    // Crear el modal
+    const modalHTML = `
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal-custom ${colores[tipo]}">
+                <button class="modal-close-btn" id="modal-close-btn">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+                <div class="modal-icon">
+                    ${iconos[tipo]}
+                </div>
+                <div class="modal-mensaje">
+                    ${mensaje}
+                </div>
+                <button class="modal-ok-btn boton_primary_tema" id="modal-ok-btn">
+                    Aceptar
+                </button>
+            </div>
+        </div>
+    `;
+
+    modalContainer.innerHTML = modalHTML;
+
+    // Agregar animación de entrada
+    setTimeout(() => {
+        const overlay = document.getElementById('modal-overlay');
+        if (overlay) {
+            overlay.classList.add('show');
+        }
+    }, 10);
+
+    // Función para cerrar el modal
+    function cerrarModal() {
+        const overlay = document.getElementById('modal-overlay');
+        if (overlay) {
+            overlay.classList.remove('show');
+            setTimeout(() => {
+                modalContainer.innerHTML = '';
+            }, 300);
+        }
+    }
+
+    // Event listeners para cerrar el modal
+    document.getElementById('modal-ok-btn').addEventListener('click', cerrarModal);
+    document.getElementById('modal-close-btn').addEventListener('click', cerrarModal);
+    document.getElementById('modal-overlay').addEventListener('click', function(e) {
+        if (e.target.id === 'modal-overlay') {
+            cerrarModal();
+        }
+    });
 }

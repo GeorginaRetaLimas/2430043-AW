@@ -19,44 +19,7 @@
 
 <body class="d-flex">
     <!-- Vista de inicio de sesión -->
-
-    <div class="modal fade modal_fondo_tema" id="successModal" tabindex="-1">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content border-success">
-            <div class="modal-body text-center py-4">
-                <div class="mb-3">
-                <div class="bg-success rounded-circle d-inline-flex align-items-center justify-content-center" 
-                    style="width: 60px; height: 60px;">
-                    <span class="text-white fw-bold" style="font-size: 1.5rem;">✓</span>
-                </div>
-                </div>
-                <h5 class="text-success mb-2">¡Éxito!</h5>
-                <p id="successMessage" class="text-muted">Operación completada</p>
-                <button class="btn btn-success mt-2" data-bs-dismiss="modal">OK</button>
-            </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade modal_fondo_tema" id="errorModal" tabindex="-1">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content border-danger">
-            <div class="modal-body text-center py-4">
-                <div class="mb-3">
-                <div class="bg-danger rounded-circle d-inline-flex align-items-center justify-content-center" 
-                    style="width: 60px; height: 60px;">
-                    <span class="text-white fw-bold" style="font-size: 1.5rem;">✗</span>
-                </div>
-                </div>
-                <h5 class="text-danger mb-2">Error</h5>
-                <p id="errorMessage" class="text-muted">Algo salió mal</p>
-                <button class="btn btn-danger mt-2" data-bs-dismiss="modal">Cerrar</button>
-            </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="vista_inicio">
+        <div id="vista_inicio">
         <div class="modal modal-sheet modal_fondo_tema d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin"> 
             <div class="modal-dialog modal-dialog-centered"> 
                 <div class="modal-content rounded-4 shadow"> 
@@ -67,15 +30,9 @@
                     </div> 
 
                     <div class="modal-body p-5 pt-0"> 
-                        <div id="mensajeError" class="alert alert-danger" role="alert">
-                        <!-- Mensaje de error se mostrará aquí -->
-                        </div>
 
-                        <div id="mensajeExito" class="alert alert-success" role="alert">
-                        <!-- Mensaje de exito se mostrará aquí -->
-                        </div>
 
-                        <form id="form_inicio_Sesion"> 
+                        <form id="form_inicio_sesion"> 
                             <div class="form-floating mb-3"> 
                                 <input type="email" class="form-control rounded-3 input_tema" id="correo" placeholder="name@example.com" required> 
                                 <label for="correo">Correo Eléctronico</label> 
@@ -113,10 +70,7 @@
                         </h1> 
                     </div> 
 
-                    <div class="modal-body p-5 pt-0"> 
-                        <div id="mensajeError_registro" class="alert alert-danger" role="alert">
-                        <!-- Mensaje de error se mostrará aquí -->
-                        </div>
+                    <div class="modal-body p-5 pt-0">
 
                         <form id="form_registro"> 
                         <div class="form-floating mb-3"> 
