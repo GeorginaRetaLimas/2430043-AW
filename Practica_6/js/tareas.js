@@ -1,23 +1,81 @@
-console.log("Conexión exitosa - Tareas");
+console.log("Conexión exitosa");
 
-var sesion;
-var tareas = [];
+// Lista de usarios
+let tareas = [];
+
+cargarProyectosEnSelect();
+cargarUsuariosEnSelect();
 
 // Cuando se inicializa
 document.addEventListener('DOMContentLoaded', function(){
     // Verificamos si en el localStorage hay sesion
     if(localStorage.getItem('sesion')){
         sesion = JSON.parse(localStorage.getItem('sesion'));
-        
-        // Cargar tareas del usuario actual
-        if(sesion.tareas) {
-            tareas = sesion.tareas;
-        }
-        
-        mostrarTareas();
+        console.log("Sesión activa:", sesion);
     } else {
         window.location.href = "index.html";
     }
+
+    // Cargar tareas existentes del localStorage
+    if(localStorage.getItem('tareas')) {
+        tareas = JSON.parse(localStorage.getItem('tareas'));
+        console.log("Tareas cargados:", tareas);
+    }
+
+    // Mostrar tareas en la tabla al cargar la página
+    mostrarTareas();
+
+    // Manejar el envío del formulario
+    document.getElementById('form_tareas').addEventListener('submit', function(e){
+        e.preventDefault();
+        
+        const id = tareas.length > 0 ? Math.max(...tareas.map(p => p.id_tarea)) + 1 : 1;
+
+        // Obtener valores del formulario
+        const proyecto = document.getElementById('proyecto').value || null;
+        const titulo = document.getElementById('titulo').value;
+        const descripcion = document.getElementById('descripcion').value;
+        const estado = document.getElementById('estado').value;
+        const prioridad = document.getElementById('prioridad').value;
+        const vencimiento = document.getElementById('fecha_vencimiento').value;
+        const asignadoSelect = document.getElementById('asignado');
+
+        const usuariosAsignados = Array.from(asignadoSelect.selectedOptions)
+            .map(option => option.value)
+            .filter(value => value !== "");
+
+        //Nota a mi misma: Validar las fechas despues, que no ingrese una fecha fin antes de fecha inicio
+
+        // Crear nuevo usuario
+        const nuevaTarea = {
+            id_tarea: id,
+            id_proyecto: proyecto,
+            titulo: titulo,
+            descripcion: descripcion,
+            estado: estado,
+            prioridad: prioridad,
+            fecha_vencimiento: vencimiento,
+            asignado_a: usuariosAsignados
+        };
+
+        // Agregar a la lista de tareas
+        tareas.push(nuevaTarea);
+
+        // Guardar en localStorage
+        guardarEnLocalStorage();
+
+        // Mostrar mensaje de éxito
+        alert('Tarea registrado exitosamente');
+
+        // Actualizar la tabla
+        mostrarTareas();
+
+        // Limpiar el formulario
+        document.getElementById('form_tarea').reset();
+
+        console.log('Tarea registrado:', nuevaTarea);
+        console.log('Total de tareas:', tareas);
+    });
 
     // Manejar cierre de sesión
     document.getElementById('btn_cerrar_sesion').addEventListener('click', function(e) {
@@ -25,94 +83,81 @@ document.addEventListener('DOMContentLoaded', function(){
         localStorage.removeItem('sesion');
         window.location.href = "index.html";
     });
-
-    // Manejar envío de formulario de tarea
-    document.getElementById('form_tarea').addEventListener('submit', function(e){
-        e.preventDefault();
-        
-        const titulo = document.getElementById('titulo').value;
-        const descripcion = document.getElementById('descripcion').value;
-        
-        agregarTarea(titulo, descripcion);
-    });
 });
 
-function agregarTarea(titulo, descripcion) {
-    // Generar ID único cin e tamaño de tareas y Math.max
-    // Si el numero de tareas es mayor a 0, si hay mas, map recorre y crea un id para cada uno
-    const id = tareas.length > 0 ? Math.max(...tareas.map(t => t.id)) + 1 : 1;
+function cargarProyectosEnSelect() {
+    const selectProyecto = document.getElementById('proyecto');
+    const proyectos = JSON.parse(localStorage.getItem('proyectos')) || [];
     
-    // Creamos una nueva tarea
-    const nuevaTarea = {
-        id: id,
-        titulo: titulo,
-        descripcion: descripcion
-    };
-    
-    tareas.push(nuevaTarea);
-    
-    // Actualizar sesión en localStorage
-    sesion.tareas = tareas;
-    localStorage.setItem('sesion', JSON.stringify(sesion));
-    
-    // Actualizar lista de usuarios
-    let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-    const usuarioIndex = usuarios.findIndex(user => user.correo === sesion.correo);
-    if (usuarioIndex !== -1) {
-        usuarios[usuarioIndex].tareas = tareas;
-        localStorage.setItem('usuarios', JSON.stringify(usuarios));
-    }
-    
-    // Limpiar formulario y mostrar tareas
-    document.getElementById('form_tarea').reset();
-    mostrarTareas();
+    proyectos.forEach(proyecto => {
+        const option = document.createElement('option');
+        option.value = proyecto.id_proyecto;
+        option.textContent = proyecto.nombre;
+        selectProyecto.appendChild(option);
+    });
 }
 
-function mostrarTareas() {
-    const listaTareas = document.getElementById('lista_tareas');
-    listaTareas.innerHTML = '';
+function cargarUsuariosEnSelect() {
+    const selectAsignado = document.getElementById('asignado');
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
     
+    usuarios.forEach(usuario => {
+        const option = document.createElement('option');
+        option.value = usuario.id_usuario || usuario.correo;
+        option.textContent = usuario.correo;
+        selectAsignado.appendChild(option);
+    });
+}
+
+// Función para mostrar Tareas en la tabla
+function mostrarTareas() {
+    const contenedor = document.getElementById('lista_tareas');
+    if (!contenedor) {
+        console.log('No se encontró el contenedor de la tabla');
+        return;
+    }
+
+    // Limpiar la tabla
+    contenedor.innerHTML = '';
+    
+    // Verificar si no hay tareas
     if (tareas.length === 0) {
-        listaTareas.innerHTML = `
+        contenedor.innerHTML = `
             <tr>
-                <td colspan="4" class="text-center">No hay tareas registradas</td>
+                <td colspan="3" class="text-center">No hay proyectos registrados</td>
             </tr>
         `;
         return;
     }
     
-    tareas.forEach(tarea => {
+    // Agregar cada usuario a la tabla
+    tareas.forEach(tareas => {
         const fila = document.createElement('tr');
+
+        // Hacer la fila
         fila.innerHTML = `
-            <td>${tarea.id}</td>
-            <td>${tarea.titulo}</td>
-            <td>${tarea.descripcion}</td>
+            <td>${tareas.id_tarea}</td>
+            <td>${tareas.id_proyecto}</td>
+            <td>${tareas.titulo}</td>
+            <td>${tareas.descripcion}</td>
+            <td>${tareas.estado}</td>
+            <td>${tareas.prioridad}</td>
+            <td>${tareas.fecha_fin}</td>
+            <td>${tareas.asignado_a}</td>
             <td>
-                <button class="btn btn-sm boton_danger_tema" onclick="eliminarTarea(${tarea.id})">
-                    <i class="bi bi-trash"></i> Eliminar
+                <button class="btn boton_danger_tema btn-sm" onclick="eliminarTarea('${tareas.id}')">
+                    Eliminar
                 </button>
             </td>
         `;
-        listaTareas.appendChild(fila);
+
+        // Agregar la fila
+        contenedor.appendChild(fila);
     });
 }
 
-function eliminarTarea(id) {
-    if (confirm('¿Estás seguro de que quieres eliminar esta tarea?')) {
-        tareas = tareas.filter(tarea => tarea.id !== id);
-        
-        // Actualizar sesión en localStorage
-        sesion.tareas = tareas;
-        localStorage.setItem('sesion', JSON.stringify(sesion));
-        
-        // Actualizar lista de usuarios
-        let usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
-        const usuarioIndex = usuarios.findIndex(user => user.correo === sesion.correo);
-        if (usuarioIndex !== -1) {
-            usuarios[usuarioIndex].tareas = tareas;
-            localStorage.setItem('usuarios', JSON.stringify(usuarios));
-        }
-        
-        mostrarTareas();
-    }
+// Función de guardar en localStorage
+function guardarEnLocalStorage(){
+    localStorage.setItem('tareas', JSON.stringify(tareas));
+    console.log('Datos guardados en localStorage');
 }

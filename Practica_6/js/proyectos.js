@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('form_proyecto').addEventListener('submit', function(e){
         e.preventDefault();
         
-        const id = proyectos.length > 0 ? Math.max(...proyectos.map(p => p.id_proyecto)) + 1 : 1;
+        const id = proyectos.length > 0 ? Math.max(...proyectos.map(p => p.id_proecto)) + 1 : 1;
 
         // Obtener valores del formulario
         const nombre = document.getElementById('nombre').value;

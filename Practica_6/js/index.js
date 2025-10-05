@@ -72,19 +72,7 @@ document.addEventListener('DOMContentLoaded', function(){
             prioridad: "maxima",
             fecha_vencimiento: "02-01-2025",
             asignado_a: [{
-                id_usuario_asignado: 0
-            }]
-
-        }, {
-            id_tarea: 1,
-            id_proyecto: 0,
-            titulo: "Agregar Proyectos a las tareas",
-            descripcion: "A lo visto en la practica 5 añadirle la funcionalidad de tareas y proyectos",
-            estado: "pendiente",
-            prioridad: "maxima",
-            fecha_vencimiento: "",
-            asignado_a: [{
-                id_usuario_asignado: 0
+                id_usuario: 0
             }]
         });
 

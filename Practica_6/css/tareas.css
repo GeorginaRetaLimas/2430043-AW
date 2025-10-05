@@ -36,6 +36,12 @@
   src: url("../fonts/BreeSerif-Regular.ttf");
 }
 
+@font-face {
+    font-family: 'fuente_H3';
+    src: url("../fonts/Caprasimo-Regular.ttf");
+}
+
+
 /* Selección de texto */
 ::selection {
     background-color: var(--color_seleccion); 
@@ -59,6 +65,40 @@ body {
 
 .sidebar_tema {
     background-color: var(--color_primary) !important;
+position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+main {
+    margin-left: 280px;
+    height: 100vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.card {
+    max-width: 100%;
+}
+
+main::-webkit-scrollbar {
+    width: 8px;
+}
+
+main::-webkit-scrollbar-track {
+    background: var(--color_primary_light);
+}
+
+main::-webkit-scrollbar-thumb {
+    background: var(--color_primary_light);
+    border-radius: 4px;
+}
+
+main::-webkit-scrollbar-thumb:hover {
+    background: var(--color_primary_dark);
 }
 
 .active_nav_tema {
@@ -105,11 +145,20 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(218, 70, 134, 0.25);
 }
 
+
+
 h1 {
     font-family: 'fuente_H1';
     font-size: 50px;
     text-align: center;
     color: var(--color_primary);
+}
+
+h3 {
+    font-family: 'fuente_H3';
+    font-size: 35px;
+    text-align: center;
+    color: var(--color_secondary_dark);
 }
 
 p {
