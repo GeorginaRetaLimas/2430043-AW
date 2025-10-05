@@ -36,6 +36,11 @@
   src: url("../fonts/BreeSerif-Regular.ttf");
 }
 
+@font-face {
+    font-family: 'fuente_H3';
+    src: url("../fonts/Caprasimo-Regular.ttf");
+}
+
 /* Selección de texto */
 ::selection {
     background-color: var(--color_seleccion); 
@@ -48,11 +53,8 @@
     color: var(--color_background);
 }
 
-
 body {
     background-color: var(--color_background);
-    overflow: hidden; /* Oculta el scroll general */
-    height: 100vh;
 }
 
 .content {
@@ -61,7 +63,7 @@ body {
 }
 
 .sidebar_tema {
-    background-color: var(--color_primary) !important; /* Color del sidebar */
+    background-color: var(--color_primary) !important;
     position: fixed;
     left: 0;
     top: 0;
@@ -99,7 +101,7 @@ main::-webkit-scrollbar-thumb:hover {
 }
 
 .active_nav_tema {
-    background-color: var(--color_primary_dark) !important; /* Color del enlace activo */
+    background-color: var(--color_primary_dark) !important;
     color: var(--color_background) !important;
 }
 
@@ -111,7 +113,6 @@ main::-webkit-scrollbar-thumb:hover {
     background-color:  var(--color_hover) !important;
 }
 
-/* Menu de cerrar sesión */
 .dropdown-menu_tema{
     background-color: var(--color_primary_dark) !important;
     color: var(--color_background) !important;
@@ -125,6 +126,11 @@ main::-webkit-scrollbar-thumb:hover {
     background-color: var(--color_primary_dark) !important; 
     color: var(--color_background) !important;
 }
+
+.dropdown-menu_tema {
+    background-color: var(--color_primary);
+}
+
 .boton_primary_tema:hover {
     background-color:  var(--color_primary_light) !important;
 }
@@ -137,17 +143,24 @@ main::-webkit-scrollbar-thumb:hover {
 .boton_danger_tema:hover{
     background-color: var(--color_seleccion) !important; 
 }
-/*
-.table-responsive {
-    max-height: 400px;
-    overflow-y: auto;
+
+.input_tema:focus {
+    border-color: var(--color_primary_light);
+    box-shadow: 0 0 0 0.2rem rgba(218, 70, 134, 0.25);
 }
-*/
+
 h1 {
     font-family: 'fuente_H1';
     font-size: 50px;
     text-align: center;
     color: var(--color_primary);
+}
+
+h3 {
+    font-family: 'fuente_H3';
+    font-size: 35px;
+    text-align: center;
+    color: var(--color_secondary_dark);
 }
 
 p {

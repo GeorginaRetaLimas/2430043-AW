@@ -1,7 +1,7 @@
 console.log("Conexión exitosa");
 
 // Limpiar local storage 
-// localStorage.clear();
+localStorage.clear();
 
 // Variables globales
 let usuarios = [];
@@ -56,26 +56,36 @@ document.addEventListener('DOMContentLoaded', function(){
 
         proyectos.push({
             id_proyecto: 0,
-            titulo: "Practica 6",
+            nombre: "Practica 6",
             descripcion: "Pagina web que nos permita registrar alumnos, darles tareas y proyectos",
+            estado: "pendiente",
+            fecha_inicio: "01-01-2025",
+            fecha_fin: "02-01-2025",
+        });
+
+        tareas.push({
+            id_tarea: 0,
+            id_proyecto: 0,
+            titulo: "Agregar Proyectos a las tareas",
+            descripcion: "A lo visto en la practica 5 añadirle la funcionalidad de tareas y proyectos",
+            estado: "pendiente",
+            prioridad: "maxima",
+            fecha_vencimiento: "02-01-2025",
+            asignado_a: [{
+                id_usuario_asignado: 0
+            }]
+
+        }, {
+            id_tarea: 1,
+            id_proyecto: 0,
+            titulo: "Agregar Proyectos a las tareas",
+            descripcion: "A lo visto en la practica 5 añadirle la funcionalidad de tareas y proyectos",
             estado: "pendiente",
             prioridad: "maxima",
             fecha_vencimiento: "",
             asignado_a: [{
                 id_usuario_asignado: 0
             }]
-        });
-
-        tareas.push({
-            id_tarea: 0,
-            id_proyecto_asignado: 0,
-            titulo: "Agregar Proyectos a las tareas",
-            descripcion: "A lo visto en la practica 5 añadirle la funcionalidad de tareas y proyectos"
-        }, {
-            id_tarea: 1,
-            id_proyecto_asignado: 0,
-            titulo: "Implementar drag and drop",
-            descripcion: "A lo visto en la practica 5 añadirle drag and drop"
         });
 
     
@@ -162,7 +172,7 @@ function buscarRegistro(correo, contraseña){
         return {
             valido: false,
             usuario: null,
-            mensaje: "Ese usuario no esta en los registros"
+            mensaje: "Ese usuario no coincide con los registros"
         };
     }
 }
@@ -285,8 +295,11 @@ function mostrarModal(mensaje, tipo) {
     }
 
     // Event listeners para cerrar el modal
+    // Boton Ok
     document.getElementById('modal-ok-btn').addEventListener('click', cerrarModal);
+    // Tachita
     document.getElementById('modal-close-btn').addEventListener('click', cerrarModal);
+    // Click afuera del modal
     document.getElementById('modal-overlay').addEventListener('click', function(e) {
         if (e.target.id === 'modal-overlay') {
             cerrarModal();
