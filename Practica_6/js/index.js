@@ -1,7 +1,7 @@
 console.log("Conexión exitosa");
 
 // Limpiar local storage 
-localStorage.clear();
+// localStorage.clear();
 
 // Variables globales
 let usuarios = [];
