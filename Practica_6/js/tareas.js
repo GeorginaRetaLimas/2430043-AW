@@ -16,11 +16,17 @@ document.addEventListener('DOMContentLoaded', function(){
         window.location.href = "index.html";
     }
 
+    if(!localStorage.getItem('proyectos')){
+        mostrarError("No hay ningun proyecto creado, primero cree uno luego asigne tareas");
+    }
+
     // Cargar tareas existentes del localStorage
     if(localStorage.getItem('tareas')) {
         tareas = JSON.parse(localStorage.getItem('tareas'));
         console.log("Tareas cargados:", tareas);
     }
+
+
 
     // Mostrar tareas en la tabla al cargar la página
     mostrarTareas();
@@ -38,11 +44,7 @@ document.addEventListener('DOMContentLoaded', function(){
         const estado = document.getElementById('estado').value;
         const prioridad = document.getElementById('prioridad').value;
         const vencimiento = document.getElementById('fecha_vencimiento').value;
-        const asignadoSelect = document.getElementById('asignado');
-
-        const usuariosAsignados = Array.from(asignadoSelect.selectedOptions)
-            .map(option => option.value)
-            .filter(value => value !== "");
+        const asignado = document.getElementById('asignado').value;
 
         //Nota a mi misma: Validar las fechas despues, que no ingrese una fecha fin antes de fecha inicio
 
@@ -55,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function(){
             estado: estado,
             prioridad: prioridad,
             fecha_vencimiento: vencimiento,
-            asignado_a: usuariosAsignados
+            asignado_a: asignado
         };
 
         // Agregar a la lista de tareas
@@ -65,13 +67,13 @@ document.addEventListener('DOMContentLoaded', function(){
         guardarEnLocalStorage();
 
         // Mostrar mensaje de éxito
-        alert('Tarea registrado exitosamente');
+        mostrarSuccess("Tarea registrado exitosamente");
 
         // Actualizar la tabla
         mostrarTareas();
 
         // Limpiar el formulario
-        document.getElementById('form_tarea').reset();
+        document.getElementById('form_tareas').reset();
 
         console.log('Tarea registrado:', nuevaTarea);
         console.log('Total de tareas:', tareas);
@@ -103,7 +105,7 @@ function cargarUsuariosEnSelect() {
     
     usuarios.forEach(usuario => {
         const option = document.createElement('option');
-        option.value = usuario.id_usuario || usuario.correo;
+        option.value = usuario.id_usuario;
         option.textContent = usuario.correo;
         selectAsignado.appendChild(option);
     });
@@ -142,7 +144,7 @@ function mostrarTareas() {
             <td>${tareas.descripcion}</td>
             <td>${tareas.estado}</td>
             <td>${tareas.prioridad}</td>
-            <td>${tareas.fecha_fin}</td>
+            <td>${tareas.fecha_vencimiento}</td>
             <td>${tareas.asignado_a}</td>
             <td>
                 <button class="btn boton_danger_tema btn-sm" onclick="eliminarTarea('${tareas.id}')">
@@ -160,4 +162,86 @@ function mostrarTareas() {
 function guardarEnLocalStorage(){
     localStorage.setItem('tareas', JSON.stringify(tareas));
     console.log('Datos guardados en localStorage');
+}
+
+function mostrarSuccess(mensaje) {
+    mostrarModal(mensaje, 'success');
+}
+
+function mostrarError(mensaje) {
+    mostrarModal(mensaje, 'error');
+}
+
+function mostrarModal(mensaje, tipo) {
+    // Crear el contenedor del modal si no existe
+    let modalContainer = document.getElementById('modal-container');
+    if (!modalContainer) {
+        modalContainer = document.createElement('div');
+        modalContainer.id = 'modal-container';
+        document.body.appendChild(modalContainer);
+    }
+
+    // Determinar el icono y color según el tipo
+    const iconos = {
+        success: '<i class="bi bi-check-circle-fill"></i>',
+        error: '<i class="bi bi-x-circle-fill"></i>'
+    };
+
+    const colores = {
+        success: 'modal-success',
+        error: 'modal-error'
+    };
+
+    // Crear el modal
+    const modalHTML = `
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal-custom ${colores[tipo]}">
+                <button class="modal-close-btn" id="modal-close-btn">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+                <div class="modal-icon">
+                    ${iconos[tipo]}
+                </div>
+                <div class="modal-mensaje">
+                    ${mensaje}
+                </div>
+                <button class="modal-ok-btn boton_primary_tema" id="modal-ok-btn">
+                    Aceptar
+                </button>
+            </div>
+        </div>
+    `;
+
+    modalContainer.innerHTML = modalHTML;
+
+    // Agregar animación de entrada
+    setTimeout(() => {
+        const overlay = document.getElementById('modal-overlay');
+        if (overlay) {
+            overlay.classList.add('show');
+        }
+    }, 10);
+
+    // Función para cerrar el modal
+    function cerrarModal() {
+        const overlay = document.getElementById('modal-overlay');
+        if (overlay) {
+            overlay.classList.remove('show');
+            setTimeout(() => {
+                modalContainer.innerHTML = '';
+            }, 300);
+        }
+    }
+
+    // Event listeners para cerrar el modal
+    // Boton Ok
+    document.getElementById('modal-ok-btn').addEventListener('click', cerrarModal);
+    // Tachita
+    document.getElementById('modal-close-btn').addEventListener('click', cerrarModal);
+    // Click afuera del modal
+    document.getElementById('modal-overlay').addEventListener('click', function(e) {
+        if (e.target.id === 'modal-overlay') {
+            cerrarModal();
+        }
+    });
 }

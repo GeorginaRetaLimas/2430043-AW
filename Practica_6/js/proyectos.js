@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('form_proyecto').addEventListener('submit', function(e){
         e.preventDefault();
         
-        const id = proyectos.length > 0 ? Math.max(...proyectos.map(p => p.id_proecto)) + 1 : 1;
+        const id = proyectos.length > 0 ? Math.max(...proyectos.map(p => p.id_proyecto)) + 1 : 1;
 
         // Obtener valores del formulario
         const nombre = document.getElementById('nombre').value;
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function(){
         guardarEnLocalStorage();
 
         // Mostrar mensaje de éxito
-        alert('Proyecto registrado exitosamente');
+        mostrarSuccess('Proyecto registrado exitosamente');
 
         // Actualizar la tabla
         mostrarProyectos();
@@ -123,4 +123,87 @@ function mostrarProyectos() {
 function guardarEnLocalStorage(){
     localStorage.setItem('proyectos', JSON.stringify(proyectos));
     console.log('Datos guardados en localStorage');
+}
+
+
+function mostrarSuccess(mensaje) {
+    mostrarModal(mensaje, 'success');
+}
+
+function mostrarError(mensaje) {
+    mostrarModal(mensaje, 'error');
+}
+
+function mostrarModal(mensaje, tipo) {
+    // Crear el contenedor del modal si no existe
+    let modalContainer = document.getElementById('modal-container');
+    if (!modalContainer) {
+        modalContainer = document.createElement('div');
+        modalContainer.id = 'modal-container';
+        document.body.appendChild(modalContainer);
+    }
+
+    // Determinar el icono y color según el tipo
+    const iconos = {
+        success: '<i class="bi bi-check-circle-fill"></i>',
+        error: '<i class="bi bi-x-circle-fill"></i>'
+    };
+
+    const colores = {
+        success: 'modal-success',
+        error: 'modal-error'
+    };
+
+    // Crear el modal
+    const modalHTML = `
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal-custom ${colores[tipo]}">
+                <button class="modal-close-btn" id="modal-close-btn">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+                <div class="modal-icon">
+                    ${iconos[tipo]}
+                </div>
+                <div class="modal-mensaje">
+                    ${mensaje}
+                </div>
+                <button class="modal-ok-btn boton_primary_tema" id="modal-ok-btn">
+                    Aceptar
+                </button>
+            </div>
+        </div>
+    `;
+
+    modalContainer.innerHTML = modalHTML;
+
+    // Agregar animación de entrada
+    setTimeout(() => {
+        const overlay = document.getElementById('modal-overlay');
+        if (overlay) {
+            overlay.classList.add('show');
+        }
+    }, 10);
+
+    // Función para cerrar el modal
+    function cerrarModal() {
+        const overlay = document.getElementById('modal-overlay');
+        if (overlay) {
+            overlay.classList.remove('show');
+            setTimeout(() => {
+                modalContainer.innerHTML = '';
+            }, 300);
+        }
+    }
+
+    // Event listeners para cerrar el modal
+    // Boton Ok
+    document.getElementById('modal-ok-btn').addEventListener('click', cerrarModal);
+    // Tachita
+    document.getElementById('modal-close-btn').addEventListener('click', cerrarModal);
+    // Click afuera del modal
+    document.getElementById('modal-overlay').addEventListener('click', function(e) {
+        if (e.target.id === 'modal-overlay') {
+            cerrarModal();
+        }
+    });
 }

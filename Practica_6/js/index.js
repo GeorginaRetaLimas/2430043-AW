@@ -1,7 +1,7 @@
 console.log("Conexión exitosa");
 
 // Limpiar local storage 
-localStorage.clear();
+//localStorage.clear();
 
 // Variables globales
 let usuarios = [];
@@ -68,12 +68,28 @@ document.addEventListener('DOMContentLoaded', function(){
             id_proyecto: 0,
             titulo: "Agregar Proyectos a las tareas",
             descripcion: "A lo visto en la practica 5 añadirle la funcionalidad de tareas y proyectos",
-            estado: "pendiente",
-            prioridad: "maxima",
+            estado: "hecha",
+            prioridad: "alta",
             fecha_vencimiento: "02-01-2025",
-            asignado_a: [{
-                id_usuario: 0
-            }]
+            asignado_a: 0
+        },{
+            id_tarea: 1,
+            id_proyecto: 0,
+            titulo: "Agregar boton de edición a los registros",
+            descripcion: "En los registros de usuario, tarea y proyecto habilitar boton de editar",
+            estado: "pendiente",
+            prioridad: "media",
+            fecha_vencimiento: "02-01-2025",
+            asignado_a: 0
+        },{
+            id_tarea: 2,
+            id_proyecto: 0,
+            titulo: "Añadir opciones de monitoreo",
+            descripcion: "En el home añadir recuadros con datos importantes",
+            estado: "pendiente",
+            prioridad: "baja",
+            fecha_vencimiento: "02-01-2025",
+            asignado_a: 0
         });
 
     
@@ -82,6 +98,8 @@ document.addEventListener('DOMContentLoaded', function(){
         localStorage.setItem('tareas', JSON.stringify(tareas));
         
         console.log("Admin creado y guardado en localStorage");
+        console.log(proyectos);
+        console.log(tareas);
     }
     
     console.log(usuarios);

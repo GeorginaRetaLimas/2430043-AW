@@ -82,7 +82,6 @@
                     <div class="flex-grow-1 mb-3">
                         <label for="proyecto" class="form-label">Proyecto</label>
                         <select class="form-select rounded-3 input_tema" id="proyecto" required>
-                            <option value="" selected>Sin proyecto</option>
                             <!-- Los proyectos se cargarán dinámicamente -->
                         </select>
                     </div>
@@ -110,26 +109,24 @@
                         <div class="flex-grow-1 mb-3">
                             <label for="prioridad" class="form-label">Prioridad</label>
                             <select class="form-select rounded-3 input_tema" id="prioridad" required>
-                                <option value="pendiente">Alta</option>
-                                <option value="en_proceso">Media</option>
-                                <option value="prioridad">Baja</option>
+                                <option value="alta">Alta</option>
+                                <option value="media">Media</option>
+                                <option value="baja">Baja</option>
                             </select>
                         </div>
 
                         <div class="flex-grow-1 mb-3">
                             <label for="fecha_vencimiento" class="form-label">Fecha Vencimiento</label>
-                            <input type="date"  class="form-control rounded-3 input_tema"  id="fecha_vencimiento">
+                            <input type="date"  class="form-control rounded-3 input_tema" id="fecha_vencimiento">
                         </div>
                     </div>
 
                     <div class="flex-grow-1 mb-3">
-                        <label for="asignado" class="form-label">Asignado a</label>
-                        <select class="form-select rounded-3 input_tema" id="asignado" multiple>
-                            <option value="" selected>Sin asignar</option>
-                            <!-- Los estudiantes se cargarán dinámicamente -->
-                        </select>
-                        <small class="text-muted">Mantén Ctrl (Cmd en Mac) para seleccionar múltiples usuarios</small>
-                    </div>
+                    <label for="asignado" class="form-label">Asignado a</label>
+                    <select class="form-select rounded-3 input_tema" id="asignado">
+                        <!-- Los estudiantes se cargarán dinámicamente -->
+                    </select>
+                </div>
                             
                     <button class="w-100 mb-2 btn btn-lg rounded-3 boton_primary_tema" type="submit">Agregar Proyecto</button> 
                 </form> 

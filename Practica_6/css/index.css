@@ -74,6 +74,7 @@ body {
 
 .input_tema:hover {
     box-shadow: var(--color_secondary_dark) !important;
+    transform: translateY(-2px);
 }
 
 h1 {
@@ -95,6 +96,7 @@ a {
 }
 
 a:hover{
+    transform: translateY(-2px) !important;
     color: var(--color_primary)!important;
 }
 
@@ -160,6 +162,7 @@ a:hover{
 
 .modal-close-btn:hover {
     color: var(--color_black);
+    transform: translateY(-2px);
 }
 
 .modal-icon {
@@ -206,3 +209,4 @@ a:hover{
 .modal-error {
     border-left: 5px solid var(--color-danger);
 }
+

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function(){
     if(localStorage.getItem('sesion')){
         sesion = JSON.parse(localStorage.getItem('sesion'));
         const correo = sesion.correo;
-        document.getElementById('datos_sesion').textContent = "Bienvenido, " + correo;
+        //document.getElementById('datos_sesion').textContent = "Bienvenido, " + correo;
     } else {
         window.location.href = "index.html";
     }
@@ -40,9 +40,11 @@ function cargarDatos() {
     }
     if(localStorage.getItem('proyectos')) {
         proyectos = JSON.parse(localStorage.getItem('proyectos'));
-        }
+        
+    }
 }
 
+// Cargar datos de opciones
 function cargarProyectosEnSelect() {
     const select = document.getElementById('select-proyecto');
     proyectos.forEach(proyecto => {
@@ -76,7 +78,7 @@ function mostrarTareas(proyectoId) {
     tareasFiltradas.sort((a, b) => {
         const ordenA = a.orden_prioridad !== undefined ? a.orden_prioridad : 999;
         const ordenB = b.orden_prioridad !== undefined ? b.orden_prioridad : 999;
-        return ordenA - ordenB;
+        return ordenA - ordenB; // orden ascendente por orden de prioridad
     });
 
     // Agregar cada tarea a la lista
@@ -90,22 +92,23 @@ function mostrarTareas(proyectoId) {
         const proyecto = proyectos.find(p => p.id_proyecto == tarea.id_proyecto);
         const nombreProyecto = proyecto ? proyecto.nombre : 'Sin proyecto';
 
-        // Convertir prioridad
+        // Convertir
         let prioridadClase = 'prioridad-baja';
         let prioridadTexto = tarea.prioridad;
-        if(tarea.prioridad === 'pendiente' || tarea.prioridad === 'Alta') {
+        if(tarea.prioridad === 'alta') {
             prioridadClase = 'prioridad-alta';
             prioridadTexto = 'Alta';
-        } else if(tarea.prioridad === 'en_proceso' || tarea.prioridad === 'Media') {
+        } else if(tarea.prioridad === 'media') {
             prioridadClase = 'prioridad-media';
-            prioridadTexto = 'Media';
+            prioridadTexto = 'media';
         } else {
-            prioridadTexto = 'Baja';
+            prioridadTexto = 'baja';
         }
 
         div.innerHTML = `
             <div class="tarea-titulo">
-                <i class="bi bi-grip-vertical me-2"></i>
+            
+                <i class="bi bi-tornado me-2"></i>
                 ${tarea.titulo}
             </div>
 
@@ -129,17 +132,18 @@ function mostrarTareas(proyectoId) {
         `;
 
         // Agregar eventos de drag and drop
-        div.addEventListener('dragstart', dragStart);
-        div.addEventListener('dragover', dragOver);
-        div.addEventListener('drop', drop);
-        div.addEventListener('dragend', dragEnd);
-        div.addEventListener('dragenter', dragEnter);
-        div.addEventListener('dragleave', dragLeave);
+        div.addEventListener('dragstart', dragStart); // cuando empieza a arrastrarse
+        div.addEventListener('dragover', dragOver); // Mientras se pasa sobre otro
+        div.addEventListener('drop', drop); // cuando se suelta sobre otro
+        div.addEventListener('dragend', dragEnd); // cuando termina el arrastre
+        div.addEventListener('dragenter', dragEnter); // Entra en limites de div
+        div.addEventListener('dragleave', dragLeave); // Sale de los limites
 
-        lista.appendChild(div);
+        lista.appendChild(div); //agrega el nuevo elemento a la lista
     });
 }
 
+// Cuando se arrastre
 function dragStart(e) {
     dragSrcEl = this;
     e.dataTransfer.effectAllowed = 'move';
@@ -147,22 +151,26 @@ function dragStart(e) {
     this.classList.add('dragging');
 }
 
+// Cuando pase por encima
 function dragOver(e) {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
     return false;
 }
 
+// Cuando este en los limites
 function dragEnter(e) {
     if(dragSrcEl !== this) {
         this.classList.add('drag-over');
-        }
+    }
 }
 
+// Cuando salga de los limites
 function dragLeave(e) {
     this.classList.remove('drag-over');
 }
 
+// Cuando suelte
 function drop(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -190,6 +198,7 @@ function drop(e) {
     return false;
 }
 
+// Cuando termina el arrasre
 function dragEnd(e) {
     this.classList.remove('dragging');
             
@@ -199,12 +208,13 @@ function dragEnd(e) {
     });
 }
 
+
 function guardarOrden() {
     const items = document.querySelectorAll('.tarea-item');
     const proyectoActual = document.getElementById('select-proyecto').value;
     
     // Obtener IDs en el nuevo orden
-    const ordenActual = [];
+    let ordenActual = [];
     items.forEach((item, index) => {
         ordenActual.push({
             id: parseInt(item.dataset.tareaId),
@@ -213,28 +223,44 @@ function guardarOrden() {
     });
 
     console.log('Nuevo orden:', ordenActual);
+    const totalTareas = items.length;
 
-    // Si estamos viendo un proyecto específico, solo actualizamos esas tareas
-    if(proyectoActual !== 'todos') {
-        // Actualizar solo las tareas del proyecto actual
-        ordenActual.forEach(item => {
-            const tareaIndex = tareas.findIndex(t => t.id_tarea === item.id);
-            if(tareaIndex !== -1) {
-                tareas[tareaIndex].orden_prioridad = item.orden;
+    ordenActual.forEach((item, index) => {
+        const tareaIndex = tareas.findIndex(t => t.id_tarea === item.id);
+        if(tareaIndex !== -1) {
+            // Calcular prioridad basada en la posición
+            let nuevaPrioridad;
+            
+            if (index === 0) {
+                // Primera posición = Alta prioridad
+                nuevaPrioridad = 'alta';
+            } else if (index === totalTareas - 1) {
+                // Última posición = Baja prioridad
+                nuevaPrioridad = 'baja';
+            } else if (index < totalTareas / 2) {
+                // Primera mitad = Media-alta prioridad
+                nuevaPrioridad = 'media';
+            } else {
+                // Segunda mitad = Media-baja prioridad
+                nuevaPrioridad = 'media';
             }
-        });
-    } else {
-        // Actualizar todas las tareas visibles
-        ordenActual.forEach(item => {
-            const tareaIndex = tareas.findIndex(t => t.id_tarea === item.id);
-            if(tareaIndex !== -1) {
-                tareas[tareaIndex].orden_prioridad = item.orden;
-            }
-        });
-    }
+            
+            // Actualizar tanto el orden como la prioridad
+            tareas[tareaIndex].orden_prioridad = index;
+            tareas[tareaIndex].prioridad = nuevaPrioridad;
+        }
+    });
 
     // Guardar en localStorage
     localStorage.setItem('tareas', JSON.stringify(tareas));
     console.log('Orden guardado en localStorage');
     console.log('Tareas actualizadas:', tareas);
+
+    // Mostramos la tarea en la que nos encontramos
+    mostrarTareas(proyectoActual);
+}
+
+function quitarInfo(){
+    const vistaInfo = document.getElementById('info');
+    vistaInfo.classList.add('d-none');
 }
