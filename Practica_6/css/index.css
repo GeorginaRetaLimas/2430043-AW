@@ -52,12 +52,15 @@
 
 
 body {
-    background-color: var(--color_background);
+    /*background-color: var(--color-danger);*/
+    /*background-image: url("../img/background.gif");*/
 
 }
 
 .modal_fondo_tema {
-    background-color: var(--color_background) !important; /* Color del sidebar */
+    /*background-color: var(--color_background) !important; /* Color del sidebar */
+    background-image: url("../img/background.gif");
+    
 }
 
 .boton_primary_tema {
