@@ -90,18 +90,25 @@
                     <!-- Formulario de registro de alumno -->
                     <form id="form_notas"> 
                         <div class="form-floating mb-3"> 
-                            <input type="email" class="form-control rounded-3 input_tema" id="correo" placeholder="name@example.com" required> 
-                            <label for="correo">Correo Eléctronico</label> 
+                            <input type="text" class="form-control rounded-3 input_tema" id="titulo" placeholder="name@example.com" required> 
+                            <label for="titulo">Título</label> 
                         </div> 
                             
                         <div class="form-floating mb-3"> 
-                            <input type="password" class="form-control rounded-3 input_tema" id="contraseña" placeholder="Password" required> 
-                            <label for="contraseña">Contraseña</label> 
-                        </div> 
+                            <input type="text" class="form-control rounded-3 input_tema" id="contenido" placeholder="Password" required> 
+                            <label for="contenido">Contenido</label> 
+                        </div>
                             
-                        <button class="w-100 mb-2 btn btn-lg rounded-3 boton_primary_tema" type="submit">Iniciar</button> 
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 boton_primary_tema" type="submit">Guardar</button> 
                     </form> 
                 </div>
+            </div>
+        </div>
+
+        <div id="vista_Lista_Notas">
+            <div class="card">
+                <ul id="litaNotas">
+                </ul>
             </div>
         </div>
     </main>
