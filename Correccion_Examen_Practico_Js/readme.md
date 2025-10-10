@@ -1,4 +1,4 @@
-# ✨🌟 Correccion Examen Practico JS 🌟✨
+# ✨🌟 CorreccionExamen Practico JS 🌟✨
 ### 07/10/2025
 Ya me quedo bonito
 
