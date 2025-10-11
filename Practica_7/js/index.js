@@ -202,7 +202,7 @@ function registrarUsuario(nombre, correo, contraseña) {
 
     // Crear nuevo usuario
     const nuevoUsuario = {
-        id: id,
+        id_usuario: id,
         nombre: nombre,
         correo: correo,
         contraseña: contraseña,
