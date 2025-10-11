@@ -1,5 +1,7 @@
 console.log("Conexión exitosa");
+
 let notas = [];
+let editandoNotaId = null;
 
 sesion = JSON.parse(localStorage.getItem('sesion'));
 
@@ -8,17 +10,31 @@ document.addEventListener('DOMContentLoaded', function(){
     // Verificamos si en el localStorage hay sesion
     if(sesion){
         console.log("Sesión activa:", sesion);
+        cargarNotas();
     } else {
         window.location.href = "index.html";
     }
 
-    // Manejar el envío del formulario
-    document.getElementById('form_notas').addEventListener('submit', function(e){
-        e.preventDefault();
+    document.getElementById('btn_AgregarNota').addEventListener('click', mostrarModalNuevaNota);
+    document.getElementById('btn_CrearNota').addEventListener('click', mostrarModalNuevaNota);
 
-       validarFormulario();
+    document.getElementById('btn_GuardarNota').addEventListener('click', guardarNota);
+
+    // Cerrar sesión
+    document.getElementById('btn_cerrar_sesion').addEventListener('click', function() {
+        localStorage.removeItem('sesion');
+        window.location.href = "index.html";
     });
 });
+
+function mostrarModalNuevaNota(){
+    editandoNotaId = null;
+
+    document.getElementById('modal_titulo').textContent = 'Nueva Nota';
+    document.getElementById('titulo').value = '';
+    document.getElementById('contenido').value = '';
+    document.getElementById('nota_id').value = '';
+}
 
 function validarFormulario(){
     let titulo = document.getElementById("titulo").value;
