@@ -46,8 +46,8 @@ function mostrarModalEditarNota(id){
     console.log("Buscando nota con ID:", idNumero);
     console.log("Notas disponibles:", notas);
 
-    if (nota) {
-        editandoNotaId = id;
+    if (nota && (sesion.rol === "admin" || nota.id_usuario === sesion.id_usuario)) {
+        editandoNotaId = idNumero;
 
         document.getElementById('modal_titulo').textContent = 'Editar Nota';
         document.getElementById('titulo').value = nota.titulo;
@@ -57,7 +57,7 @@ function mostrarModalEditarNota(id){
         const modal = new bootstrap.Modal(document.getElementById('modal_nota'));
         modal.show();
     } else {
-        mostrarError("No se encontro la nota");
+        mostrarError("No tienes permisos para editar esta nota");
     }
 }
 
@@ -138,10 +138,19 @@ function cargarNotas(){
     const notasGuardadas = localStorage.getItem('notas');
     if (notasGuardadas) {
         notas = JSON.parse(notasGuardadas);
+    } else {
+        notas = [];
     }
 
-    // Filtrar por el usuario actual
-    const notasUsuario = notas.filter(nota => nota.id_usuario === sesion.id_usuario);
+    let notasUsuario;
+
+    if(sesion.rol === "admin"){
+        console.log("Cargando todas las notas (admin)");
+        notasUsuario = notas;
+    } else {
+        console.log("Cargando notas del usuario:", sesion.id_usuario);
+        notasUsuario = notas.filter(nota => nota.id_usuario === sesion.id_usuario);
+    }
 
     const listaNotas = document.getElementById('lista_notas');
     const noNotas = document.getElementById('no_notas');
@@ -155,7 +164,18 @@ function cargarNotas(){
     noNotas.style.display = 'none';
 
     let html = '';
-    notasUsuario.forEach(nota => { html += `
+    notasUsuario.forEach(nota => { 
+        let autor = "Usuario";
+
+        if(sesion.rol === "admin") {
+            const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+            const usuarioNota = usuarios.find(u => u.id_usuario === nota.id_usuario);
+            autor = usuarioNota ? usuarioNota.correo : "Usuario";
+        } else {
+            autor = sesion.correo || 'Usuario';
+        }
+        
+        html += `
         <div class="col-12 col-md-6 col-lg-4">
             <div class="card card-nota">
                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -186,6 +206,13 @@ function cargarNotas(){
 
 function eliminarNota(id) {
     const idNumero = parseInt(id);
+
+    const nota = notas.find(n => n.id_notas === idNumero);
+
+    if (!nota || (sesion.rol !== "admin" && nota.id_usuario !== sesion.id_usuario)) {
+        mostrarError("No tienes permisos para eliminar esta nota");
+        return;
+    }
 
     if (confirm("¿Estás seguro de que quieres eliminar esta nota?")) {
         notas = notas.filter(nota => nota.id_notas !== idNumero);

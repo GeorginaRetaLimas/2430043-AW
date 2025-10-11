@@ -49,9 +49,11 @@ document.addEventListener('DOMContentLoaded', function(){
     function crearUsuarioAdmin(){
         console.log("Creando cuenta admin...");
         usuarios.push({
-            id_usuario: 0,
+            id_usuario: 1,
+            nombre: "Admin",
             correo: "admin@gmail.com",
             contraseña: "admin",
+            rol: "admin"
         });
 
         proyectos.push({
@@ -91,7 +93,6 @@ document.addEventListener('DOMContentLoaded', function(){
             fecha_vencimiento: "02-01-2025",
             asignado_a: 0
         });
-
     
         localStorage.setItem('usuarios', JSON.stringify(usuarios));
         localStorage.setItem('proyectos', JSON.stringify(proyectos));
@@ -137,10 +138,11 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('form_registro').addEventListener('submit', function(e){
         e.preventDefault();
 
+        const nombre = document.getElementById('nombre').value;
         const correo = document.getElementById('correo_registro').value;
         const contraseña = document.getElementById('contraseña_registro').value;
 
-        const resultado = registrarUsuario(correo, contraseña);
+        const resultado = registrarUsuario(nombre, correo, contraseña);
 
         if(resultado.valido) {
             console.log(`Usuario registrado: ${resultado.usuario.correo}!`);
@@ -183,7 +185,7 @@ function buscarRegistro(correo, contraseña){
     }
 }
 
-function registrarUsuario(correo, contraseña) {
+function registrarUsuario(nombre, correo, contraseña) {
     console.log("Entrar a la función registrar");
 
     // Verificar si el usuario ya existe
@@ -201,8 +203,10 @@ function registrarUsuario(correo, contraseña) {
     // Crear nuevo usuario
     const nuevoUsuario = {
         id: id,
+        nombre: nombre,
         correo: correo,
-        contraseña: contraseña
+        contraseña: contraseña,
+        rol: "usuario" 
     };
 
     // Agregar a la lista de usuarios

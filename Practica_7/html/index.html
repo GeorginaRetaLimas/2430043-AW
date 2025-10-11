@@ -71,22 +71,26 @@
                     </div> 
 
                     <div class="modal-body p-5 pt-0">
-
                         <form id="form_registro"> 
-                        <div class="form-floating mb-3"> 
-                            <input type="email" class="form-control rounded-3 input_tema" id="correo_registro" placeholder="name@example.com" required> 
-                            <label for="correo">Correo Eléctronico</label> 
-                        </div> 
+                            <div class="form-floating mb-3"> 
+                                <input type="text" class="form-control rounded-3 input_tema" id="nombre" placeholder="Nombre" required> 
+                                <label for="nombre">Nombre</label> 
+                            </div> 
                             
-                        <div class="form-floating mb-3"> 
-                            <input type="password" class="form-control rounded-3 input_tema" id="contraseña_registro" placeholder="Password" required> 
-                            <label for="contraseña">Contraseña</label> 
-                        </div> 
-                            
-                        <button class="w-100 mb-2 btn btn-lg rounded-3 boton_primary_tema" type="submit">Registrar</button> 
-                        <hr>
-                        <small>¿Ya tienes una cuenta? <a id="etiquetaActivarRegistro" onclick="activarVistaInicio()">Iniciar Sesión</a></small>    
-                    </form> 
+                            <div class="form-floating mb-3"> 
+                                <input type="email" class="form-control rounded-3 input_tema" id="correo_registro" placeholder="Correo Eléctronico" required> 
+                                <label for="correo_registro">Correo Eléctronico</label> 
+                            </div> 
+                                
+                            <div class="form-floating mb-3"> 
+                                <input type="password" class="form-control rounded-3 input_tema" id="contraseña_registro" placeholder="Contraseña" required> 
+                                <label for="contraseña_registro">Contraseña</label> 
+                            </div> 
+                                
+                            <button class="w-100 mb-2 btn btn-lg rounded-3 boton_primary_tema" type="submit">Registrar</button> 
+                            <hr>
+                            <small>¿Ya tienes una cuenta? <a id="etiquetaActivarRegistro" onclick="activarVistaInicio()">Iniciar Sesión</a></small>    
+                        </form> 
                     </div> 
                 </div> 
             </div> 
