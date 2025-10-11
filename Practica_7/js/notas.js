@@ -40,7 +40,11 @@ function mostrarModalNuevaNota(){
 }
 
 function mostrarModalEditarNota(id){
-    const nota = notas.find(n => n.id_notas === id);
+    const idNumero = parseInt(id);
+    const nota = notas.find(n => n.id_notas === idNumero);
+
+    console.log("Buscando nota con ID:", idNumero);
+    console.log("Notas disponibles:", notas);
 
     if (nota) {
         editandoNotaId = id;
@@ -69,7 +73,7 @@ function guardarNota(){
 
     const fechaEnvio = new Date();
     const año = fechaEnvio.getFullYear();
-    const mes = obtenerMes(fechaEnvio.getMonth());
+    const mes = obtenerMes(fechaEnvio.getMonth() + 1);
     const dia = fechaEnvio.getDate();
 
     const fecha = dia + " " + mes + " " + año;
@@ -77,7 +81,7 @@ function guardarNota(){
 
     // Si hay una nota en edición
     if (editandoNotaId) {
-        const index = notas.find(n => n.id_notas === editandoNotaId);
+        const index = notas.findIndex(n => n.id_notas === editandoNotaId);
 
         if(index !== -1){
             notas[index].titulo = titulo;
@@ -90,7 +94,7 @@ function guardarNota(){
         const nuevoId = notas.length > 0 ? Math.max(...notas.map(n => n.id_notas)) + 1 : 1;
 
         const nuevaNota = {
-            id_notas: id,
+            id_notas: nuevoId,
             id_usuario: sesion.id_usuario,
             titulo: titulo,
             contenido: contenido,
@@ -104,7 +108,7 @@ function guardarNota(){
 
     // Cerrar el modal
     const modal = bootstrap.Modal.getInstance(document.getElementById('modal_nota'));
-    modal.hide;
+    modal.hide();
 
     mostrarSuccess(editandoNotaId ? "Nota actualizada correctamente" : "Nota creada exitosamente");
     console.log(notas);
@@ -155,32 +159,25 @@ function cargarNotas(){
         <div class="col-12 col-md-6 col-lg-4">
             <div class="card card-nota">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <span class="text-truncate>${nota.titulo}</span>
-                    
+                    <span class="text-truncate">${nota.titulo}</span>
                     <div>
-                        <button class="btn btn-sm btn-nota btn_primary_tema me-1"
-                            onclick="mostrarModarEditarNota(${nota.id_notas})">
+                        <button class="btn btn-sm btn-nota boton_primary_tema me-1" onclick="mostrarModalEditarNota(${nota.id_notas})">
                             <i class="bi bi-pencil"></i>
                         </button>
-
-                        <button class="btn btn-sm btn-nota btn_danger_tema" 
-                            onclick="eliminarNota(${nota.id_notas})">
+                        <button class="btn btn-sm btn-nota boton_danger_tema" onclick="eliminarNota(${nota.id_notas})">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
                 </div>
-
                 <div class="card-body">
                     <p class="card-text">${nota.contenido}</p>
-                <div>
-                
+                </div>
                 <div class="card-footer d-flex justify-content-between">
                     <small>${nota.fecha}</small>
-                    <small>${sesion.nombre}</small>
+                    <small>${sesion.correo || 'Usuario'}</small>
                 </div>
             </div>
         </div>
-
         `
     });
 
@@ -188,8 +185,10 @@ function cargarNotas(){
 }
 
 function eliminarNota(id) {
+    const idNumero = parseInt(id);
+
     if (confirm("¿Estás seguro de que quieres eliminar esta nota?")) {
-        notas = notas.filter(nota => nota.id_notas !== id);
+        notas = notas.filter(nota => nota.id_notas !== idNumero);
         localStorage.setItem('notas', JSON.stringify(notas));
         mostrarSuccess("Nota eliminada correctamente");
         cargarNotas();

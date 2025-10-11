@@ -10,12 +10,13 @@
 
     --color-success: #b8f686;
     --color-warning: #f6cb86;
-    --color-danger: #f68686;
+    --color-danger: #f57171;
 
     --color_background: rgb(255, 245, 249);
     --color_black: rgb(12, 1, 5);
 
     --color_hover: rgba(255, 255, 255, 0.408);
+    --color_shadow: rgba(51, 4, 25, 0.74);
 
     --color_seleccion: #be7595;
 }
@@ -305,4 +306,62 @@ a {
     color: var(--color-warning); /* Color amarillo de advertencia */
     font-size: 3rem;
     margin-bottom: 15px;
+}
+
+/*Estilos para los cards*/
+.card-nota {
+  background-color: var(--color_background);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px var(--color_shadow);
+  transition: all 0.3s ease;
+  height: 100%;
+  border-left: 4px solid var(--color_primary);
+}
+
+.card-nota:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px var(--color_shadow);
+}
+
+.card-nota .card-header {
+  background-color: var(--color_primary_light);
+  border-bottom: 1px solid var(--color_primary);
+  font-family: 'fuente_A';
+  font-weight: bold;
+}
+
+.card-nota .card-body {
+  padding: 1.25rem;
+}
+
+.card-nota .card-footer {
+  background-color: var(--color_background);
+  border-top: 1px solid var(--color_primary_dark);
+  font-size: 0.8rem;
+  color: var(--color_primary);
+}
+
+.btn-nota {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+}
+
+/* Botón grande para agregar notas */
+#btn-agregar-nota {
+  box-shadow: 0 4px 8px var(--color_shadow);
+  transition: all 0.3s ease;
+}
+
+#btn-agregar-nota:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px var(--color_shadow);
+}
+
+.modal-content {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.modal-header {
+  border-bottom: 2px solid var(--color_primary_dark);
 }
