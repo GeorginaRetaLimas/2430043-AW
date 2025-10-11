@@ -34,40 +34,82 @@ function mostrarModalNuevaNota(){
     document.getElementById('titulo').value = '';
     document.getElementById('contenido').value = '';
     document.getElementById('nota_id').value = '';
+
+    const modal = new bootstrap.Modal(document.getElementById('modal_nota'));
+    modal.show();
 }
 
-function validarFormulario(){
-    let titulo = document.getElementById("titulo").value;
-    let contenido = document.getElementById("contenido").value;
+function mostrarModalEditarNota(id){
+    const nota = notas.find(n => n.id_notas === id);
 
-    console.log("Titulo: ", titulo);
-    console.log("Contenido: ", contenido);
+    if (nota) {
+        editandoNotaId = id;
 
-    let datosValidos = true;
-    let mensaje;
-
-    if(titulo === ""){
-        mensaje = "No se puede guardar una nota sin titulo";
-        datosValidos = false;
-    }
-
-    if(contenido === ""){
-        mensaje += "No se puede guardar una nota sin contenido";
-        datosValidos = false;
-    }
-
-    if (datosValidos){
-        const año = fechaEnvio.getFullYear();
-        const mes = obtenerMes();
-        const dia = fechaEnvio.getDate();
-
-        const fecha = dia + " " + mes + " " + año;
-
-        guardarNota(titulo, contenido, fecha);
+        document.getElementById('modal_titulo').textContent = 'Editar Nota';
+        document.getElementById('titulo').value = nota.titulo;
+        document.getElementById('contenido').value = nota.contenido;
+        document.getElementById('nota_id').value = nota.id_notas;
+        
+        const modal = new bootstrap.Modal(document.getElementById('modal_nota'));
+        modal.show();
     } else {
-        mostrarError(mensaje);
+        mostrarError("No se encontro la nota");
+    }
+}
+
+function guardarNota(){
+    const titulo = document.getElementById("titulo").value.trim();
+    const contenido = document.getElementById("contenido").value.trim();
+    const id = document.getElementById("nota_id").value;
+
+    if (!titulo || !contenido) {
+        mostrarError("El título y el contenido son obligatorios");
+        return;
     }
 
+    const fechaEnvio = new Date();
+    const año = fechaEnvio.getFullYear();
+    const mes = obtenerMes(fechaEnvio.getMonth());
+    const dia = fechaEnvio.getDate();
+
+    const fecha = dia + " " + mes + " " + año;
+    //console.log(fecha);
+
+    // Si hay una nota en edición
+    if (editandoNotaId) {
+        const index = notas.find(n => n.id_notas === editandoNotaId);
+
+        if(index !== -1){
+            notas[index].titulo = titulo;
+            notas[index].contenido = contenido;
+            notas[index].fecha = fecha;
+        } else {
+            mostrarError("Error al tratar de guardar la editación de la nota");
+        }
+    } else {
+        const nuevoId = notas.length > 0 ? Math.max(...notas.map(n => n.id_notas)) + 1 : 1;
+
+        const nuevaNota = {
+            id_notas: id,
+            id_usuario: sesion.id_usuario,
+            titulo: titulo,
+            contenido: contenido,
+            fecha: fecha
+        };
+
+        notas.push(nuevaNota);
+    }
+
+    localStorage.setItem('notas', JSON.stringify(notas));
+
+    // Cerrar el modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modal_nota'));
+    modal.hide;
+
+    mostrarSuccess(editandoNotaId ? "Nota actualizada correctamente" : "Nota creada exitosamente");
+    console.log(notas);
+
+    cargarNotas();
 }
 
 function obtenerMes(){
@@ -88,23 +130,72 @@ function obtenerMes(){
     }
 }
 
-function guardarNota(titulo, contenido, fecha){
-    id = notas.length > 0 ? Math.max(...notas.map(n => n.id_notas)) + 1 : 1;
+function cargarNotas(){
+    // Cargar desde LocalStorage
+    const notasGuardadas = localStorage.getItem('notas');
+    if (notasGuardadas) {
+        notas = JSON.parse(notasGuardadas);
+    }
 
-    console.log(fecha);
+    // Filtrar por el usuario actual
+    const notasUsuario = notas.filter(nota => nota.id_usuario === sesion.id_usuario);
 
-    let nuevaNota = {
-        id_notas: id,
-        id_usuario: sesion.id_usuario,
-        titulo: titulo,
-        contenido: contenido,
-        fecha: fecha
-    };
+    const listaNotas = document.getElementById('lista_notas');
+    const noNotas = document.getElementById('no_notas');
 
-    console.log(nurvaNota);
+    if(notasUsuario.length === 0){
+        listaNotas.innerHTML = ''
+        noNotas.style.display = 'block';
+        return;
+    }
+
+    noNotas.style.display = 'none';
+
+    let html = '';
+    notasUsuario.forEach(nota => { html += `
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card card-nota">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <span class="text-truncate>${nota.titulo}</span>
+                    
+                    <div>
+                        <button class="btn btn-sm btn-nota btn_primary_tema me-1"
+                            onclick="mostrarModarEditarNota(${nota.id_notas})">
+                            <i class="bi bi-pencil"></i>
+                        </button>
+
+                        <button class="btn btn-sm btn-nota btn_danger_tema" 
+                            onclick="eliminarNota(${nota.id_notas})">
+                            <i class="bi bi-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <p class="card-text">${nota.contenido}</p>
+                <div>
+                
+                <div class="card-footer d-flex justify-content-between">
+                    <small>${nota.fecha}</small>
+                    <small>${sesion.nombre}</small>
+                </div>
+            </div>
+        </div>
+
+        `
+    });
+
+    listaNotas.innerHTML = html;
 }
 
-
+function eliminarNota(id) {
+    if (confirm("¿Estás seguro de que quieres eliminar esta nota?")) {
+        notas = notas.filter(nota => nota.id_notas !== id);
+        localStorage.setItem('notas', JSON.stringify(notas));
+        mostrarSuccess("Nota eliminada correctamente");
+        cargarNotas();
+    }
+}
 
 function mostrarSuccess(mensaje) {
     mostrarModal(mensaje, 'success');

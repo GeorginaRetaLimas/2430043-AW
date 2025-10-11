@@ -172,6 +172,11 @@ a {
 }
 
 /* Estilos para modales de éxito y error */
+.modal-header {
+    background-color: var(--color_primary) !important; 
+    color: var(--color_background) !important;
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
