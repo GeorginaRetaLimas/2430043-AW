@@ -57,6 +57,8 @@
 
 body {
     background-color: var(--color_background);
+    height: 100vh;
+    overflow: hidden;
 }
 
 .content {
@@ -65,20 +67,26 @@ body {
 }
 
 .sidebar_tema {
-    background-color: var(--color_primary) !important; /* Color del sidebar */
-position: fixed;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    z-index: 1000;
+    background-color: var(--color_primary) !important;
+
+    position: relative;
+    padding: 1rem !important;
     overflow-y: auto;
 }
 
-main {
-    margin-left: 280px;
-    height: 100vh;
-    overflow-y: auto;
-    position: relative;
+.dropdown-menu_tema {
+    background-color: var(--color_primary_dark) !important;
+    color: var(--color_primary) !important;
+    max-width: min(300px, 90vw) !important; 
+    width: auto !important;
+    left: auto !important;
+    right: 0 !important;
+}
+
+.dropdown-menu_tema .dropdown-item {
+    font-family: 'fuente_A' !important;
+    font-size: 0.8rem !important;
+    padding: 0.4rem 0.5rem !important;
 }
 
 .card {

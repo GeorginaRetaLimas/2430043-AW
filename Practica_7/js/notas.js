@@ -1,18 +1,12 @@
 console.log("Conexión exitosa");
-
-// Lista de usarios
-let usuarios = [{
-    correo : "admin@gmail.com",
-    contraseña : "admin"
-}];
-
 let notas = [];
+
+sesion = JSON.parse(localStorage.getItem('sesion'));
 
 // Cuando se inicializa
 document.addEventListener('DOMContentLoaded', function(){
     // Verificamos si en el localStorage hay sesion
-    if(localStorage.getItem('sesion')){
-        sesion = JSON.parse(localStorage.getItem('sesion'));
+    if(sesion){
         console.log("Sesión activa:", sesion);
     } else {
         window.location.href = "index.html";
@@ -47,15 +41,51 @@ function validarFormulario(){
     }
 
     if (datosValidos){
-        
+        const año = fechaEnvio.getFullYear();
+        const mes = obtenerMes();
+        const dia = fechaEnvio.getDate();
+
+        const fecha = dia + " " + mes + " " + año;
+
+        guardarNota(titulo, contenido, fecha);
     } else {
         mostrarError(mensaje);
     }
 
 }
 
-function guardarNota(titulo, contenido){
+function obtenerMes(){
+    const mes = fechaEnvio.getMonth() + 1;
+    switch(mes){
+        case 1: return "Enero"; break;
+        case 2: return "Febrero"; break;
+        case 3: return "Marzo"; break;
+        case 4: return "Abril"; break;
+        case 5: return "Mayo"; break;
+        case 6: return "Junio"; break;
+        case 7: return "Julio"; break;
+        case 8: return "Agosto"; break;
+        case 9: return "Septiembre"; break;
+        case 10: return "Octubre"; break;
+        case 11: return "Noviembre"; break;
+        case 12: return "Diciembre"; break;
+    }
+}
 
+function guardarNota(titulo, contenido, fecha){
+    id = notas.length > 0 ? Math.max(...notas.map(n => n.id_notas)) + 1 : 1;
+
+    console.log(fecha);
+
+    let nuevaNota = {
+        id_notas: id,
+        id_usuario: sesion.id_usuario,
+        titulo: titulo,
+        contenido: contenido,
+        fecha: fecha
+    };
+
+    console.log(nurvaNota);
 }
 
 
