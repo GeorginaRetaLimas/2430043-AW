@@ -112,8 +112,7 @@ function guardarNota(){
     cargarNotas();
 }
 
-function obtenerMes(){
-    const mes = fechaEnvio.getMonth() + 1;
+function obtenerMes(mes){
     switch(mes){
         case 1: return "Enero"; break;
         case 2: return "Febrero"; break;
