@@ -5,13 +5,19 @@ let dragSrcEl = null;
 let tareas = [];
 let proyectos = [];
 
+const ROLES = {
+    ADMIN: 'admin',
+    USUARIO: 'usuario'
+};
+
 // Cuando se inicializa
 document.addEventListener('DOMContentLoaded', function(){
     // Verificamos si en localStorage hay sesion
     if(localStorage.getItem('sesion')){
         sesion = JSON.parse(localStorage.getItem('sesion'));
         const correo = sesion.correo;
-        //document.getElementById('datos_sesion').textContent = "Bienvenido, " + correo;
+
+        mostrarInfoUsuario();
     } else {
         window.location.href = "index.html";
     }
@@ -34,6 +40,24 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 });
 
+// Cargar info del usuario
+function mostrarInfoUsuario() {
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    const usuarioActual = usuarios.find(u => u.id_usuario === sesion.id_usuario);
+    
+    if (usuarioActual) {
+        console.log('Usuario actual:', usuarioActual.nombre, '- Rol:', usuarioActual.rol);
+        
+        const header = document.querySelector('h1');
+        if (header) {
+            header.innerHTML = `Panel de Control 
+                <span class="badge ${usuarioActual.rol === ROLES.ADMIN ? 'bg-danger' : 'bg-primary'} ms-2">
+                    ${usuarioActual.rol === ROLES.ADMIN ? 'Administrador' : 'Usuario'}
+                </span>`;
+        }
+    }
+}
+
 function cargarDatos() {
     if(localStorage.getItem('tareas')) {
         tareas = JSON.parse(localStorage.getItem('tareas'));
@@ -44,31 +68,53 @@ function cargarDatos() {
     }
 }
 
-// Cargar datos de opciones
 function cargarProyectosEnSelect() {
     const select = document.getElementById('select-proyecto');
-    proyectos.forEach(proyecto => {
+    select.innerHTML = '<option value="todos">Todas las tareas</option>';
+    
+    const proyectosFiltrados = filtrarProyectosPorRol(proyectos);
+    
+    proyectosFiltrados.forEach(proyecto => {
         const option = document.createElement('option');
         option.value = proyecto.id_proyecto;
         option.textContent = proyecto.nombre;
         select.appendChild(option);
     });
+
+    if (proyectosFiltrados.length === 0 && sesion.rol !== ROLES.ADMIN) {
+        const option = document.createElement('option');
+        option.value = "sin_proyectos";
+        option.textContent = "No tienes proyectos asignados";
+        option.disabled = true;
+        select.appendChild(option);
+    }
 }
 
 function mostrarTareas(proyectoId) {
     const lista = document.getElementById('lista-tareas');
     lista.innerHTML = '';
 
-    // Filtrar tareas según el proyecto seleccionado
-    let tareasFiltradas = tareas;
+    // Filtrar tareas por rol primero
+    let tareasFiltradas = filtrarTareasPorRol(tareas);
+    
+    // Luego filtrar por proyecto si es necesario
     if(proyectoId !== 'todos') {
-        tareasFiltradas = tareas.filter(t => t.id_proyecto == proyectoId);
+        tareasFiltradas = tareasFiltradas.filter(t => t.id_proyecto == proyectoId);
     }
+
+    // Mostrar mensaje según el rol si no hay tareas
     if(tareasFiltradas.length === 0) {
+        let mensaje = 'No hay tareas para este proyecto';
+        if (sesion.rol !== ROLES.ADMIN && proyectoId === 'todos') {
+            mensaje = 'No tienes tareas asignadas';
+        } else if (sesion.rol !== ROLES.ADMIN && proyectoId !== 'todos') {
+            mensaje = 'No tienes tareas asignadas en este proyecto';
+        }
+        
         lista.innerHTML = `
             <div class="no-tareas">
                 <i class="bi bi-inbox" style="font-size: 3rem;"></i>
-                <p>No hay tareas para este proyecto</p>
+                <p>${mensaje}</p>
             </div>
         `;
         return;
@@ -206,6 +252,26 @@ function dragEnd(e) {
     document.querySelectorAll('.tarea-item').forEach(item => {
         item.classList.remove('drag-over');
     });
+}
+
+// Función para filtrar tareas por rol
+function filtrarTareasPorRol(datos) {
+    if (sesion.rol === ROLES.ADMIN) {
+        return datos;
+    } else {
+        return datos.filter(tarea => tarea.asignado_a === sesion.id_usuario);
+    }
+}
+
+// Función para filtrar proyectos por rol
+function filtrarProyectosPorRol(datos) {
+    if (sesion.rol === ROLES.ADMIN) {
+        return datos;
+    } else {
+        const tareasUsuario = tareas.filter(t => t.asignado_a === sesion.id_usuario);
+        const proyectosIds = [...new Set(tareasUsuario.map(t => t.id_proyecto))];
+        return datos.filter(proyecto => proyectosIds.includes(proyecto.id_proyecto));
+    }
 }
 
 

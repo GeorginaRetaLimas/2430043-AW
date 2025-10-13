@@ -141,7 +141,7 @@
                         </select>
                     </div>
                                 
-                        <button class="w-100 mb-2 btn btn-lg rounded-3 boton_primary_tema" type="submit">Agregar Proyecto</button> 
+                        <button class="w-100 mb-2 btn btn-lg rounded-3 boton_primary_tema" type="submit">Agregar Tarea</button>
                     </form> 
                 </div>
             </div>
@@ -172,6 +172,84 @@
                 </div>
             </div>
         </main>
+    </div>
+
+    <!-- Modal de edición de tareas -->
+    <div class="modal fade" id="modal_edicion_tarea">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Tarea</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form_edicion_tarea">
+                        <input type="hidden" id="tarea_id_edicion">
+                        
+                        <div class="mb-3">
+                            <label for="proyecto_edicion" class="form-label">Proyecto</label>
+                            <select class="form-select rounded-3 input_tema" id="proyecto_edicion" required>
+                                <!-- Aqui se cargara -->
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="titulo_edicion" class="form-label">Título</label>
+                            <input type="text" class="form-control rounded-3 input_tema" id="titulo_edicion" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="descripcion_edicion" class="form-label">Descripción</label>
+                            <textarea class="form-control rounded-3 input_tema" id="descripcion_edicion" rows="3" required></textarea>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="estado_edicion" class="form-label">Estado</label>
+                                    <select class="form-select rounded-3 input_tema" id="estado_edicion" required>
+                                        <option value="pendiente">Pendiente</option>
+                                        <option value="en_proceso">En proceso</option>
+                                        <option value="hecha">Hecha</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="prioridad_edicion" class="form-label">Prioridad</label>
+                                    <select class="form-select rounded-3 input_tema" id="prioridad_edicion" required>
+                                        <option value="alta">Alta</option>
+                                        <option value="media">Media</option>
+                                        <option value="baja">Baja</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="fecha_vencimiento_edicion" class="form-label">Fecha Vencimiento</label>
+                                    <input type="date" class="form-control rounded-3 input_tema" id="fecha_vencimiento_edicion">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="asignado_edicion" class="form-label">Asignado a</label>
+                                    <select class="form-select rounded-3 input_tema" id="asignado_edicion">
+                                        <!-- Se cargará dinámicamente -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn boton_primary_tema" onclick="guardarEdicionTarea()">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap JavaScript -->

@@ -3,6 +3,11 @@ console.log("Conexión exitosa");
 // Lista de usarios
 let tareas = [];
 
+const ROLES = {
+    ADMIN: 'admin',
+    USUARIO: 'usuario'
+};
+
 cargarProyectosEnSelect();
 cargarUsuariosEnSelect();
 
@@ -26,8 +31,6 @@ document.addEventListener('DOMContentLoaded', function(){
         console.log("Tareas cargados:", tareas);
     }
 
-
-
     // Mostrar tareas en la tabla al cargar la página
     mostrarTareas();
 
@@ -45,8 +48,6 @@ document.addEventListener('DOMContentLoaded', function(){
         const prioridad = document.getElementById('prioridad').value;
         const vencimiento = document.getElementById('fecha_vencimiento').value;
         const asignado = document.getElementById('asignado').value;
-
-        //Nota a mi misma: Validar las fechas despues, que no ingrese una fecha fin antes de fecha inicio
 
         // Crear nuevo usuario
         const nuevaTarea = {
@@ -122,40 +123,227 @@ function mostrarTareas() {
     // Limpiar la tabla
     contenedor.innerHTML = '';
     
+    const datosFiltrados = filtrarTareasPorRol(tareas);
+    
     // Verificar si no hay tareas
-    if (tareas.length === 0) {
+    if (datosFiltrados.length === 0) {
         contenedor.innerHTML = `
             <tr>
-                <td colspan="3" class="text-center">No hay proyectos registrados</td>
+                <td colspan="9" class="text-center">No hay tareas registradas</td>
             </tr>
         `;
         return;
     }
     
-    // Agregar cada usuario a la tabla
-    tareas.forEach(tareas => {
+    // Agregar cada tarea a la tabla
+    datosFiltrados.forEach(tarea => {
         const fila = document.createElement('tr');
+        
+        const puedeEditar = tienePermisosTarea(tarea);
+        const botones = puedeEditar ? `
+            <button class="btn btn-sm boton_primary_tema me-1" onclick="mostrarModalEditarTarea(${tarea.id_tarea})">
+                <i class="bi bi-pencil"></i>
+            </button>
+            <button class="btn btn-sm boton_danger_tema" onclick="eliminarTarea(${tarea.id_tarea})">
+                <i class="bi bi-trash"></i>
+            </button>
+        ` : '<span class="text-muted">Sin permisos</span>';
+
+        // Obtener nombre del proyecto y usuario
+        const proyecto = obtenerNombreProyecto(tarea.id_proyecto);
+        const usuario = obtenerNombreUsuario(tarea.asignado_a);
 
         // Hacer la fila
         fila.innerHTML = `
-            <td>${tareas.id_tarea}</td>
-            <td>${tareas.id_proyecto}</td>
-            <td>${tareas.titulo}</td>
-            <td>${tareas.descripcion}</td>
-            <td>${tareas.estado}</td>
-            <td>${tareas.prioridad}</td>
-            <td>${tareas.fecha_vencimiento}</td>
-            <td>${tareas.asignado_a}</td>
+            <td>${tarea.id_tarea}</td>
+            <td>${proyecto}</td>
+            <td>${tarea.titulo}</td>
+            <td>${tarea.descripcion}</td>
             <td>
-                <button class="btn boton_danger_tema btn-sm" onclick="eliminarTarea('${tareas.id}')">
-                    Eliminar
-                </button>
+                <span class="badge ${obtenerClaseEstadoTarea(tarea.estado)}">${tarea.estado}</span>
+            </td>
+            <td>
+                <span class="badge ${obtenerClasePrioridad(tarea.prioridad)}">${tarea.prioridad}</span>
+            </td>
+            <td>${formatearFecha(tarea.fecha_vencimiento)}</td>
+            <td>${usuario}</td>
+            <td>
+                <div class="btn-group">
+                    ${botones}
+                </div>
             </td>
         `;
 
         // Agregar la fila
         contenedor.appendChild(fila);
     });
+}
+
+function obtenerNombreProyecto(idProyecto) {
+    const proyectos = JSON.parse(localStorage.getItem('proyectos')) || [];
+    const proyecto = proyectos.find(p => p.id_proyecto === idProyecto);
+    return proyecto ? proyecto.nombre : 'Sin proyecto';
+}
+
+function obtenerNombreUsuario(idUsuario) {
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    const usuario = usuarios.find(u => u.id_usuario === idUsuario);
+    return usuario ? usuario.nombre : 'Sin asignar';
+}
+
+// Función para obtener clase CSS según prioridad (CORREGIR)
+function obtenerClasePrioridad(prioridad) {
+    const clases = {
+        'alta': 'bg-danger',
+        'media': 'bg-warning',
+        'baja': 'bg-info'
+    };
+    return clases[prioridad] || 'bg-secondary';
+}
+
+// Función para obtener clase CSS según estado de tarea (CORREGIR)
+function obtenerClaseEstadoTarea(estado) {
+    const clases = {
+        'pendiente': 'bg-warning',
+        'en_proceso': 'bg-primary',
+        'hecha': 'bg-success'
+    };
+    return clases[estado] || 'bg-secondary';
+}
+
+// Función para formatear fecha (CORREGIR)
+function formatearFecha(fecha) {
+    if (!fecha) return 'No definida';
+    try {
+        return new Date(fecha).toLocaleDateString('es-ES');
+    } catch (error) {
+        return 'Fecha inválida';
+    }
+}
+
+function filtrarTareasPorRol(datos) {
+    if (sesion.rol === ROLES.ADMIN) {
+        return datos;
+    } else {
+        return datos.filter(tarea => tarea.asignado_a === sesion.id_usuario);
+    }
+}
+
+function tienePermisosTarea(tarea) {
+    if (sesion.rol === ROLES.ADMIN) {
+        return true;
+    }
+    return tarea.asignado_a === sesion.id_usuario;
+}
+
+function mostrarModalEditarTarea(idTarea) {
+    const tarea = tareas.find(t => t.id_tarea === idTarea);
+    
+    if (!tarea) {
+        mostrarError('Tarea no encontrada');
+        return;
+    }
+    
+    // Verificar permisos
+    if (!tienePermisosTarea(tarea)) {
+        mostrarError('No tienes permisos para editar esta tarea');
+        return;
+    }
+    
+    // Llenar formulario de edición
+    document.getElementById('proyecto_edicion').value = tarea.id_proyecto;
+    document.getElementById('titulo_edicion').value = tarea.titulo;
+    document.getElementById('descripcion_edicion').value = tarea.descripcion;
+    document.getElementById('estado_edicion').value = tarea.estado;
+    document.getElementById('prioridad_edicion').value = tarea.prioridad;
+    document.getElementById('fecha_vencimiento_edicion').value = tarea.fecha_vencimiento;
+    document.getElementById('asignado_edicion').value = tarea.asignado_a;
+    
+    // Guardar el ID de la tarea que se está editando
+    document.getElementById('tarea_id_edicion').value = tarea.id_tarea;
+    
+    // Mostrar modal
+    const modal = new bootstrap.Modal(document.getElementById('modal_edicion_tarea'));
+    modal.show();
+}
+
+// Función para guardar edición de tarea
+function guardarEdicionTarea() {
+    const idTarea = parseInt(document.getElementById('tarea_id_edicion').value);
+    const proyecto = document.getElementById('proyecto_edicion').value;
+    const titulo = document.getElementById('titulo_edicion').value.trim();
+    const descripcion = document.getElementById('descripcion_edicion').value.trim();
+    const estado = document.getElementById('estado_edicion').value;
+    const prioridad = document.getElementById('prioridad_edicion').value;
+    const vencimiento = document.getElementById('fecha_vencimiento_edicion').value;
+    const asignado = document.getElementById('asignado_edicion').value;
+
+    // Validaciones
+    if (!titulo || !descripcion) {
+        mostrarError('Título y descripción son obligatorios');
+        return false;
+    }
+
+    // Encontrar y actualizar la tarea
+    const tareaIndex = tareas.findIndex(t => t.id_tarea === idTarea);
+    if (tareaIndex === -1) {
+        mostrarError('Tarea no encontrada');
+        return false;
+    }
+
+    // Actualizar datos de la tarea
+    tareas[tareaIndex].id_proyecto = proyecto;
+    tareas[tareaIndex].titulo = titulo;
+    tareas[tareaIndex].descripcion = descripcion;
+    tareas[tareaIndex].estado = estado;
+    tareas[tareaIndex].prioridad = prioridad;
+    tareas[tareaIndex].fecha_vencimiento = vencimiento;
+    tareas[tareaIndex].asignado_a = asignado;
+
+    // Guardar en localStorage
+    guardarEnLocalStorage();
+
+    // Actualizar tabla
+    mostrarTareas();
+
+    // Cerrar modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modal_edicion_tarea'));
+    modal.hide();
+
+    // Mostrar mensaje de éxito
+    mostrarSuccess('Tarea actualizada correctamente');
+
+    return true;
+}
+
+// Eliminar tarea
+function eliminarTarea(idTarea) {
+    const tarea = tareas.find(t => t.id_tarea === idTarea);
+
+    if (!tarea) {
+        mostrarError('Tarea no encontrada');
+        return;
+    }
+
+    // Verificar permisos
+    if (!tienePermisosTarea(tarea)) {
+        mostrarError('No tienes permisos para eliminar esta tarea');
+        return;
+    }
+
+    mostrarConfirmacion(
+        `¿Estás seguro de que quieres eliminar la tarea "${tarea.titulo}"? Esta acción no se puede deshacer.`,
+        function() {
+            tareas = tareas.filter(t => t.id_tarea !== idTarea);
+            guardarEnLocalStorage();
+            mostrarTareas(); 
+            console.log(`Tarea ${idTarea} eliminada`);
+            mostrarSuccess('Tarea eliminada correctamente');
+        },
+        function() {
+            console.log('Eliminación cancelada');
+        }
+    );
 }
 
 // Función de guardar en localStorage

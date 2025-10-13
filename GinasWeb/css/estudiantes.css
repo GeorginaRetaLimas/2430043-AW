@@ -347,3 +347,18 @@ a {
     font-size: 3rem;
     margin-bottom: 15px;
 }
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(218, 70, 134, 0.05);
+}
+
+.table th {
+    font-family: 'fuente_A';
+    color: var(--color_primary);
+    border-bottom: 2px solid var(--color_primary_light);
+}
+
+.table td {
+    font-family: 'fuente_P';
+    vertical-align: middle;
+}
