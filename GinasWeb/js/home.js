@@ -51,7 +51,7 @@ function mostrarInfoUsuario() {
         const header = document.querySelector('h1');
         if (header) {
             header.innerHTML = `Panel de Control 
-                <span class="badge ${usuarioActual.rol === ROLES.ADMIN ? 'bg-danger' : 'bg-primary'} ms-2">
+                <span class="badge ${usuarioActual.rol === ROLES.ADMIN ? 'bg-admin' : 'bg-primary'} ms-2">
                     ${usuarioActual.rol === ROLES.ADMIN ? 'Administrador' : 'Usuario'}
                 </span>`;
         }
