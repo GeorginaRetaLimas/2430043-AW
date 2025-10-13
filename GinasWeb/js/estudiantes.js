@@ -1,10 +1,12 @@
 console.log("Conexión exitosa");
 
 // Lista de usarios
-let usuarios = [{
-    correo : "admin@gmail.com",
-    contraseña : "admin"
-}];
+let usuarios = [];
+
+const ROLES = {
+    ADMIN: 'admin',
+    USUARIO: 'usuario'
+};
 
 // Cuando se inicializa
 document.addEventListener('DOMContentLoaded', function(){
@@ -14,6 +16,11 @@ document.addEventListener('DOMContentLoaded', function(){
         console.log("Sesión activa:", sesion);
     } else {
         window.location.href = "index.html";
+    }
+
+    // Cragar contenedor de rol si es admin
+    if (sesion.rol === ROLES.ADMIN) {
+        document.getElementById('contenedor_rol').style.display = 'block';
     }
 
     // Cargar usuarios existentes del localStorage
@@ -30,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function(){
         e.preventDefault();
         
         // Obtener valores del formulario
+        const nombre = document.getElementById('nombre').value;
         const correo = document.getElementById('correo').value;
         const contraseña = document.getElementById('contraseña').value;
 
@@ -47,10 +55,15 @@ document.addEventListener('DOMContentLoaded', function(){
             return;
         }
 
+        const nuevoId = usuarios.length > 0 ? Math.max(...usuarios.map(u => u.id_usuario)) + 1 : 1;
+
         // Crear nuevo usuario
         const nuevoUsuario = {
+            id_usuario: nuevoId,
+            nombre: nombre,
             correo: correo,
-            contraseña: contraseña
+            contraseña: contraseña,
+            rol: sesion.rol === ROLES.ADMIN ? (document.getElementById('rol').value || ROLES.USUARIO) : ROLES.USUARIO, 
         };
 
         // Agregar a la lista de usuarios
@@ -78,7 +91,13 @@ document.addEventListener('DOMContentLoaded', function(){
         localStorage.removeItem('sesion');
         window.location.href = "index.html";
     });
+
+    document.getElementById('btn_GuardarNota').addEventListener('click', guardarEdicionUsuario);
 });
+
+function esAdminPrincipal(usuario) {
+    return usuario.correo === 'admin@gmail.com' && usuario.rol === ROLES.ADMIN;
+}
 
 // Función para mostrar usuarios en la tabla
 function mostrarUsuarios() {
@@ -90,9 +109,11 @@ function mostrarUsuarios() {
 
     // Limpiar la tabla
     contenedor.innerHTML = '';
+
+    const datos = filtrarPorRol(usuarios);
     
     // Verificar si no hay usuarios
-    if (usuarios.length === 0) {
+    if (datos.length === 0) {
         contenedor.innerHTML = `
             <tr>
                 <td colspan="3" class="text-center">No hay estudiantes registrados</td>
@@ -102,22 +123,38 @@ function mostrarUsuarios() {
     }
     
     // Agregar cada usuario a la tabla
-    usuarios.forEach(usuario => {
+    datos.forEach(usuario => {
         const fila = document.createElement('tr');
 
         // Hacer la fila
         fila.innerHTML = `
+            <th>${usuario.id_usuario}</td>
+            <td>${usuario.nombre}</td>
             <td>${usuario.correo}</td>
+            <td>${usuario.rol}</td>
             <td>
-                <button class="btn boton_danger_tema btn-sm" onclick="eliminarUsuario('${usuario.correo}')">
-                    Eliminar
-                </button>
+                <div>
+                    <button class="btn btn-sm btn-nota boton_primary_tema me-1" onclick="mostrarModalEditarUsuario('${usuario.correo}')">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                    <button class="btn btn-sm btn-nota boton_danger_tema" onclick="eliminarUsuario('${usuario.correo}')">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
             </td>
         `;
 
         // Agregar la fila
         contenedor.appendChild(fila);
     });
+}
+
+function filtrarPorRol(datos) {
+    if (sesion.rol === ROLES.ADMIN) {
+        return datos;
+    } else {
+        return datos.filter(item => item.id_usuario === sesion.id_usuario);
+    }
 }
 
 // Función de guardar en localStorage
@@ -136,22 +173,133 @@ function cargarUsuarios() {
 
 // Eliminar alumno
 function eliminarUsuario(correo) {
+    const usuario = usuarios.find(user => user.correo === correo);
+
+    if (!usuario) {
+        mostrarError('Usuario no encontrado');
+        return;
+    }
+
+    // Verificar si es el admin principal
+    if (esAdminPrincipal(usuario)) {
+        mostrarError('No se puede eliminar el administrador principal');
+        return;
+    }
+
+    if(usuario.id_usuario === sesion.id_usuario){
+        mostrarError("No te puedes eliminar a ti mismo, hable a un administrador");
+        return;
+    }
+
     mostrarConfirmacion(
-        `¿Estás seguro de que quieres eliminar al estudiante ${correo}? Esta acción no se puede deshacer.`,
+        `¿Estás seguro de que quieres eliminar al estudiante ${usuario.nombre} (${correo})? Esta acción no se puede deshacer.`,
         function() {
-            // Código que se ejecuta si confirma
             usuarios = usuarios.filter(user => user.correo !== correo);
             guardarEnLocalStorage();
             mostrarUsuarios(); 
             console.log(`Usuario ${correo} eliminado`);
             mostrarSuccess('Estudiante eliminado correctamente');
-        },
-        function() {
-            // Código que se ejecuta si cancela (opcional)
-            console.log('Eliminación cancelada');
         }
     );
 }
+
+// Función para mostrar modal de edición
+function mostrarModalEditarUsuario(correo) {
+    const usuario = usuarios.find(user => user.correo === correo);
+    
+    if (!usuario) {
+        mostrarError('Usuario no encontrado');
+        return;
+    }
+    
+    // Verificar si es el admin principal
+    if (esAdminPrincipal(usuario)) {
+        mostrarError('No se puede editar el administrador principal');
+        return;
+    }
+    
+    // Verificar permisos
+    if (sesion.rol !== ROLES.ADMIN && usuario.correo !== sesion.correo) {
+        mostrarError("No tienes permisos para editar este usuario");
+        return;
+    }
+    
+    document.getElementById('modal_titulo').textContent = 'Editar Usuario';
+    document.getElementById('nombre_edicion').value = usuario.nombre;
+    document.getElementById('correo_edicion').value = usuario.correo;
+    document.getElementById('contraseña_edicion').value = usuario.contraseña;
+    
+    document.getElementById('correo_edicion').setAttribute('data-correo-original', usuario.correo);
+    
+    const rolContainer = document.getElementById('editar_contenedor_rol');
+    if (sesion.rol === ROLES.ADMIN) {
+        rolContainer.style.display = 'block';
+        document.getElementById('rol_edicion').value = usuario.rol;
+    } else {
+        rolContainer.style.display = 'none';
+    }
+    
+    const modal = new bootstrap.Modal(document.getElementById('modal_edicion_usuario'));
+    modal.show();
+}
+
+// Función para guardar edición
+function guardarEdicionUsuario() {
+    const correoOriginal = document.getElementById('correo_edicion').getAttribute('data-correo-original');
+    const nombre = document.getElementById('nombre_edicion').value.trim();
+    const correo = document.getElementById('correo_edicion').value.trim();
+    const contraseña = document.getElementById('contraseña_edicion').value;
+    const rol = sesion.rol === ROLES.ADMIN ? document.getElementById('rol_edicion').value : undefined;
+
+    // Validaciones
+    if (!nombre || !correo || !contraseña) {
+        mostrarError('Todos los campos son obligatorios');
+        return false;
+    }
+
+    // Validar formato de correo
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(correo)) {
+        mostrarError('Por favor, ingrese un correo electrónico válido');
+        return false;
+    }
+
+    // Verificar si el correo ya existe
+    if (correo !== correoOriginal) {
+        const correoExistente = usuarios.find(user => user.correo === correo && user.correo !== correoOriginal);
+        if (correoExistente) {
+            mostrarError('Este correo electrónico ya está registrado');
+            return false;
+        }
+    }
+
+    // Encontrar y actualizar el usuario
+    const usuarioIndex = usuarios.findIndex(user => user.correo === correoOriginal);
+    if (usuarioIndex === -1) {
+        mostrarError('Usuario no encontrado');
+        return false;
+    }
+
+    // Actualizar datos del usuario
+    usuarios[usuarioIndex].nombre = nombre;
+    usuarios[usuarioIndex].correo = correo;
+    usuarios[usuarioIndex].contraseña = contraseña;
+    
+    if (rol) {
+        usuarios[usuarioIndex].rol = rol;
+    }
+
+    guardarEnLocalStorage();
+    mostrarUsuarios();
+
+    const modal = bootstrap.Modal.getInstance(document.getElementById('modal_edicion_usuario'));
+    modal.hide();
+
+    mostrarSuccess('Usuario actualizado correctamente');
+
+    return true;
+}
+
 
 function mostrarSuccess(mensaje) {
     mostrarModal(mensaje, 'success');

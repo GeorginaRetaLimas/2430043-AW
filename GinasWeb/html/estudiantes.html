@@ -95,14 +95,27 @@
                         <!-- Formulario de registro de alumno -->
                         <form id="form_registro"> 
                             <div class="form-floating mb-3"> 
-                                <input type="email" class="form-control rounded-3 input_tema" id="correo" placeholder="name@example.com" required> 
+                                <input type="text" class="form-control rounded-3 input_tema" id="nombre"> 
+                                <label for="nombre">Nombre</label> 
+                            </div> 
+
+                            <div class="form-floating mb-3"> 
+                                <input type="email" class="form-control rounded-3 input_tema" id="correo"> 
                                 <label for="correo">Correo Eléctronico</label> 
                             </div> 
                                 
                             <div class="form-floating mb-3"> 
-                                <input type="password" class="form-control rounded-3 input_tema" id="contraseña" placeholder="Password" required> 
+                                <input type="password" class="form-control rounded-3 input_tema" id="contraseña"> 
                                 <label for="contraseña">Contraseña</label> 
                             </div> 
+
+                            <div class="form-floating mb-3" id="contenedor_rol" style="display: none;">
+                                <select class="form-select rounded-3 input_tema" id="rol">
+                                    <option value="usuario">Usuario</option>
+                                    <option value="admin">Admin</option>
+                                </select>
+                                <label for="rol">Rol</label>
+                            </div>
                                 
                             <button class="w-100 mb-2 btn btn-lg rounded-3 boton_primary_tema" type="submit">Iniciar</button> 
                         </form> 
@@ -118,7 +131,10 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>Id</th>
+                                <th>Nombre</th>
                                 <th>Correo</th>
+                                <th>Rol</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -130,6 +146,51 @@
                 </div>
             </div>
         </main>
+    </div>
+
+    <div class="modal fade" id="modal_edicion_usuario">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal_titulo">Editar Usuario</h5>
+                    <button type="button" class="btn-close boton_primary_tema text-white" data-bs-dismiss="modal" aria-label="Close"></button>                    
+                </div>
+
+                <div class="modal-body">
+                    <form id="editar_usuario">
+                        <input type="hidden" id="nota_id">
+                        
+                        <div class="form-floating mb-3"> 
+                            <input type="text" class="form-control rounded-3 input_tema" id="nombre_edicion"> 
+                            <label for="nombre">Nombre</label> 
+                        </div> 
+
+                        <div class="form-floating mb-3"> 
+                            <input type="email" class="form-control rounded-3 input_tema" id="correo_edicion"> 
+                            <label for="correo">Correo Electrónico</label> 
+                        </div> 
+                            
+                        <div class="form-floating mb-3"> 
+                            <input type="password" class="form-control rounded-3 input_tema" id="contraseña_edicion"> 
+                            <label for="contraseña">Contraseña</label> 
+                        </div> 
+
+                        <div class="form-floating mb-3" id="editar_contenedor_rol" style="display: none;">
+                            <select class="form-select rounded-3 input_tema" id="rol_edicion">
+                                <option value="usuario">Usuario</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                            <label for="rol">Rol</label>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn boton_primary_tema" id="btn_GuardarNota">Guardar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap JavaScript -->
