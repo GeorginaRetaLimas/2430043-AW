@@ -214,12 +214,17 @@ function eliminarNota(id) {
         return;
     }
 
-    if (confirm("¿Estás seguro de que quieres eliminar esta nota?")) {
-        notas = notas.filter(nota => nota.id_notas !== idNumero);
-        localStorage.setItem('notas', JSON.stringify(notas));
-        mostrarSuccess("Nota eliminada correctamente");
-        cargarNotas();
-    }
+    mostrarConfirmacion("¿Estás seguro de que quieres eliminar esta nota?", 
+        function(){
+            notas = notas.filter(nota => nota.id_notas !== idNumero);
+            localStorage.setItem('notas', JSON.stringify(notas));
+            mostrarSuccess("Nota eliminada correctamente");
+            cargarNotas();
+        },
+        function() {
+            console.log('Eliminación cancelada');
+        }
+    )
 }
 
 function mostrarSuccess(mensaje) {
@@ -300,6 +305,81 @@ function mostrarModal(mensaje, tipo) {
     document.getElementById('modal-overlay').addEventListener('click', function(e) {
         if (e.target.id === 'modal-overlay') {
             cerrarModal();
+        }
+    });
+}
+
+function mostrarConfirmacion(mensaje, callbackAceptar, callbackCancelar = null) {
+    // Crear el contenedor del modal si no existe
+    let modalContainer = document.getElementById('modal-confirm-container');
+    if (!modalContainer) {
+        modalContainer = document.createElement('div');
+        modalContainer.id = 'modal-confirm-container';
+        document.body.appendChild(modalContainer);
+    }
+
+    // Crear el modal de confirmación
+    const modalHTML = `
+        <div class="modal-overlay" id="modal-confirm-overlay">
+            <div class="modal-custom modal-confirm">
+                <button class="modal-close-btn" id="modal-confirm-close-btn">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+                <div class="modal-icon">
+                    <i class="bi bi-exclamation-triangle-fill text-warning"></i>
+                </div>
+                <div class="modal-mensaje">
+                    ${mensaje}
+                </div>
+                <div class="modal-buttons">
+                    <button class="modal-cancel-btn boton_secondary_tema" id="modal-cancel-btn">
+                        Cancelar
+                    </button>
+                    <button class="modal-ok-btn boton_danger_tema" id="modal-confirm-ok-btn">
+                        Sí, eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    modalContainer.innerHTML = modalHTML;
+
+    // Agregar animación de entrada
+    setTimeout(() => {
+        const overlay = document.getElementById('modal-confirm-overlay');
+        if (overlay) {
+            overlay.classList.add('show');
+        }
+    }, 10);
+
+    // Función para cerrar el modal
+    function cerrarModal() {
+        const overlay = document.getElementById('modal-confirm-overlay');
+        if (overlay) {
+            overlay.classList.remove('show');
+            setTimeout(() => {
+                modalContainer.innerHTML = '';
+            }, 300);
+        }
+    }
+
+    document.getElementById('modal-confirm-ok-btn').addEventListener('click', function() {
+        cerrarModal();
+        if (callbackAceptar) callbackAceptar();
+    });
+
+    document.getElementById('modal-cancel-btn').addEventListener('click', function() {
+        cerrarModal();
+        if (callbackCancelar) callbackCancelar();
+    });
+
+    document.getElementById('modal-confirm-close-btn').addEventListener('click', cerrarModal);
+
+    document.getElementById('modal-confirm-overlay').addEventListener('click', function(e) {
+        if (e.target.id === 'modal-confirm-overlay') {
+            cerrarModal();
+            if (callbackCancelar) callbackCancelar();
         }
     });
 }

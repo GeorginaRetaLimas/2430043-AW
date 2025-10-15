@@ -1,6 +1,6 @@
-# ✨🌟 Practica 6 🌟✨
+# ✨🌟 GinasWeb 🌟✨
 #### 05/10/2025
-#### [VER PRÁCTICA](http://64.227.107.109/AppWeb/Practica_7/)
+#### [VER PRÁCTICA](http://64.227.107.109/AppWeb/GinasWeb/)
 
 Se implemento elementos como drag y drop para manejar elementos en la
 asignación de tareas, en esta práctica se uso para manejar lo que es 
@@ -19,8 +19,6 @@ que puedan ver todos las notas y tareas.
 
 Para los usuarios normales ellos solo pueden ver sus notas y sus propios proyectos
 
-#### Trabajo en classrrom:
-Práctica no. 6
 
 
 
