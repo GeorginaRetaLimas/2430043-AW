@@ -1,14 +1,46 @@
 console.log("Conexión exitosa");
 
-document.getElementById("Inicio").onsubmit(this.e, function(){ 
-    e.preventDefault();
+document.getElementById("Inicio").addEventListener("submit", function(e){ 
+    e.prevent
 
     let n = document.getElementById("cantidad_alumnos").value;
     console.log(n);
+
+    let materia = [n];
+
+    materia.forEach(materia => {
+        /*
+        `
+            <div class="d-none">
+                <div>
+                    <h1>Formulario alumno</h1>
+                    <form id="Materias">
+                        <p>Materia 1</p><br>
+                        <input type="number" id="mat1" min="0">
+                        <p>Materia 2</p><br>
+                        <input type="number" id="mat2" min="0">
+                        <p>Materia 3</p><br>
+                        <input type="number" id="mat3" min="0">
+                        <p>Materia 4</p><br>
+                        <input type="number" id="mat4" min="0">
+
+                        <input type="submit">
+                    </form>
+                </div>
+
+                <div>
+                    <h1>Respuesta</h1>
+                    <p id="respuesta"></p>
+                </div>
+            </div>
+        `
+        */
+    });
+
 });
 
 
-document.getElementById("Materias").onsubmit(this.e, function() {
+document.getElementById("Materias").addEventListener("submit", function(e){ 
     e.preventDefault();
     
     let m1 = document.getElementById("mat1").value;
