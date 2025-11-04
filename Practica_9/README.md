@@ -9,7 +9,7 @@
 
 ## Enlaces del Proyecto
 
-[![Visitar sitio Web](assets/imagenes/logo.png)](http://64.227.107.109/AppWeb/Practica_9)
+[![Visitar sitio Web](assets/img/logo.png)](http://64.227.107.109/AppWeb/Practica_9)
 
 ## Reglas del negocio mencionadas en clase
 
