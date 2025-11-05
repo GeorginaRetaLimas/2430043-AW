@@ -25,6 +25,7 @@
     --color_background: #FFF9F0;
 
     --color_modal_background: #b2c6ff78;
+    --color_gris: #808caa;
 }
 
 /* Fuentes */
@@ -104,6 +105,15 @@ a {
 
 .swal2-confirm {
     background-color: var(--color_azul_primary) !important;
+    font-family: 'fuente_Button' !important;
+    font-size: 1.1rem !important;
+    border-radius: 10px !important;
+    border: none !important;
+    padding: 10px 25px !important;
+}
+
+.swal2-cancel {
+    background-color: var(--color_gris) !important;
     font-family: 'fuente_Button' !important;
     font-size: 1.1rem !important;
     border-radius: 10px !important;

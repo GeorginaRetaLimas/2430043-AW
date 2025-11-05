@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function(){
             localStorage.setItem('registroActivo', 'false');
 
             setTimeout(function() {
-                window.location.href = "../html/dashboard.html";
+                window.location.href = "../pages/dashboard.html";
             }, 2000);
         } else {
             Swal.fire('Error', 'Usuario no reconocido', 'error');
