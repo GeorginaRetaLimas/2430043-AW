@@ -6,6 +6,8 @@
     --color_azul_primary_dark: #081F5C;
     --color_azul_primary_light: #7096D1;
 
+    --color_azul_primary_e_light: #a1c2f2;
+
     --color_celeste_primary: #D0E3FF;
     --color_celeste_primary_dark: #BAD6EB;
     --color_celeste_primary_light: #F7F2EB;
@@ -68,6 +70,11 @@ a {
     font-size: 1.3rem !important;
 }
 
+/* Cabecera */
+header {
+    background-color: var(--color_celeste_primary) !important;
+}
+
 /* Componentes especificos */
 .btn-primary {
     background-color: var(--color_azul_primary) !important;
@@ -82,6 +89,24 @@ a {
     font-family: 'fuente_Button' !important;
     letter-spacing: 1px !important;
     font-size: 1.4rem !important;
+}
+
+.btn-secondary {
+    background-color: var(--color_azul_primary_light) !important;
+    border-color:  var(--color_azul_primary_light) !important;
+    font-family: 'fuente_Button' !important;
+    border-radius: 8px !important;
+    letter-spacing: 1px !important;
+    font-size: 1.1rem !important;
+}
+
+.btn-secondary:hover{
+    background-color: var(--color_azul_primary_e_light) !important;
+    border-color:  var(--color_azul_primary_e_light) !important;
+    font-family: 'fuente_Button' !important;
+    border-radius: 8px !important;
+    letter-spacing: 1px !important;
+    font-size: 1.2rem !important;
 }
 
 /* Modal */
@@ -142,3 +167,4 @@ a {
     background-color: var(--color_azul_primary_dark);
 }
 
+/* Header */
