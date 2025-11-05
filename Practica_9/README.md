@@ -13,5 +13,17 @@
 
 ## Reglas del negocio mencionadas en clase
 
-⚠️ No se puede borrar a un paciente si el este tiene una cita con un médico.
-⚠️ Los usuarios no se borran del sistema fisico, es lógicamente desactivando al usuario.
+- ⚠️ No se puede borrar a un paciente si el este tiene una cita con un médico.
+- ⚠️ Los usuarios no se borran del sistema fisico, es lógicamente desactivando al usuario.
+
+## Pantallas que hacer
+- Login
+- Dasboard
+- Control de pacientes
+- Control de Agenda
+- Control de médicos
+- Reportes
+- Pagos
+- Gestor de tarifas
+- Bitacoras de usuarios
+- Especialiddes médicas
