@@ -1,5 +1,3 @@
-localStorage.clear();
-
 console.log("Conexión exitosa a auth.js");
 
 let registroActivo;
@@ -24,7 +22,9 @@ document.addEventListener('DOMContentLoaded', function(){
 
             setTimeout(function() {
                 window.location.href = "../html/dashboard.html";
-            }, 1500);
+            }, 2000);
+        } else {
+            Swal.fire('Error', 'Usuario no reconocido', 'error');
         }
     });
 });

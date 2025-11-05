@@ -1,0 +1,122 @@
+/* ESTILOS FIJOS */
+
+/* Paleta de colores */
+:root {
+    --color_azul_primary: #334EAC;
+    --color_azul_primary_dark: #081F5C;
+    --color_azul_primary_light: #7096D1;
+
+    --color_celeste_primary: #D0E3FF;
+    --color_celeste_primary_dark: #BAD6EB;
+    --color_celeste_primary_light: #F7F2EB;
+
+    --color_secondary: #F9D489;
+    --color_secondary_dark: #ecbb57;
+    --color_secondary_light: #FBE6B4;
+
+    --color-success: #c4ff9b;
+    --color-warning: #fdde8b;
+    --color-danger: #f06c69;
+
+    --color-success_dark: #87d875;
+    --color-warning_dark: #eec17d;
+    --color-danger_dark: #e55a5a;
+
+    --color_background: #FFF9F0;
+
+    --color_modal_background: #b2c6ff78;
+}
+
+/* Fuentes */
+@font-face {
+  font-family: 'fuente_H1';
+  src: url("../font/Caprasimo/Caprasimo-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'fuente_Button';
+  src: url("../font/Bebas_Neue/BebasNeue-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'fuente_P';
+  src: url("../font/Winky_Sans/WinkySans-VariableFont_wght.ttf");
+}
+
+@font-face {
+  font-family: 'fuente_A';
+  src: url("../font/Winky_Sans/static/WinkySans-Medium.ttf");
+}
+
+/* Componente principales */
+h1 {
+    font-family: 'fuente_H1' !important;
+    color: var(--color_azul_primary) !important;
+    font-size: 2.5rem !important;
+}
+
+a {
+    font-family: 'fuente_A' !important;
+    color: var(--color_azul_primary_light) !important;
+    font-size: 1.3rem !important;
+}
+
+/* Componentes especificos */
+.btn-primary {
+    background-color: var(--color_azul_primary) !important;
+    font-family: 'fuente_Button' !important;
+    letter-spacing: 1px !important;
+    font-size: 1.3rem !important;
+}
+
+.btn-primary:hover{
+    background-color: var(--color_azul_primary_light) !important;
+    border-color:  var(--color_azul_primary_light) !important;
+    font-family: 'fuente_Button' !important;
+    letter-spacing: 1px !important;
+    font-size: 1.4rem !important;
+}
+
+/* Modal */
+.modal-sheet {
+    background-color: var(--color_modal_background) !important;
+}
+
+/* SweetAlert */
+.swal2-popup {
+    background-color: var(--color_background) !important;
+    border-radius: 15px !important;
+    border: 2px solid var(--color_azul_primary_light) !important;
+    font-family: 'fuente_P' !important;
+}
+
+.swal2-title {
+    color: var(--color_azul_primary) !important;
+    font-family: 'fuente_A' !important;
+    font-size: 1.5rem !important;
+    font-weight: bold !important;
+}
+
+.swal2-html-container {
+    color: var(--color_azul_primary_dark) !important;
+    font-size: 1.1rem !important;
+}
+
+.swal2-confirm {
+    background-color: var(--color_azul_primary) !important;
+    font-family: 'fuente_Button' !important;
+    font-size: 1.1rem !important;
+    border-radius: 10px !important;
+    border: none !important;
+    padding: 10px 25px !important;
+}
+
+.swal2-confirm:hover {
+    background-color: var(--color_azul_primary) !important;
+    transform: scale(1.05) !important;
+}
+
+.swal2-success {
+    color: var(--color_azul_primary) !important;
+    border-color: var(--color_azul_primary) !important;
+}
