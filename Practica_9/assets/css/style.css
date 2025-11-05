@@ -10,6 +10,7 @@
 
     --color_celeste_primary: #D0E3FF;
     --color_celeste_primary_dark: #BAD6EB;
+    --color_celeste_primary_half_light: #e0ecff;
     --color_celeste_primary_light: #F7F2EB;
 
     --color_secondary: #F9D489;
@@ -38,7 +39,7 @@
 
 @font-face {
   font-family: 'fuente_Button';
-  src: url("../font/Bebas_Neue/BebasNeue-Regular.ttf");
+  src: url("../font/Winky_Sans/static/WinkySans-Medium.ttf");
 }
 
 @font-face {
@@ -79,7 +80,6 @@ header {
 .btn-primary {
     background-color: var(--color_azul_primary) !important;
     font-family: 'fuente_Button' !important;
-    letter-spacing: 1px !important;
     font-size: 1.3rem !important;
 }
 
@@ -87,7 +87,6 @@ header {
     background-color: var(--color_azul_primary_light) !important;
     border-color:  var(--color_azul_primary_light) !important;
     font-family: 'fuente_Button' !important;
-    letter-spacing: 1px !important;
     font-size: 1.4rem !important;
 }
 
@@ -96,8 +95,7 @@ header {
     border-color:  var(--color_azul_primary_light) !important;
     font-family: 'fuente_Button' !important;
     border-radius: 8px !important;
-    letter-spacing: 1px !important;
-    font-size: 1.1rem !important;
+    font-size: 0.9rem !important;
 }
 
 .btn-secondary:hover{
@@ -105,8 +103,7 @@ header {
     border-color:  var(--color_azul_primary_e_light) !important;
     font-family: 'fuente_Button' !important;
     border-radius: 8px !important;
-    letter-spacing: 1px !important;
-    font-size: 1.2rem !important;
+    font-size: 1rem !important;
 }
 
 /* Modal */
@@ -164,7 +161,19 @@ header {
 
 /* Slide Bar */
 .offcanvas {
-    background-color: var(--color_azul_primary_dark);
+    background-color: var(--color_celeste_primary);
 }
 
-/* Header */
+.list-group-item{
+    background-color: var(--color_celeste_primary_light);
+    border: 1px solid var(--color_celeste_primary) !important;
+}
+
+.list-group-item:hover{
+    background-color: var(--color_celeste_primary_half_light);
+    font-size: 1.32rem !important;
+}
+
+.offcanvas-header{
+    color: var(--color_background) !important;
+}
