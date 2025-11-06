@@ -1,0 +1,30 @@
+/* Estilos especificos para dashboard */
+
+/* Carrusel */
+.carousel {
+    margin: 0 auto;
+}
+
+.carousel-item img {
+    height: 320px;
+    /*object-fit: cover;*/
+    width: 100%;
+    border-radius: 0.5rem;
+}
+
+.carousel-indicators button {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: rgba(77, 123, 140, 0.1);
+    border-radius: 0.5rem;
+}
