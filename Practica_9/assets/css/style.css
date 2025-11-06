@@ -38,6 +38,11 @@
 }
 
 @font-face {
+  font-family: 'fuente_H3';
+  src: url("../font/Winky_Sans/WinkySans-VariableFont_wght.ttf");
+}
+
+@font-face {
   font-family: 'fuente_H6';
   src: url("../font/Winky_Sans/static/WinkySans-Italic.ttf");
 }
@@ -64,10 +69,16 @@ h1 {
     font-size: 2.5rem !important;
 }
 
-h6 {
-    font-family: 'fuente_H6' !important;
-    color: var(--color_azul_primary_light) !important;
-    font-size: 2.0rem !important;
+h3 {
+    font-family: 'fuente_H3' !important;
+    color: var(--color_secondary_dark) !important;
+    font-size: 1.8rem !important;
+}
+
+h4 {
+    font-family: 'fuente_Button' !important;
+    color: var(--color_azul_primary_e_light) !important;
+    font-size: 1.2rem !important;
 }
 
 h5 {
@@ -76,15 +87,28 @@ h5 {
     font-size: 2.5rem !important;
 }
 
+h6 {
+    font-family: 'fuente_H6' !important;
+    color: var(--color_azul_primary_e_light) !important;
+    font-size: 2.0rem !important;
+}
+
 a {
     font-family: 'fuente_A' !important;
     color: var(--color_azul_primary_light) !important;
     font-size: 1.3rem !important;
+
+    cursor: pointer !important;
 }
 
 /* Cabecera */
 header {
     background-color: var(--color_celeste_primary) !important;
+}
+
+footer {
+    background-color: var(--color_azul_primary_dark) !important;
+    padding: 1.1rem;
 }
 
 /* Componentes especificos */
@@ -115,6 +139,19 @@ header {
     font-family: 'fuente_Button' !important;
     border-radius: 8px !important;
     font-size: 1rem !important;
+}
+
+.btn-third {
+    background-color: var(--color_secondary) !important;
+    font-family: 'fuente_Button' !important;
+    font-size: 1.3rem !important;
+}
+
+.btn-third:hover{
+    background-color: var(--color_secondary_light) !important;
+    border-color:  var(--color_secondary_light) !important;
+    font-family: 'fuente_Button' !important;
+    font-size: 1.4rem !important;
 }
 
 /* Modal */
