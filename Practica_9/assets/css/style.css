@@ -69,6 +69,12 @@ h1 {
     font-size: 2.5rem !important;
 }
 
+h2 {
+    font-family: 'fuente_Button' !important;
+    color: var(--color_azul_primary) !important;
+    font-size: 1.1rem !important;
+}
+
 h3 {
     font-family: 'fuente_H3' !important;
     color: var(--color_secondary_dark) !important;
@@ -84,7 +90,7 @@ h4 {
 h5 {
     font-family: 'fuente_Button' !important;
     color: var(--color_celeste_primary) !important;
-    font-size: 2.5rem !important;
+    font-size: 1.8rem !important;
 }
 
 h6 {
@@ -270,4 +276,8 @@ footer {
     background-color: var(--color_azul_primary_light);
     border: var(--color_azul_primary_dark);
     color: var(--color_background);
+}
+
+.modal-cabecera-registro {
+    background-color: var(--color_azul_primary_dark);
 }
