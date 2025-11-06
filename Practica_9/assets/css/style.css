@@ -154,6 +154,22 @@ footer {
     font-size: 1.4rem !important;
 }
 
+.btn-cancel-primary {
+    background-color: var(--color_azul_primary_light) !important;
+    font-family: 'fuente_Button' !important;
+    color: var(--color_background);
+    font-size: 1.3rem !important;
+}
+
+.btn-cancel-primary:hover{
+    background-color: var(--color_azul_primary_e_light) !important;
+    border-color:  var(--color_azul_primary_e_light) !important;
+    font-family: 'fuente_Button' !important;
+    color: var(--color_background);
+    font-size: 1.4rem !important;
+}
+
+
 /* Modal */
 .modal-sheet {
     background-color: var(--color_modal_background) !important;
