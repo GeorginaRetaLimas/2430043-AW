@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
 
     <!-- Estilos para los controladores -->
-     <link rel="stylesheet" href="../assets/css/controladores.css" type="text/css">
+    <link rel="stylesheet" href="../assets/css/controladores.css" type="text/css">
 </head>
 <body>
     <!-- Header -->
@@ -107,9 +107,6 @@
         </div>
     </div>
 
-    <!-- Script para el slide Bar -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <!-- Contenido principal de control pacientes -->
     <div class="row h-100 m-0">
         <main class="col mb-5 p-3 overflow-auto">
@@ -129,7 +126,7 @@
                 <div class="card-body">
                     <h6 class="card-title">Paciente</h6>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -146,7 +143,7 @@
                                 </tr>
                             </thead>
                             <tbody id="lista_Pacientes">
-                                <!-- Las tareas se mostrarán aquí -->
+                                <!-- Los pacientes se mostrarán aquí -->
                             </tbody>
                         </table>
                     </div>
@@ -166,6 +163,9 @@
         </div>
 
     </div>
+
+    <!-- Script para el slide Bar -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/slideBar.js"></script>

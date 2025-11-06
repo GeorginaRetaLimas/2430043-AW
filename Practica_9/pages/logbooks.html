@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../assets/img/logo_icon_transparent.png" type="image/x-icon">
-    <title>Bitacoras de Usuario</title>
+    <title>Bitacora de Usuarios</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
+    <!-- Estilos globales para la web -->
     <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
+
+    <!-- Estilos para los controladores -->
+    <link rel="stylesheet" href="../assets/css/controladores.css" type="text/css">
 </head>
 <body>
     <!-- Header -->
@@ -102,11 +106,56 @@
             </div>
         </div>
     </div>
+    <!-- Fin de Slide Bar-->
+
+    <!-- Contenido principal de control pacientes -->
+    <div class="row h-100 m-0">
+        <main class="col mb-5 p-3 overflow-auto">
+            <h1 class="text-center">
+                Bitacora de Usuarios
+            </h1> 
+            
+            <!-- Boton agregar paciente -->
+            <div class="d-flex justify-content-end mb*4">
+                
+            </div>
+
+            <!-- Contenedor de pacientes -->
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h6 class="card-title">Bitacora</h6>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Id Usuario</th>
+                                    <th>Usuario</th>
+                                    <th>Fecha Acceso</th>
+                                    <th>Accion</th>
+                                    <th>Status</th>
+                                    <th>Modulo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="lista_Pacientes">
+                                <!-- Los pacientes se mostrarán aquí -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="no_Pacientes" class="text-center py-5">
+                <i class="bi bi-person-exclamation icon-registro-vacio"></i>
+                <p class="mt-2">No hay acciones registradas</p>
+            </div>
+        </main>
+
+    </div>
 
     <!-- Script para el slide Bar -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/slideBar.js"></script>
 </body>
