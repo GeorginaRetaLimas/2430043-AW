@@ -103,11 +103,84 @@
         </div>
     </div>
 
+    <div class="row h-100 m-0">
+        <main class="col mb-5 p-4 overflow-auto">
+            <div class="text-center">
+                <h1>Base de Datos</h1>
+            </div>
+
+            <!-- Contenedor para la imagen -->
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-3">
+                    <div class="text-center">
+                        <img src="../bd/BaseDatosRelacional.png" class="img-fluid rounded" alt="Diagrama de Base de Datos Relacional" style="max-height: 700px;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3 text-center">
+                <button class="btn btn-primary btn-lg shadow-sm text-center" onclick="confirmarDescarga()">
+                    <i class="bi bi-database-down me-2"></i>
+                    Exportar BD
+                </button>
+            </div>
+
+            <div class="mt-3 text-muted text-center">
+                <small>
+                    Entregable con el diagrama de la base de datos relacional del sistema
+                </small>
+            </div>
+        </main>
+    </div>
+
     <!-- Script para el slide Bar -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../js/slideBar.js"></script>
+
+    <script>
+        function confirmarDescarga() {
+            Swal.fire({
+                title: '¿Descargar la base de datos?',
+                text: 'Se descargará el archivo SQL que contiene la base de datos',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Descargar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                // Descargar archivo
+                if (result.isConfirmed) {
+                    // ruta a la base de datos
+                    const url = '../bd/hospital.sql';
+
+                    // Creamos el enlace de manera dinamica
+                    const link = document.createElement('a');
+
+                    // le establecemos este link
+                    link.href = url;
+
+                    // Y el atributo de descarga, se bajará la fecha y agrega el .sql
+                    link.download = 'Backup_GinasClinic_' + new Date().toISOString() + '.sql';
+                    
+                    // Agregamos este enlace al cuerpo del documento
+                    document.body.appendChild(link);
+
+                    // Simulamos un click y esto dispara la descarga
+                    link.click();
+
+                    // Eliminamos el enlace
+                    document.body.removeChild(link);
+                    
+                    Swal.fire(
+                        'Descargado',
+                        'La base de datos se ha descargado correctamente.',
+                        'success'
+                    );
+                }
+            });
+        }
+        
+    </script>
 </body>
 </html>

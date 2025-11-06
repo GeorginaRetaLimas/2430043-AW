@@ -192,3 +192,22 @@ header {
 .offcanvas-header{
     color: var(--color_background) !important;
 }
+
+/* Tabla cabecera */
+.table-primary {
+    font-family: 'fuente_A' !important;
+    color: var(--color_azul_primary_light) !important;
+    font-size: 1.1rem !important;
+}
+
+/* Boton para mostrar un registro*/
+.icono-agregar{
+    font-size: 1rem;
+}
+
+/* Icono grande cuando no hay registros */
+.icon-registro-vacio {
+    font-size: 4rem; 
+    color: var(--color_azul_primary_light);
+
+}
