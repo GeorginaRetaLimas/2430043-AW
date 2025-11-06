@@ -38,6 +38,11 @@
 }
 
 @font-face {
+  font-family: 'fuente_H6';
+  src: url("../font/Winky_Sans/static/WinkySans-Italic.ttf");
+}
+
+@font-face {
   font-family: 'fuente_Button';
   src: url("../font/Winky_Sans/static/WinkySans-Medium.ttf");
 }
@@ -49,7 +54,7 @@
 
 @font-face {
   font-family: 'fuente_A';
-  src: url("../font/Winky_Sans/static/WinkySans-Medium.ttf");
+  src: url("../font/Winky_Sans/static/WinkySans-Regular.ttf");
 }
 
 /* Componente principales */
@@ -57,6 +62,12 @@ h1 {
     font-family: 'fuente_H1' !important;
     color: var(--color_azul_primary) !important;
     font-size: 2.5rem !important;
+}
+
+h6 {
+    font-family: 'fuente_H6' !important;
+    color: var(--color_azul_primary_light) !important;
+    font-size: 2.0rem !important;
 }
 
 h5 {
