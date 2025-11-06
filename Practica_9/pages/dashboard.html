@@ -22,13 +22,13 @@
                     <i class="bi bi-list"></i>
                 </button>
 
-                <a href="/" class="text-white text-decoration-none mb-0">
+                <a href="dashboard.html" class="text-white text-decoration-none mb-0">
                     <img src="../assets/img/logo_line_transparent.png" height="35px">
                 </a>
 
                 <!-- Botones -->
                 <div class="text-end"> 
-                    <button type="button" class="btn btn-secondary btn-sm">Cerrar</button> 
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="cerrarSesion()">Cerrar</button> 
                 </div> 
             </div> 
         </div> 
@@ -37,11 +37,16 @@
     <!-- Slide Bar -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="menu_Lateral" aria-labelledby="menu_Lateral_Label">
         <div class="offcanvas-header">
-            <img src="../assets/img/logo_line_transparent.png" height="40px">
+            <img src="../assets/img/logo_line_transparent.png" height="40px" href="dashboard.html">
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <div class="list-group list-group-flush">
+                <a href="dashboard.html" class="list-group-item list-group-item-action list-group-item-select">
+                    <i class="bi bi-house-check"></i>
+                    Dashboard
+                </a>
+                
                 <a href="pacientes.html" class="list-group-item list-group-item-action">
                     <i class="bi bi-person-gear"></i>
                     Control de Pacientes
