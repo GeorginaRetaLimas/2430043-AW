@@ -248,3 +248,10 @@ footer {
     color: var(--color_azul_primary_light);
 
 }
+
+/* Buscador de filtros */
+.btn-outline-secondary:hover {
+    background-color: var(--color_azul_primary_light);
+    border: var(--color_azul_primary_dark);
+    color: var(--color_background);
+}

@@ -111,11 +111,42 @@
                 Control de Pacientes
             </h1> 
             
-            <!-- Boton agregar paciente -->
-            <div class="d-flex justify-content-end mb*4">
-                <button class="btn btn-lg btn-primary round-circle" onclick="mostrarRegistroPaciente()">
-                    <i class="bi bi-person-plus icono-agregar"></i>
-                </button>
+            <!-- Búsqueda, filtros y registro -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+                <div class="d-flex flex-column flex-md-row gap-2 w-100">
+                    <!-- Barra de búsqueda -->
+                    <div class="flex-fill">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar paciente..." id="buscar" oninput="aplicarFiltros()">
+                            <button class="btn btn-outline-secondary" type="button" onclick="aplicarFiltros()">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Filtros -->
+                    <div class="d-flex gap-2">
+                        <select class="form-select filtro-categoria" style="min-width: 150px;" id="filtro-categoria" onchange="aplicarFiltros()">
+                            <option value="">Estatus</option>
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
+                        </select>
+                        
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="ordenar" onchange="aplicarFiltros()">
+                            <option value="">Ordenar</option>
+                            <option value="nombre-asc">Nombre A-Z</option>
+                            <option value="nombre-desc">Nombre Z-A</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Botón agregar paciente -->
+                <div class="flex-shrink-0">
+                    <button class="btn btn-primary btn-lg" onclick="mostrarRegistroPaciente()">
+                        <i class="bi bi-person-plus me-2"></i>
+                        Agregar
+                    </button>
+                </div>
             </div>
 
             <!-- Contenedor de pacientes -->
@@ -147,11 +178,11 @@
                 </div>
             </div>
 
-            <div id="no_Pacientes" class="text-center py-5">
+            <div id="no_Pacientes" class="text-center py-5 d-none">
                 <i class="bi bi-person-exclamation icon-registro-vacio"></i>
                 <p class="mt-2">No hay notas disponibles</p>
 
-                <button class="btn btn-primary mt-2" onclick="mostrarRegistroPaciente()">Registrar Paciente</button>
+                <button class="btn btn-primary mt-2" onclick="mostrarRegistroPaciente()">Agregar</button>
             </div>
         </main>
 
