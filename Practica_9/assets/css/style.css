@@ -234,6 +234,16 @@ footer {
     background-color: var(--color_celeste_primary);
 }
 
+.offcanvas-body {
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+}
+
+.offcanvas-body::-webkit-scrollbar {
+    display: none;
+}
+
 .list-group-item{
     background-color: var(--color_celeste_primary_light);
     border: 1px solid var(--color_celeste_primary) !important;
