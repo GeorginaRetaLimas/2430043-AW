@@ -117,11 +117,55 @@
                 Control de Agenda
             </h1> 
             
-            <!-- Boton agregar paciente -->
-            <div class="d-flex justify-content-end mb*4">
-                <button class="btn btn-lg btn-primary round-circle" onclick="mostrarRegistroPaciente()">
-                    <i class="bi bi-person-plus icono-agregar"></i>
-                </button>
+            <!-- Búsqueda, filtros y registro -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+                <div class="d-flex flex-column flex-md-row gap-2 w-100">
+                    <!-- Barra de búsqueda -->
+                    <div class="flex-fill">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar cita..." id="buscar_cita" oninput="aplicarFiltrosCitas()">
+                            <button class="btn btn-outline-secondary" type="button" onclick="aplicarFiltrosCitas()">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Filtros -->
+                    <div class="d-flex gap-2">
+                        <select class="form-select filtro-categoria" style="min-width: 150px;" id="filtro-estatus-cita" onchange="aplicarFiltrosCitas()">
+                            <option value="">Estatus</option>
+                            <option value="programada">Programada</option>
+                            <option value="confirmada">Confirmada</option>
+                            <option value="completada">Completada</option>
+                            <option value="cancelada">Cancelada</option>
+                        </select>
+                        
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="filtro-fecha-cita" onchange="aplicarFiltrosCitas()">
+                            <option value="">Fecha</option>
+                            <option value="hoy">Hoy</option>
+                            <option value="semana">Esta semana</option>
+                            <option value="mes">Este mes</option>
+                            <option value="proximas">Próximas</option>
+                            <option value="pasadas">Pasadas</option>
+                        </select>
+                        
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="ordenar-citas" onchange="aplicarFiltrosCitas()">
+                            <option value="">Ordenar</option>
+                            <option value="fecha-asc">Fecha ↑</option>
+                            <option value="fecha-desc">Fecha ↓</option>
+                            <option value="paciente-asc">Paciente A-Z</option>
+                            <option value="paciente-desc">Paciente Z-A</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Botón agregar cita -->
+                <div class="flex-shrink-0">
+                    <button class="btn btn-primary btn-lg" onclick="mostrarRegistroCita()">
+                        <i class="bi bi-calendar-plus me-2"></i>
+                        Agregar Cita
+                    </button>
+                </div>
             </div>
 
             <!-- Contenedor de pacientes -->
@@ -149,20 +193,86 @@
                     </div>
                 </div>
             </div>
-
-            <div id="no_Pacientes" class="text-center py-5">
-                <i class="bi bi-person-exclamation icon-registro-vacio"></i>
-                <p class="mt-2">No hay cita disponibles</p>
-
-                <button class="btn btn-primary mt-2" onclick="mostrarRegistroPaciente()">Registrar Paciente</button>
-            </div>
         </main>
 
-        <div id="registro_Paciente">
+        <!-- Modal de registro o edición de Cita -->
+        <div id="registro_Cita" class="modal fade" tabindex="-1" aria-labelledby="modal_titulo_cita" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <!-- Cabecera del modal -->
+                    <div class="modal-header modal-cabecera-registro">
+                        <h5 class="modal-title" id="modal_titulo_cita">Registro de Cita</h5>
+                        
+                        <div id="detalles_edicion_cita" class="hidden">
+                            <small id="fecha_Reg_cita"></small>
+                            <small id="estatus_cita"></small>
+                        </div>
+                    </div>
 
+                    <div class="modal-body">
+                        <!-- Formulario de Registro -->
+                        <form id="form_Cita">
+                            <h2>Datos de la Cita</h2>
+                            <div class="d-flex align-items-stretch w-100 gap-3 mb-2">
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="text" class="form-control" id="id_paciente_cita" placeholder="">
+                                        <label for="id_paciente_cita" class="form-label">ID Paciente</label>
+                                    </div>
+                                </div>
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="text" class="form-control" id="id_medico_cita" placeholder="">
+                                        <label for="id_medico_cita" class="form-label">ID Médico</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3 mb-2">
+                                <!-- Fecha de Cita -->
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="datetime-local" class="form-control" id="fecha_cita" placeholder="">
+                                        <label for="fecha_cita" class="form-label">Fecha y Hora de Cita</label>
+                                    </div>
+                                </div>
+
+                                <!-- Estatus -->
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="estatus_cita_form">
+                                            <option value="programada" selected>Programada</option>
+                                            <option value="confirmada">Confirmada</option>
+                                            <option value="completada">Completada</option>
+                                            <option value="cancelada">Cancelada</option>
+                                        </select>
+                                        <label for="estatus_cita_form" class="form-label">Estatus</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3"> 
+                                <input type="text" class="form-control" id="motivo_cita" placeholder="">
+                                <label for="motivo_cita" class="form-label">Motivo de la Cita</label>
+                            </div>
+
+                            <div class="form-floating mb-3"> 
+                                <textarea class="form-control" id="observaciones_cita" placeholder="" style="height: 100px"></textarea>
+                                <label for="observaciones_cita" class="form-label">Observaciones</label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancel-primary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="guardarCita()">Guardar</button>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </div>
+
+    <script src="../js/agenda.js"></script>
 
     <!-- Script para el slide Bar -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

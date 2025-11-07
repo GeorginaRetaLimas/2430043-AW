@@ -155,7 +155,7 @@
                 
                 <!-- Botón agregar paciente -->
                 <div class="flex-shrink-0">
-                    <button class="btn btn-primary btn-lg" onclick="mostrarRegistroPaciente()">
+                    <button class="btn btn-primary btn-lg" onclick="mostrarRegistroUsuario()">
                         <i class="bi bi-person-plus me-2"></i>
                         Agregar
                     </button>
@@ -188,142 +188,129 @@
                     </div>
                 </div>
             </div>
-
-            <div id="no_Pacientes" class="text-center py-5 d-none">
-                <i class="bi bi-person-exclamation icon-registro-vacio"></i>
-                <p class="mt-2">No hay notas disponibles</p>
-
-                <button class="btn btn-primary mt-2" onclick="mostrarRegistroPaciente()">Agregar</button>
-            </div>
         </main>
 
-        <!-- Modal de registro o edición de Paciente -->
-        <div id="registro_Paciente" class="modal fade" tabindex="-1" aria-labelledby="modal_titulo" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <!-- Cabecera del modal -->
-                        <div class="modal-header modal-cabecera-registro">
-                            <h5 class="modal-title" id="modal_titulo"></h5>
-                            
-                            <div id="detalles de edicion" class="hidden">
-                                <small id="fecha_Reg"></small>
-                                <small id="estatus"></small>
+        <div id="registro_Usuario" class="modal fade" tabindex="-1" aria-labelledby="modal_titulo" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <!-- Cabecera del modal -->
+                    <div class="modal-header modal-cabecera-registro">
+                        <h5 class="modal-title" id="modal_titulo_usuario">Registro de Usuario</h5>
+                        
+                        <div id="detalles_edicion_usuario" class="hidden">
+                            <small id="fecha_Reg_usuario"></small>
+                            <small id="estatus_usuario"></small>
+                        </div>
+                    </div>
+
+                    <div class="modal-body">
+                        <!-- Formulario de Registro -->
+                        <form id="form_Usuario">
+                            <h2>Datos del Usuario</h2>
+                            <div class="d-flex align-items-stretch w-100 gap-3 mb-2">
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="text" class="form-control" id="nombre_usuario" placeholder="">
+                                        <label for="nombre_usuario" class="form-label">Nombre Completo</label>
+                                    </div>
+                                </div>
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="text" class="form-control" id="usuario" placeholder="">
+                                        <label for="usuario" class="form-label">Nombre de Usuario</label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="modal-body">
-                            <!--Formulario de Registro -->
-                            <form id="form_Paciente">
-                                <h2>Datos del Paciente</h2>
-                                <div class="d-flex align-items-stretch w-100 gap-3 mb-2">
-                                    <div class="flex-fill">
-                                        <div class="form-floating"> 
-                                            <input type="text" class="form-control" id="nombre" placeholder="">
-                                            <label for="nombre" class="form-label">Nombre</label>
-                                        </div>
-                                    </div>
-                                    <div class="flex-fill">
-                                        <div class="form-floating"> 
-                                            <input type="text" class="form-control" id="curp" placeholder="">
-                                            <label for="curp" class="form-label">Curp</label>
-                                        </div>
+                            
+                            <div class="d-flex align-items-stretch w-100 gap-3 mb-2">
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="password" class="form-control" id="contrasena" placeholder="">
+                                        <label for="contrasena" class="form-label">Contraseña</label>
                                     </div>
                                 </div>
-                                <div class="row g-3 mb-2">
-                                    <!-- Fecha de Nacimiento -->
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <input type="date" class="form-control" id="fecha_Nac" placeholder="">
-                                            <label for="fecha_Nac" class="form-label">Fecha Nacimiento</label>
-                                        </div>
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="password" class="form-control" id="confirmar_contrasena" placeholder="">
+                                        <label for="confirmar_contrasena" class="form-label">Confirmar Contraseña</label>
                                     </div>
-
-                                    <!-- Sexo -->
-                                    <div class="col-md-6">
-                                        <div class="form-floating">
-                                            <select class="form-select" id="sexo">
-                                                <option value="" selected disabled></option>
-                                                <option value="hombre">Hombre</option>
-                                                <option value="mujer">Mujer</option>
-                                                <option value="otro">Otro</option>
-                                            </select>
-                                            <label for="sexo" class="form-label">Sexo</label>
-                                        </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3 mb-2">
+                                <!-- Rol -->
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="rol">
+                                            <option value="" selected disabled></option>
+                                            <option value="secretario">Secretario</option>
+                                            <option value="medico">Médico</option>
+                                        </select>
+                                        <label for="rol" class="form-label">Rol</label>
                                     </div>
                                 </div>
 
-                                <div class="d-flex align-items-stretch w-100 gap-3 mb-2">
-                                    <div class="flex-fill">
-                                        <div class="form-floating"> 
-                                            <input type="text" class="form-control" id="telefono" placeholder="">
-                                            <label for="telefono" class="form-label">Telefono</label>
-                                        </div>
-                                    </div>
-                                    <div class="flex-fill">
-                                        <div class="form-floating"> 
-                                            <input type="text" class="form-control" id="correo" placeholder="">
-                                            <label for="correo" class="form-label">Correo</label>
-                                        </div>
+                                <!-- Sexo -->
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="sexo_usuario">
+                                            <option value="" selected disabled></option>
+                                            <option value="hombre">Hombre</option>
+                                            <option value="mujer">Mujer</option>
+                                            <option value="otro">Otro</option>
+                                        </select>
+                                        <label for="sexo_usuario" class="form-label">Sexo</label>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="form-floating mb-3"> 
-                                    <input type="text" class="form-control" id="direccion" placeholder="">
-                                    <label for="direccion" class="form-label">Direccion</label>
-                                </div>
-
-                                <h2>Datos del Contacto de Emergencia</h2>
-                                <div class="d-flex align-items-stretch w-100 gap-3 mb-3">
-                                    <div class="flex-fill">
-                                        <div class="form-floating"> 
-                                            <input type="text" class="form-control" id="cont_emergencia" placeholder="">
-                                            <label for="cont_emergencia" class="form-label">Contacto Emergencia</label>
-                                        </div>
-                                    </div>
-                                    <div class="flex-fill">
-                                        <div class="form-floating"> 
-                                            <input type="text" class="form-control" id="tel_emergencia" placeholder="">
-                                            <label for="tel_emergencia" class="form-label">Télefono Emergencia</label>
-                                        </div>
+                            <div class="d-flex align-items-stretch w-100 gap-3 mb-2">
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="text" class="form-control" id="telefono_usuario" placeholder="">
+                                        <label for="telefono_usuario" class="form-label">Teléfono</label>
                                     </div>
                                 </div>
-
-                                <h2>Datos Medicos importantes</h2>
-                                <!-- Alergias select -->
-                                <div class="form-floating mb-2">
-                                    <select class="form-select" id="alergias" onchange="validarAlergias()">
-                                        <option value="" selected disabled></option>
-                                        <option value="ninguna">Ninguna</option>
-                                        <option value="alguna">Alguna</option>
-                                    </select>
-                                    <label for="alergias" class="form-label">Alergias con la que cuenta</label>
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="email" class="form-control" id="correo_usuario" placeholder="">
+                                        <label for="correo_usuario" class="form-label">Correo</label>
+                                    </div>
                                 </div>
+                            </div>
 
-                                <!-- Alergias CheckBox -->
-                                <div class="d-none">
-                                    <!-- Alergias generadas dinámicamente -->
-                                </div>
-                                <!-- Fin alergias CheckBox -->
-                               
-                                <div class="form-floating mb-3"> 
-                                    <input type="text" class="form-control" id="antecedente" placeholder="">
-                                    <label for="antecedente" class="form-label">Antecedentes Medicos</label>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="form-floating mb-3"> 
+                                <input type="text" class="form-control" id="direccion_usuario" placeholder="">
+                                <label for="direccion_usuario" class="form-label">Dirección</label>
+                            </div>
+                            
+                            <!-- Campo para ID Médico -->
+                            <div class="form-floating mb-3 d-none" id="id_medico_container">
+                                <input type="text" class="form-control" id="id_medico" placeholder="">
+                                <label for="id_medico" class="form-label">ID Médico</label>
+                            </div>
 
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-cancel-primary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary">Guardar</button>
-                        </div>
+                            <!-- Estatus -->
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="estatus_usuario_form">
+                                    <option value="activo" selected>Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
+                                <label for="estatus_usuario_form" class="form-label">Estatus</label>
+                            </div>
+                        </form>
+                    </div>
 
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancel-primary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="guardarUsuario()">Guardar</button>
                     </div>
                 </div>
+            </div>
         </div>
-
     </div>
 
-    <script src="../js/patient.js"></script>
+    <script src="../js/usser.js"></script>
 
     <!-- Script para el slide Bar -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

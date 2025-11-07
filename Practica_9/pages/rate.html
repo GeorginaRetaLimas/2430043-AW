@@ -109,7 +109,6 @@
         </div>
     </div>
     <!-- Fin del Slide Bar -->
-
     
     <!-- Contenido principal de control pacientes -->
     <div class="row h-100 m-0">
@@ -118,11 +117,60 @@
                 Gestor de Tarifas
             </h1> 
             
-            <!-- Boton agregar paciente -->
-            <div class="d-flex justify-content-end mb*4">
-                <button class="btn btn-lg btn-primary round-circle" onclick="mostrarRegistroPaciente()">
-                    <i class="bi bi-person-plus icono-agregar"></i>
-                </button>
+            <!-- Búsqueda, filtros y registro -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+                <div class="d-flex flex-column flex-md-row gap-2 w-100">
+                    <!-- Barra de búsqueda -->
+                    <div class="flex-fill">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar servicio..." id="buscar_tarifa" oninput="aplicarFiltrosTarifas()">
+                            <button class="btn btn-outline-secondary" type="button" onclick="aplicarFiltrosTarifas()">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Filtros -->
+                    <div class="d-flex gap-2">
+                        <select class="form-select filtro-categoria" style="min-width: 150px;" id="filtro-estatus-tarifa" onchange="aplicarFiltrosTarifas()">
+                            <option value="">Estatus</option>
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
+                        </select>
+                        
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="filtro-especialidad-tarifa" onchange="aplicarFiltrosTarifas()">
+                            <option value="">Especialidad</option>
+                            <option value="cardiologia">Cardiología</option>
+                            <option value="pediatria">Pediatría</option>
+                            <option value="dermatologia">Dermatología</option>
+                            <option value="ginecologia">Ginecología</option>
+                        </select>
+                        
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="filtro-rango-precio" onchange="aplicarFiltrosTarifas()">
+                            <option value="">Rango Precio</option>
+                            <option value="0-500">$0 - $500</option>
+                            <option value="500-1000">$500 - $1,000</option>
+                            <option value="1000-2000">$1,000 - $2,000</option>
+                            <option value="2000+">Más de $2,000</option>
+                        </select>
+                        
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="ordenar-tarifas" onchange="aplicarFiltrosTarifas()">
+                            <option value="">Ordenar</option>
+                            <option value="servicio-asc">Servicio A-Z</option>
+                            <option value="servicio-desc">Servicio Z-A</option>
+                            <option value="precio-asc">Precio ↑</option>
+                            <option value="precio-desc">Precio ↓</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Botón agregar tarifa -->
+                <div class="flex-shrink-0">
+                    <button class="btn btn-primary btn-lg" onclick="mostrarRegistroTarifa()">
+                        <i class="bi bi-plus-circle me-2"></i>
+                        Agregar Tarifa
+                    </button>
+                </div>
             </div>
 
             <!-- Contenedor de pacientes -->
@@ -149,20 +197,78 @@
                     </div>
                 </div>
             </div>
-
-            <div id="no_Pacientes" class="text-center py-5">
-                <i class="bi bi-person-exclamation icon-registro-vacio"></i>
-                <p class="mt-2">No hay pagos disponibles</p>
-
-                <button class="btn btn-primary mt-2" onclick="mostrarRegistroPaciente()">Registrar Paciente</button>
-            </div>
         </main>
 
-        <div id="registro_Paciente">
+        <!-- Modal de registro o edición de Tarifa -->
+        <div id="registro_Tarifa" class="modal fade" tabindex="-1" aria-labelledby="modal_titulo_tarifa" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <!-- Cabecera del modal -->
+                    <div class="modal-header modal-cabecera-registro">
+                        <h5 class="modal-title" id="modal_titulo_tarifa">Registro de Tarifa</h5>
+                        
+                        <div id="detalles_edicion_tarifa" class="hidden">
+                            <small id="fecha_Reg_tarifa"></small>
+                            <small id="estatus_tarifa"></small>
+                        </div>
+                    </div>
 
+                    <div class="modal-body">
+                        <!-- Formulario de Registro -->
+                        <form id="form_Tarifa">
+                            <h2>Datos de la Tarifa</h2>
+                            <div class="d-flex align-items-stretch w-100 gap-3 mb-2">
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="text" class="form-control" id="servicio_tarifa" placeholder="">
+                                        <label for="servicio_tarifa" class="form-label">Servicio</label>
+                                    </div>
+                                </div>
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="number" class="form-control" id="costo_base_tarifa" placeholder="" step="0.01">
+                                        <label for="costo_base_tarifa" class="form-label">Costo Base</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-stretch w-100 gap-3 mb-2">
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="text" class="form-control" id="id_especialidad_tarifa" placeholder="">
+                                        <label for="id_especialidad_tarifa" class="form-label">ID Especialidad</label>
+                                    </div>
+                                </div>
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="text" class="form-control" id="especialidad_tarifa" placeholder="">
+                                        <label for="especialidad_tarifa" class="form-label">Especialidad</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Estatus -->
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="estatus_tarifa_form">
+                                    <option value="activo" selected>Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
+                                <label for="estatus_tarifa_form" class="form-label">Estatus</label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancel-primary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="guardarTarifa()">Guardar</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
+
+    <script src="../js/rate.js"></script>
 
     <!-- Script para el slide Bar -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -117,9 +117,60 @@
                 Bitacora de Usuarios
             </h1> 
             
-            <!-- Boton agregar paciente -->
-            <div class="d-flex justify-content-end mb*4">
+            <!-- Búsqueda, filtros y registro -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+                <div class="d-flex flex-column flex-md-row gap-2 w-100">
+                    <!-- Barra de búsqueda -->
+                    <div class="flex-fill">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar servicio..." id="buscar_tarifa" oninput="aplicarFiltrosTarifas()">
+                            <button class="btn btn-outline-secondary" type="button" onclick="aplicarFiltrosTarifas()">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Filtros -->
+                    <div class="d-flex gap-2">
+                        <select class="form-select filtro-categoria" style="min-width: 150px;" id="filtro-estatus-tarifa" onchange="aplicarFiltrosTarifas()">
+                            <option value="">Estatus</option>
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
+                        </select>
+                        
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="filtro-especialidad-tarifa" onchange="aplicarFiltrosTarifas()">
+                            <option value="">Especialidad</option>
+                            <option value="cardiologia">Cardiología</option>
+                            <option value="pediatria">Pediatría</option>
+                            <option value="dermatologia">Dermatología</option>
+                            <option value="ginecologia">Ginecología</option>
+                        </select>
+                        
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="filtro-rango-precio" onchange="aplicarFiltrosTarifas()">
+                            <option value="">Rango Precio</option>
+                            <option value="0-500">$0 - $500</option>
+                            <option value="500-1000">$500 - $1,000</option>
+                            <option value="1000-2000">$1,000 - $2,000</option>
+                            <option value="2000+">Más de $2,000</option>
+                        </select>
+                        
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="ordenar-tarifas" onchange="aplicarFiltrosTarifas()">
+                            <option value="">Ordenar</option>
+                            <option value="servicio-asc">Servicio A-Z</option>
+                            <option value="servicio-desc">Servicio Z-A</option>
+                            <option value="precio-asc">Precio ↑</option>
+                            <option value="precio-desc">Precio ↓</option>
+                        </select>
+                    </div>
+                </div>
                 
+                <!-- Botón agregar tarifa -->
+                <div class="flex-shrink-0">
+                    <button class="btn btn-primary btn-lg" onclick="mostrarRegistroTarifa()">
+                        <i class="bi bi-plus-circle me-2"></i>
+                        Agregar Tarifa
+                    </button>
+                </div>
             </div>
 
             <!-- Contenedor de pacientes -->
@@ -145,11 +196,6 @@
                         </table>
                     </div>
                 </div>
-            </div>
-
-            <div id="no_Pacientes" class="text-center py-5">
-                <i class="bi bi-person-exclamation icon-registro-vacio"></i>
-                <p class="mt-2">No hay acciones registradas</p>
             </div>
         </main>
 

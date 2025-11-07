@@ -115,11 +115,44 @@
                 Especialidades médicas
             </h1> 
             
-            <!-- Boton agregar paciente -->
-            <div class="d-flex justify-content-end mb*4">
-                <button class="btn btn-lg btn-primary round-circle" onclick="mostrarRegistroPaciente()">
-                    <i class="bi bi-person-plus icono-agregar"></i>
-                </button>
+            <!-- Búsqueda, filtros y registro -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+                <div class="d-flex flex-column flex-md-row gap-2 w-100">
+                    <!-- Barra de búsqueda -->
+                    <div class="flex-fill">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar especialidad..." id="buscar_especialidad" oninput="aplicarFiltrosEspecialidades()">
+                            <button class="btn btn-outline-secondary" type="button" onclick="aplicarFiltrosEspecialidades()">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Filtros -->
+                    <div class="d-flex gap-2">
+                        <select class="form-select filtro-categoria" style="min-width: 150px;" id="filtro-estatus-especialidad" onchange="aplicarFiltrosEspecialidades()">
+                            <option value="">Estatus</option>
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
+                        </select>
+                        
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="ordenar-especialidades" onchange="aplicarFiltrosEspecialidades()">
+                            <option value="">Ordenar</option>
+                            <option value="nombre-asc">Nombre A-Z</option>
+                            <option value="nombre-desc">Nombre Z-A</option>
+                            <option value="fecha-creacion-asc">Creación ↑</option>
+                            <option value="fecha-creacion-desc">Creación ↓</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Botón agregar especialidad -->
+                <div class="flex-shrink-0">
+                    <button class="btn btn-primary btn-lg" onclick="mostrarRegistroEspecialidad()">
+                        <i class="bi bi-plus-circle me-2"></i>
+                        Agregar Especialidad
+                    </button>
+                </div>
             </div>
 
             <!-- Contenedor de pacientes -->
@@ -144,20 +177,58 @@
                     </div>
                 </div>
             </div>
-
-            <div id="no_Pacientes" class="text-center py-5">
-                <i class="bi bi-person-exclamation icon-registro-vacio"></i>
-                <p class="mt-2">No hay pagos disponibles</p>
-
-                <button class="btn btn-primary mt-2" onclick="mostrarRegistroPaciente()">Registrar Paciente</button>
-            </div>
         </main>
 
-        <div id="registro_Paciente">
+        <!-- Modal de registro o edición de Especialidad -->
+        <div id="registro_Especialidad" class="modal fade" tabindex="-1" aria-labelledby="modal_titulo_especialidad" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <!-- Cabecera del modal -->
+                    <div class="modal-header modal-cabecera-registro">
+                        <h5 class="modal-title" id="modal_titulo_especialidad">Registro de Especialidad</h5>
+                        
+                        <div id="detalles_edicion_especialidad" class="hidden">
+                            <small id="fecha_Reg_especialidad"></small>
+                            <small id="estatus_especialidad"></small>
+                        </div>
+                    </div>
 
+                    <div class="modal-body">
+                        <!-- Formulario de Registro -->
+                        <form id="form_Especialidad">
+                            <h2>Datos de la Especialidad</h2>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="nombre_especialidad" placeholder="">
+                                <label for="nombre_especialidad" class="form-label">Nombre de la Especialidad</label>
+                            </div>
+
+                            <div class="form-floating mb-3"> 
+                                <textarea class="form-control" id="descripcion_especialidad" placeholder="" style="height: 100px"></textarea>
+                                <label for="descripcion_especialidad" class="form-label">Descripción</label>
+                            </div>
+
+                            <!-- Estatus -->
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="estatus_especialidad_form">
+                                    <option value="activo" selected>Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
+                                <label for="estatus_especialidad_form" class="form-label">Estatus</label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancel-primary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="guardarEspecialidad()">Guardar</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
+
+    <script src="../js/specialties.js"></script>
 
     <!-- Script para el slide Bar -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

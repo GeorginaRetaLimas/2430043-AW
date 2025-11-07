@@ -120,11 +120,62 @@
                 Reportes
             </h1> 
             
-            <!-- Boton agregar paciente -->
-            <div class="d-flex justify-content-end mb*4">
-                <button class="btn btn-lg btn-primary round-circle" onclick="mostrarRegistroPaciente()">
-                    <i class="bi bi-person-plus icono-agregar"></i>
-                </button>
+            <!-- Búsqueda, filtros y registro -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+                <div class="d-flex flex-column flex-md-row gap-2 w-100">
+                    <!-- Barra de búsqueda -->
+                    <div class="flex-fill">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Buscar reporte..." id="buscar_reporte" oninput="aplicarFiltrosReportes()">
+                            <button class="btn btn-outline-secondary" type="button" onclick="aplicarFiltrosReportes()">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Filtros -->
+                    <div class="d-flex gap-2">
+                        <select class="form-select filtro-categoria" style="min-width: 150px;" id="filtro-tipo-reporte" onchange="aplicarFiltrosReportes()">
+                            <option value="">Tipo</option>
+                            <option value="citas">Citas</option>
+                            <option value="pacientes">Pacientes</option>
+                            <option value="medicos">Médicos</option>
+                            <option value="pagos">Pagos</option>
+                            <option value="financiero">Financiero</option>
+                        </select>
+                        
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="filtro-estado-reporte" onchange="aplicarFiltrosReportes()">
+                            <option value="">Estado</option>
+                            <option value="generado">Generado</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="error">Error</option>
+                        </select>
+                        
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="filtro-fecha-reporte" onchange="aplicarFiltrosReportes()">
+                            <option value="">Fecha</option>
+                            <option value="hoy">Hoy</option>
+                            <option value="semana">Esta semana</option>
+                            <option value="mes">Este mes</option>
+                            <option value="trimestre">Este trimestre</option>
+                        </select>
+                        
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="ordenar-reportes" onchange="aplicarFiltrosReportes()">
+                            <option value="">Ordenar</option>
+                            <option value="fecha-asc">Fecha ↑</option>
+                            <option value="fecha-desc">Fecha ↓</option>
+                            <option value="tipo-asc">Tipo A-Z</option>
+                            <option value="tipo-desc">Tipo Z-A</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Botón generar reporte -->
+                <div class="flex-shrink-0">
+                    <button class="btn btn-primary btn-lg" onclick="mostrarRegistroReporte()">
+                        <i class="bi bi-file-earmark-plus me-2"></i>
+                        Generar Reporte
+                    </button>
+                </div>
             </div>
 
             <!-- Contenedor de pacientes -->
@@ -156,20 +207,101 @@
                     </div>
                 </div>
             </div>
-
-            <div id="no_Pacientes" class="text-center py-5">
-                <i class="bi bi-person-exclamation icon-registro-vacio"></i>
-                <p class="mt-2">No hay notas disponibles</p>
-
-                <button class="btn btn-primary mt-2" onclick="mostrarRegistroPaciente()">Registrar Paciente</button>
-            </div>
         </main>
 
-        <div id="registro_Paciente">
+        <!-- Modal de registro o edición de Reporte -->
+        <div id="registro_Reporte" class="modal fade" tabindex="-1" aria-labelledby="modal_titulo_reporte" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <!-- Cabecera del modal -->
+                    <div class="modal-header modal-cabecera-registro">
+                        <h5 class="modal-title" id="modal_titulo_reporte">Generar Reporte</h5>
+                        
+                        <div id="detalles_edicion_reporte" class="hidden">
+                            <small id="fecha_Reg_reporte"></small>
+                            <small id="estatus_reporte"></small>
+                        </div>
+                    </div>
 
+                    <div class="modal-body">
+                        <!-- Formulario de Registro -->
+                        <form id="form_Reporte">
+                            <h2>Parámetros del Reporte</h2>
+                            <div class="d-flex align-items-stretch w-100 gap-3 mb-2">
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <select class="form-select" id="tipo_reporte">
+                                            <option value="" selected disabled></option>
+                                            <option value="citas">Reporte de Citas</option>
+                                            <option value="pacientes">Reporte de Pacientes</option>
+                                            <option value="medicos">Reporte de Médicos</option>
+                                            <option value="pagos">Reporte de Pagos</option>
+                                        </select>
+                                        <label for="tipo_reporte" class="form-label">Tipo de Reporte</label>
+                                    </div>
+                                </div>
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="text" class="form-control" id="id_paciente_reporte" placeholder="">
+                                        <label for="id_paciente_reporte" class="form-label">ID Paciente (Opcional)</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex align-items-stretch w-100 gap-3 mb-2">
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <input type="text" class="form-control" id="id_medico_reporte" placeholder="">
+                                        <label for="id_medico_reporte" class="form-label">ID Médico (Opcional)</label>
+                                    </div>
+                                </div>
+                                <div class="flex-fill">
+                                    <div class="form-floating"> 
+                                        <select class="form-select" id="generado_reporte">
+                                            <option value="si">Sí</option>
+                                            <option value="no" selected>No</option>
+                                        </select>
+                                        <label for="generado_reporte" class="form-label">¿Generado?</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-3 mb-2">
+                                <!-- Fecha Inicio -->
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control" id="fecha_inicio_reporte" placeholder="">
+                                        <label for="fecha_inicio_reporte" class="form-label">Fecha Inicio</label>
+                                    </div>
+                                </div>
+
+                                <!-- Fecha Fin -->
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control" id="fecha_fin_reporte" placeholder="">
+                                        <label for="fecha_fin_reporte" class="form-label">Fecha Fin</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-floating mb-3"> 
+                                <textarea class="form-control" id="descripcion_reporte" placeholder="" style="height: 100px"></textarea>
+                                <label for="descripcion_reporte" class="form-label">Descripción</label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancel-primary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="generarReporte()">Generar Reporte</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
+
+    <script src="../js/report.js"></script>
 
     <!-- Script para el slide Bar -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
