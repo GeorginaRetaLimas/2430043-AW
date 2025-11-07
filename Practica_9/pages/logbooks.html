@@ -123,8 +123,8 @@
                     <!-- Barra de búsqueda -->
                     <div class="flex-fill">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Buscar servicio..." id="buscar_tarifa" oninput="aplicarFiltrosTarifas()">
-                            <button class="btn btn-outline-secondary" type="button" onclick="aplicarFiltrosTarifas()">
+                            <input type="text" class="form-control" placeholder="Buscar en bitácora..." id="buscar_bitacora" oninput="aplicarFiltrosBitacoras()">
+                            <button class="btn btn-outline-secondary" type="button" onclick="aplicarFiltrosBitacoras()">
                                 <i class="bi bi-search"></i>
                             </button>
                         </div>
@@ -132,43 +132,49 @@
                     
                     <!-- Filtros -->
                     <div class="d-flex gap-2">
-                        <select class="form-select filtro-categoria" style="min-width: 150px;" id="filtro-estatus-tarifa" onchange="aplicarFiltrosTarifas()">
-                            <option value="">Estatus</option>
-                            <option value="activo">Activo</option>
-                            <option value="inactivo">Inactivo</option>
+                        <select class="form-select filtro-categoria" style="min-width: 150px;" id="filtro-modulo-bitacora" onchange="aplicarFiltrosBitacoras()">
+                            <option value="">Módulo</option>
+                            <option value="usuarios">Usuarios</option>
+                            <option value="pacientes">Pacientes</option>
+                            <option value="citas">Citas</option>
+                            <option value="medicos">Médicos</option>
+                            <option value="pagos">Pagos</option>
+                            <option value="reportes">Reportes</option>
                         </select>
                         
-                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="filtro-especialidad-tarifa" onchange="aplicarFiltrosTarifas()">
-                            <option value="">Especialidad</option>
-                            <option value="cardiologia">Cardiología</option>
-                            <option value="pediatria">Pediatría</option>
-                            <option value="dermatologia">Dermatología</option>
-                            <option value="ginecologia">Ginecología</option>
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="filtro-accion-bitacora" onchange="aplicarFiltrosBitacoras()">
+                            <option value="">Acción</option>
+                            <option value="login">Login</option>
+                            <option value="logout">Logout</option>
+                            <option value="crear">Crear</option>
+                            <option value="editar">Editar</option>
+                            <option value="eliminar">Eliminar</option>
+                            <option value="consultar">Consultar</option>
                         </select>
                         
-                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="filtro-rango-precio" onchange="aplicarFiltrosTarifas()">
-                            <option value="">Rango Precio</option>
-                            <option value="0-500">$0 - $500</option>
-                            <option value="500-1000">$500 - $1,000</option>
-                            <option value="1000-2000">$1,000 - $2,000</option>
-                            <option value="2000+">Más de $2,000</option>
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="filtro-fecha-bitacora" onchange="aplicarFiltrosBitacoras()">
+                            <option value="">Fecha</option>
+                            <option value="hoy">Hoy</option>
+                            <option value="ayer">Ayer</option>
+                            <option value="semana">Esta semana</option>
+                            <option value="mes">Este mes</option>
                         </select>
                         
-                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="ordenar-tarifas" onchange="aplicarFiltrosTarifas()">
+                        <select class="form-select filtro-categoria" style="min-width: 160px;" id="ordenar-bitacoras" onchange="aplicarFiltrosBitacoras()">
                             <option value="">Ordenar</option>
-                            <option value="servicio-asc">Servicio A-Z</option>
-                            <option value="servicio-desc">Servicio Z-A</option>
-                            <option value="precio-asc">Precio ↑</option>
-                            <option value="precio-desc">Precio ↓</option>
+                            <option value="fecha-asc">Fecha ↑</option>
+                            <option value="fecha-desc">Fecha ↓</option>
+                            <option value="usuario-asc">Usuario A-Z</option>
+                            <option value="usuario-desc">Usuario Z-A</option>
                         </select>
                     </div>
                 </div>
                 
-                <!-- Botón agregar tarifa -->
+                <!-- Botón exportar bitácora -->
                 <div class="flex-shrink-0">
-                    <button class="btn btn-primary btn-lg" onclick="mostrarRegistroTarifa()">
-                        <i class="bi bi-plus-circle me-2"></i>
-                        Agregar Tarifa
+                    <button class="btn btn-primary btn-lg" onclick="exportarBitacora()">
+                        <i class="bi bi-download me-2"></i>
+                        Exportar
                     </button>
                 </div>
             </div>
