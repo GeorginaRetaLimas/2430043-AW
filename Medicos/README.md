@@ -79,15 +79,3 @@
 
 - Sugerencias
     - No usar muchos modales para los formularios
-
-- Acomodo sugerido
-    - Models
-    - Controllers
-    - Core
-    - Layouts (header, footer)
-    - Views
-        - Especialidad
-            - Crear.php
-            - Editar.php
-            - Index.php
-        
