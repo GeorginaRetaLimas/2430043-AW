@@ -1,0 +1,88 @@
+/* Paleta de colores */
+:root {
+    --color_azul_primary: #334EAC;
+    --color_azul_primary_dark: #081F5C;
+    --color_azul_primary_light: #7096D1;
+
+    --color_azul_primary_e_light: #a1c2f2;
+
+    --color_celeste_primary: #D0E3FF;
+    --color_celeste_primary_dark: #BAD6EB;
+    --color_celeste_primary_half_light: #e0ecff;
+    --color_celeste_primary_light: #F7F2EB;
+
+    --color_secondary: #F9D489;
+    --color_secondary_dark: #ecbb57;
+    --color_secondary_light: #FBE6B4;
+
+    --color-success: #c4ff9b;
+    --color-warning: #fdde8b;
+    --color-danger: #f06c69;
+
+    --color-success_dark: #87d875;
+    --color-warning_dark: #eec17d;
+    --color-danger_dark: #e55a5a;
+
+    --color_background: #FFF9F0;
+
+    --color_modal_background: #b2c6ff78;
+    --color_gris: #808caa;
+}
+
+.calendario-semanal {
+    border: 1px solid var(--color_modal_background);
+    border-radius: 0.375rem;
+}
+
+.dias-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: var(--color_celeste_primary);
+    border-bottom: 1px solid var(--color_azul_primary_light);
+}
+
+.dia-semana {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-right: 1px solid var(--color_azul_primary_light);
+}
+
+.dia-semana:last-child {
+    border-right: none;
+}
+
+.dia-semana.hoy {
+    background-color: var(--color_azul_primary_light);
+    color: var(--color_celeste_primary_light);
+}
+
+.cuerpo-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    min-height: 400px;
+}
+
+.dia-citas {
+    padding: 5px;
+    border-right: 1px solid var(--color_azul_primary_light);
+    min-height: 400px;
+}
+
+.dia-citas:last-child {
+    border-right: none;
+}
+
+.dia-citas.hoy {
+    background-color: var(--color_celeste_primary_half_light);
+}
+
+.cita-semanal {
+    background-color: white;
+    border-left: 3px solid var(--color_azul_primary);
+    padding: 5px;
+    margin-bottom: 3px;
+    border-radius: 3px;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
