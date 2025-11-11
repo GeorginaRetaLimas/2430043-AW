@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assets/img/logo_icon_transparent.png" type="image/x-icon">
+    <title>Práctica 9</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+
+    <!-- Estilos generales -->
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+</head>
+<body class="align-items-center">
+    <!-- Modal de Inicio de Sesión -->
+    <div id="modal_Inicio">
+        <div class="modal modal-sheet d-block bg-body-secondary p-4 py-md-4">
+            <div class="modal-dialog modal-dialog-centered modal-xl"> 
+                <!-- Contenido del modal -->
+                <div class="modal-content rounded-4 shadow overflow-hidden">
+                    <div class="row g-0">
+                        <div class="col-md-6">
+                            <!-- Cabecera del modal -->
+                            <div class="modal-header d-flex flex-column align-items-start p-3 mb-3"> 
+                                <!-- Logo arriba a la izquierda -->
+                                <div class="mb-3">
+                                    <img src="assets/img/logo_line_transparent.png" height="30px" alt="Logo">
+                                </div>
+                                
+                                <div class="w-100 text-center mt-0">
+                                    <h1 class="mb-0">Inicio de Sesión</h1>
+                                </div>
+                            </div>
+
+                            <!-- Formulario de Inicio Sesión -->
+                            <div class="modal-body p-5 pt-0"> 
+                                <form id="form_inicio"> 
+                                    <div class="form-floating mb-3"> 
+                                        <input type="text" class="form-control rounded-3 form-control-lg" id="usuario" placeholder="" required> 
+                                        <label for="usuario">Usuario</label> 
+                                    </div> 
+                                        
+                                    <div class="form-floating mb-3"> 
+                                        <input type="password" class="form-control rounded-3 form-control-lg" id="contraseña" placeholder="" required> 
+                                        <label for="contraseña">Contraseña</label> 
+                                    </div> 
+                                        
+                                    <button class="w-100 mb-2 btn btn-primary btn-lg rounded-3 fw-normal" type="submit">Iniciar</button> 
+                                    <small class="fs-6">
+                                        Correo: Admin <br>
+                                        Contraseña: admin
+                                    </small> 
+
+                                    <hr>
+
+                                    <small class="fs-6">¿No tienes cuenta? <a class="link-opacity-50" onclick="cambiarRegistro()">Registrate</a></small>    
+                                </form> 
+                            </div> 
+                        </div>
+
+                        <!-- Imagen de Inicio de Sesión -->
+                        <div class="col-md-6 d-none d-md-block p-0">
+                            <div class="h-100">
+                                <img src="assets/img/login_cat.png" alt="Imagen login_cat" class="w-100 h-100 object-fit-cover">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Registro de Usuarios -->
+    <div id="modal_Registro">
+        <div class="modal modal-sheet d-block bg-body-secondary p-4 py-md-4">
+            <div class="modal-dialog modal-dialog-centered modal-xl"> 
+                <!-- Contenido del modal -->
+                <div class="modal-content rounded-4 shadow overflow-hidden">
+                    <div class="row g-0">
+                        <!-- Imagen de Inicio de Sesión -->
+                        <div class="col-md-6 d-none d-md-block p-0">
+                            <div class="h-100">
+                                <img src="assets/img/register_cat.png" alt="Imagen login_cat" class="w-100 h-100 object-fit-cover">
+                            </div>
+                        </div>
+
+                        <!-- El otro lado con textito -->
+                        <div class="col-md-6">
+                            <!-- Cabecera del modal -->
+                            <div class="modal-header d-flex flex-column align-items-start p-3 mb-2"> 
+                                <!-- Logo arriba a la izquierda -->
+                                <div class="mb-3">
+                                    <img src="assets/img/logo_line_transparent.png" height="30px" alt="Logo">
+                                </div>
+                                
+                                <div class="w-100 text-center mt-0">
+                                    <h1 class="mb-0">Registro Usuario</h1>
+                                </div>
+                            </div>
+
+                            <!-- Formulario de Registro Usuarios -->
+                            <div class="modal-body p-5 pt-0"> 
+                                <form id="form_registro"> 
+                                    <div class="form-floating mb-3"> 
+                                        <input type="email" class="form-control rounded-3 form-control-lg" id="correo_registro" placeholder="" required> 
+                                        <label for="correo_registro">Correo Eléctroinico</label> 
+                                    </div> 
+
+                                    <div class="form-floating mb-3"> 
+                                        <input type="email" class="form-control rounded-3 form-control-lg" id="" placeholder="" required> 
+                                        <label for="usuario_registro">Usuario</label> 
+                                    </div> 
+                                        
+                                    <div class="form-floating mb-3"> 
+                                        <input type="password" class="form-control rounded-3 form-control-lg" id="contraseña_registro" placeholder="" required> 
+                                        <label for="contraseña_registro">Contraseña</label> 
+                                    </div> 
+
+                                    <div class="form-floating mb-3"> 
+                                        <input type="password" class="form-control rounded-3 form-control-lg" id="confirmar_registro" placeholder="" required> 
+                                        <label for="confirmar_registro">Confirmar contraseña</label> 
+                                    </div> 
+                                        
+                                    <button class="w-100 mb-2 btn btn-primary btn-lg rounded-3 fw-normal" type="submit">Registrar</button> 
+                                    <hr>
+
+                                    <small class="fs-6">¿Ya tienes cuenta? <a class="link-opacity-50" onclick="cambiarInicio()">Inicia</a></small>    
+                                </form> 
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
