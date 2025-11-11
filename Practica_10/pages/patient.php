@@ -141,6 +141,8 @@
                             <option value="">Ordenar</option>
                             <option value="nombre-asc">Nombre A-Z</option>
                             <option value="nombre-desc">Nombre Z-A</option>
+                            <option value="acceso-reciente">Acceso Recientes</option>
+                            <option value="acceso-antiguo">Acceso Antiguo</option>
                         </select>
                     </div>
                 </div>
@@ -192,7 +194,7 @@
                         <div class="modal-header modal-cabecera-registro">
                             <h5 class="modal-title" id="modal_titulo"></h5>
                             
-                            <div id="detalles de edicion" class="hidden">
+                            <div id="detalles_edicion" class="hidden">
                                 <small id="fecha_Reg"></small>
                                 <small id="estatus"></small>
                             </div>
@@ -277,13 +279,9 @@
 
                                 <h2>Datos Medicos importantes</h2>
                                 <!-- Alergias select -->
-                                <div class="form-floating mb-2">
-                                    <select class="form-select" id="alergias" onchange="validarAlergias()">
-                                        <option value="" selected disabled></option>
-                                        <option value="ninguna">Ninguna</option>
-                                        <option value="alguna">Alguna</option>
-                                    </select>
-                                    <label for="alergias" class="form-label">Alergias con la que cuenta</label>
+                                <div class="form-floating mb-3">
+                                    <textarea class="form-control" id="alergias" placeholder="Describa las alergias del paciente" style="height: 100px"></textarea>
+                                    <label for="alergias" class="form-label">Alergias (separadas por comas)</label>
                                 </div>
 
                                 <!-- Alergias CheckBox -->
@@ -301,7 +299,7 @@
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-cancel-primary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-primary">Guardar</button>
+                            <button type="button" class="btn btn-primary" onclick="guardarPaciente()">Guardar</button>
                         </div>
 
                     </div>

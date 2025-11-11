@@ -133,8 +133,8 @@
                     <div class="d-flex gap-2">
                         <select class="form-select filtro-categoria" style="min-width: 150px;" id="filtro-rol" onchange="aplicarFiltros()">
                             <option value="">Rol</option>
-                            <option value="activo">Secretario</option>
-                            <option value="inactivo">Medico</option>
+                            <option value="secretario">Secretario</option>
+                            <option value="medico">Médico</option>
                         </select>
 
                         <select class="form-select filtro-categoria" style="min-width: 150px;" id="filtro-categoria" onchange="aplicarFiltros()">
@@ -174,7 +174,6 @@
                                     <th>Usuario</th>
                                     <th>Contraseña</th>
                                     <th>Rol</th>
-                                    <th>Sexo</th>
                                     <th>IdMedico</th>
                                     <th>Estatus</th>
                                     <th>Ultimo Acceso</th>
@@ -248,7 +247,7 @@
                                 <div class="col-md-6">
                                     <div class="form-floating mb-3">
                                         <select class="form-select" id="estatus_usuario_form">
-                                            <option value="activo" selected>Activo</option>
+                                            <option value="activo">Activo</option>
                                             <option value="inactivo">Inactivo</option>
                                         </select>
                                         <label for="estatus_usuario_form" class="form-label">Estatus</label>
