@@ -37,12 +37,12 @@
                             <div class="modal-body p-5 pt-0"> 
                                 <form id="form_inicio"> 
                                     <div class="form-floating mb-3"> 
-                                        <input type="text" class="form-control rounded-3 form-control-lg" id="usuario" placeholder="" required> 
+                                        <input type="text" class="form-control rounded-3 form-control-lg" id="usuario" placeholder=""> 
                                         <label for="usuario">Usuario</label> 
                                     </div> 
                                         
                                     <div class="form-floating mb-3"> 
-                                        <input type="password" class="form-control rounded-3 form-control-lg" id="contraseña" placeholder="" required> 
+                                        <input type="password" class="form-control rounded-3 form-control-lg" id="contraseña" placeholder=""> 
                                         <label for="contraseña">Contraseña</label> 
                                     </div> 
                                         
@@ -103,17 +103,17 @@
                             <div class="modal-body p-5 pt-0"> 
                                 <form id="form_registro">
                                     <div class="form-floating mb-3"> 
-                                        <input type="text" class="form-control rounded-3 form-control-lg" id="usuario_registro" name="usuario_registro" placeholder="" required> 
+                                        <input type="text" class="form-control rounded-3 form-control-lg" id="usuario_registro" name="usuario_registro" placeholder=""> 
                                         <label for="usuario_registro">Usuario</label> 
                                     </div> 
                                         
                                     <div class="form-floating mb-3"> 
-                                        <input type="password" class="form-control rounded-3 form-control-lg" id="contraseña_registro" name="contraseña_registro" placeholder="" required> 
+                                        <input type="password" class="form-control rounded-3 form-control-lg" id="contraseña_registro" name="contraseña_registro" placeholder=""> 
                                         <label for="contraseña_registro">Contraseña</label> 
                                     </div> 
 
                                     <div class="form-floating mb-3"> 
-                                        <input type="password" class="form-control rounded-3 form-control-lg" id="confirmar_registro" name="confirmar_registro" placeholder="" required> 
+                                        <input type="password" class="form-control rounded-3 form-control-lg" id="confirmar_registro" name="confirmar_registro" placeholder=""> 
                                         <label for="confirmar_registro">Confirmar contraseña</label> 
                                     </div> 
                                         

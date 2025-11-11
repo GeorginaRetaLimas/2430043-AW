@@ -210,12 +210,6 @@
                             <div class="d-flex align-items-stretch w-100 gap-3 mb-2">
                                 <div class="flex-fill">
                                     <div class="form-floating"> 
-                                        <input type="text" class="form-control" id="nombre_usuario" placeholder="">
-                                        <label for="nombre_usuario" class="form-label">Nombre Completo</label>
-                                    </div>
-                                </div>
-                                <div class="flex-fill">
-                                    <div class="form-floating"> 
                                         <input type="text" class="form-control" id="usuario" placeholder="">
                                         <label for="usuario" class="form-label">Nombre de Usuario</label>
                                     </div>
@@ -250,53 +244,16 @@
                                     </div>
                                 </div>
 
-                                <!-- Sexo -->
+                                <!-- Estatus -->
                                 <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <select class="form-select" id="sexo_usuario">
-                                            <option value="" selected disabled></option>
-                                            <option value="hombre">Hombre</option>
-                                            <option value="mujer">Mujer</option>
-                                            <option value="otro">Otro</option>
+                                    <div class="form-floating mb-3">
+                                        <select class="form-select" id="estatus_usuario_form">
+                                            <option value="activo" selected>Activo</option>
+                                            <option value="inactivo">Inactivo</option>
                                         </select>
-                                        <label for="sexo_usuario" class="form-label">Sexo</label>
+                                        <label for="estatus_usuario_form" class="form-label">Estatus</label>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="d-flex align-items-stretch w-100 gap-3 mb-2">
-                                <div class="flex-fill">
-                                    <div class="form-floating"> 
-                                        <input type="text" class="form-control" id="telefono_usuario" placeholder="">
-                                        <label for="telefono_usuario" class="form-label">Teléfono</label>
-                                    </div>
-                                </div>
-                                <div class="flex-fill">
-                                    <div class="form-floating"> 
-                                        <input type="email" class="form-control" id="correo_usuario" placeholder="">
-                                        <label for="correo_usuario" class="form-label">Correo</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-floating mb-3"> 
-                                <input type="text" class="form-control" id="direccion_usuario" placeholder="">
-                                <label for="direccion_usuario" class="form-label">Dirección</label>
-                            </div>
-                            
-                            <!-- Campo para ID Médico -->
-                            <div class="form-floating mb-3 d-none" id="id_medico_container">
-                                <input type="text" class="form-control" id="id_medico" placeholder="">
-                                <label for="id_medico" class="form-label">ID Médico</label>
-                            </div>
-
-                            <!-- Estatus -->
-                            <div class="form-floating mb-3">
-                                <select class="form-select" id="estatus_usuario_form">
-                                    <option value="activo" selected>Activo</option>
-                                    <option value="inactivo">Inactivo</option>
-                                </select>
-                                <label for="estatus_usuario_form" class="form-label">Estatus</label>
                             </div>
                         </form>
                     </div>

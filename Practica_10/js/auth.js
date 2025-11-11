@@ -16,27 +16,57 @@ document.addEventListener('DOMContentLoaded', function(){
         const usuario = document.getElementById('usuario').value;
         const contraseña = document.getElementById('contraseña').value;
 
-        if(usuario === "Admin" && contraseña === "admin"){
-            Swal.fire({
-                icon: 'success',
-                title: 'Éxito',
-                text: 'Usuario logueado con éxito',
-                confirmButtonText: 'Aceptar'
-            });
-
-            localStorage.setItem('registroActivo', 'false');
-
-            setTimeout(function() {
-                window.location.href = "../pages/dashboard.php";
-            }, 2000);
-        } else {
+        // Validaciones básicas, no
+        if (!usuario || !contraseña) {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: 'Usuario no reconocido',
+                text: 'Por favor completa todos los campos',
                 confirmButtonText: 'Aceptar'
             });
+            return;
         }
+
+        // Enviar al servidor para autenticación real
+        const formData = new FormData();
+        formData.append('usuario', usuario);
+        formData.append('contraseña', contraseña);
+            
+        fetch('../php/user_login.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data.includes('exitoso')) {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Login exitoso!',
+                    html: data,
+                    confirmButtonText: 'Aceptar',
+                    timer: 1500,
+                    showConfirmButton: false
+                }).then(() => {
+                    window.location.href = "../pages/dashboard.php";
+                });
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error en el login',
+                    html: data,
+                    confirmButtonText: 'Aceptar'
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error de conexión con el servidor',
+                confirmButtonText: 'Aceptar'
+            });
+        });
     });
 
     // Registro de Usuario
@@ -93,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function(){
         .then(response => response.text())
         .then(data => {
             // Verificamos si la respuesta contiene mensajes de éxito o error
-            if (data.includes('éxito')) {
+            if (data.includes('xito')) {
                 Swal.fire({
                     icon: 'success',
                     title: '¡Registro exitoso!',
