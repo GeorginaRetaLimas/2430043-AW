@@ -10,7 +10,7 @@ function confirmarDescarga() {
         // Descargar archivo
         if (result.isConfirmed) {
             // ruta a la base de datos
-            const url = '../bd/hospital.sql';
+            const url = '../bd/clinica_db.sql';
 
             // Creamos el enlace de manera dinamica
             const link = document.createElement('a');

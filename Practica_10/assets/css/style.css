@@ -17,13 +17,13 @@
     --color_secondary_dark: #ecbb57;
     --color_secondary_light: #FBE6B4;
 
-    --color-success: #c4ff9b;
-    --color-warning: #fdde8b;
-    --color-danger: #f06c69;
+    --color-success: #539844;
+    --color-warning: #d9b142;
+    --color-danger: #cd3f3c;
 
-    --color-success_dark: #87d875;
-    --color-warning_dark: #eec17d;
-    --color-danger_dark: #e55a5a;
+    --color-success_dark: #357429;
+    --color-warning_dark: #c58524;
+    --color-danger_dark: #8d2323;
 
     --color_background: #FFF9F0;
 
@@ -175,6 +175,43 @@ footer {
     font-size: 1.4rem !important;
 }
 
+.btn-warning {
+    background-color: var(--color-warning) !important;
+    font-family: 'fuente_Button' !important;
+    color: var(--color_background);
+    font-size: 1rem !important;
+}
+
+.btn-warning:hover {
+    background-color: var(--color-warning_dark) !important;
+    border: var(--color-warning_dark);
+    font-family: 'fuente_Button' !important;
+    color: var(--color_background);
+    font-size: 1.2rem !important;
+}
+
+.btn-danger {
+    background-color: var(--color-danger) !important;
+    font-family: 'fuente_Button' !important;
+    color: var(--color_background);
+    font-size: 1rem !important;
+}
+
+.btn-danger:hover {
+    background-color: var(--color-danger_dark) !important;
+    border: var(--color-danger_dark);
+    font-family: 'fuente_Button' !important;
+    color: var(--color_background);
+    font-size: 1.2rem !important;
+}
+
+.bg-success {
+    background-color: var(--color-success) !important;
+}
+
+.bg-danger {
+    background-color: var(--color-danger) !important;
+}
 
 /* Modal */
 .modal-sheet {

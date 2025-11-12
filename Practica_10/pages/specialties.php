@@ -188,8 +188,8 @@
                         <h5 class="modal-title" id="modal_titulo_especialidad">Registro de Especialidad</h5>
                         
                         <div id="detalles_edicion_especialidad" class="hidden">
-                            <small id="fecha_Reg_especialidad"></small>
-                            <small id="estatus_especialidad"></small>
+                            <h4 id="fecha_Reg_especialidad"></h4>
+                            <h4 id="estatus_especialidad"></h4>
                         </div>
                     </div>
 

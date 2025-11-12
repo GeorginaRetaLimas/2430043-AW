@@ -246,12 +246,11 @@
                                 <!-- Especialidad -->
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <select class="form-select" id="especialidad_medico">
-                                            <option value="" selected disabled></option>
-                                            <option value="cardiologia">Cardiología</option>
-                                            <option value="pediatria">Pediatría</option>
-                                            <option value="dermatologia">Dermatología</option>
-                                            <option value="ginecologia">Anesteciologo</option>
+                                        <select class="form-select" >
+                                            <?php
+                                                //$stmt =
+                                            ?>
+                                            
                                         </select>
                                         <label for="especialidad_medico" class="form-label">Especialidad</label>
                                     </div>

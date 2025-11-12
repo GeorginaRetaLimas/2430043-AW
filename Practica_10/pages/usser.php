@@ -131,18 +131,21 @@
                     
                     <!-- Filtros -->
                     <div class="d-flex gap-2">
+                        <!-- Rol -->
                         <select class="form-select filtro-categoria" style="min-width: 150px;" id="filtro-rol" onchange="aplicarFiltros()">
                             <option value="">Rol</option>
                             <option value="secretario">Secretario</option>
                             <option value="medico">Médico</option>
                         </select>
 
+                        <!-- Estatus -->
                         <select class="form-select filtro-categoria" style="min-width: 150px;" id="filtro-categoria" onchange="aplicarFiltros()">
                             <option value="">Estatus</option>
                             <option value="activo">Activo</option>
                             <option value="inactivo">Inactivo</option>
                         </select>
                         
+                        <!-- Ordenamiento -->
                         <select class="form-select filtro-categoria" style="min-width: 160px;" id="ordenar" onchange="aplicarFiltros()">
                             <option value="">Ordenar</option>
                             <option value="nombre-asc">Nombre A-Z</option>
