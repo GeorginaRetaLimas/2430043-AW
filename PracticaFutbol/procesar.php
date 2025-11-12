@@ -1,4 +1,7 @@
 <?php
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+    
     $pdo = new PDO("mysql:host=localhost;dbname=futbol;", "admin", "72b3c6aa122d856cd739bc4e41b070d6ba90a8e516e285d4");
 
     // Traemos los datos
@@ -42,5 +45,5 @@
     $stmt->bindParam(':sexo', $sexo);
     $stmt->bindParam(':equipo', $equipo);
 
-    $stmt->execute();
+    $stmt->execute();}
 ?>
