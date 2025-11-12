@@ -140,11 +140,8 @@
                         </select>
                         
                         <select class="form-select filtro-categoria" style="min-width: 160px;" id="filtro-especialidad-medico" onchange="aplicarFiltrosMedicos()">
-                            <option value="">Especialidad</option>
-                            <option value="cardiologia">Cardiología</option>
-                            <option value="pediatria">Pediatría</option>
-                            <option value="dermatologia">Dermatología</option>
-                            <option value="ginecologia">Ginecología</option>
+                            <option value="">Especialidades</option>
+                            <!-- Se llenará con el Js -->
                         </select>
                         
                         <select class="form-select filtro-categoria" style="min-width: 160px;" id="ordenar-medicos" onchange="aplicarFiltrosMedicos()">
@@ -246,11 +243,8 @@
                                 <!-- Especialidad -->
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <select class="form-select" >
-                                            <?php
-                                                //$stmt =
-                                            ?>
-                                            
+                                        <select class="form-select" id="especialidad_medico">
+                                            <!-- El js va a mostrar las opciones -->
                                         </select>
                                         <label for="especialidad_medico" class="form-label">Especialidad</label>
                                     </div>
