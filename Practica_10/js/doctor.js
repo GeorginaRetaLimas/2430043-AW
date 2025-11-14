@@ -130,9 +130,16 @@ function guardarMedico() {
     const horario = document.getElementById('horario_medico').value;
     const estatus = document.getElementById('estatus_medico_form').value;
 
+    console.log(nombre, cedula, especialidad);
+
     // Validaciones básicas en JavaScript
-    if (!nombre || !cedula || !especialidad) {
-        Swal.fire('Error', 'Nombre, cédula y especialidad son obligatorios', 'error');
+    if (!nombre || !cedula) {
+        Swal.fire('Error', 'Nombre y cédula son obligatorios (JS)', 'error');
+        return;
+    }
+
+    if (!especialidad) {
+        Swal.fire('Error', 'La especialidad es obligatorios (JS)', 'error');
         return;
     }
 
@@ -270,10 +277,12 @@ function eliminarMedico(id) {
         cancelButtonText: 'Cancelar'
     }).then((resultado) => {
         if (resultado.isConfirmed) {
+            // Definimos el action de eliminar un medico
             const datosFormulario = new FormData();
             datosFormulario.append('action', 'delete_medicos');
             datosFormulario.append('id', id);
 
+            // Enviar la peticion al servidor
             fetch('../php/doctor_create.php', {
                 method: 'POST',
                 body: datosFormulario

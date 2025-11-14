@@ -165,8 +165,13 @@
             $activo = ($estatus === 'activo') ? 1 : 0;
 
             // Validaciones en PHP
-            if (empty($nombre) || empty($cedula) || empty($especialidad)) {
-                echo json_encode(['success' => false, 'message' => 'Nombre, cédula y especialidad son obligatorios']);
+            if (empty($nombre) || empty($cedula)) {
+                echo json_encode(['success' => false, 'message' => 'Nombre y cédula son obligatorios (PHP)']);
+                return;
+            }
+
+            if (empty($especialidad)) {
+                echo json_encode(['success' => false, 'message' => 'Especialidad son obligatorios (PHP)']);
                 return;
             }
 

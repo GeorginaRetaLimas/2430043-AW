@@ -1,3 +1,4 @@
+// Variables globales de paciente
 let pacientes = [];
 let pacienteEditando = null;
 
