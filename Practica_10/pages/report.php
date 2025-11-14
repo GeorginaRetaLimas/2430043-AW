@@ -218,8 +218,8 @@
                         <h5 class="modal-title" id="modal_titulo_reporte">Generar Reporte</h5>
                         
                         <div id="detalles_edicion_reporte" class="hidden">
-                            <small id="fecha_Reg_reporte"></small>
-                            <small id="estatus_reporte"></small>
+                            <h4 id="fecha_Reg_reporte"></h4>
+                            <h4 id="estatus_reporte"></h4>
                         </div>
                     </div>
 

@@ -208,8 +208,8 @@
                         <h5 class="modal-title" id="modal_titulo_pago">Registro de Pago</h5>
                         
                         <div id="detalles_edicion_pago" class="hidden">
-                            <small id="fecha_Reg_pago"></small>
-                            <small id="estatus_pago"></small>
+                            <h4 id="fecha_Reg_pago"></h4>
+                            <h4 id="estatus_pago"></h4>
                         </div>
                     </div>
 

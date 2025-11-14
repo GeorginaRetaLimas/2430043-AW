@@ -208,8 +208,8 @@
                         <h5 class="modal-title" id="modal_titulo_tarifa">Registro de Tarifa</h5>
                         
                         <div id="detalles_edicion_tarifa" class="hidden">
-                            <small id="fecha_Reg_tarifa"></small>
-                            <small id="estatus_tarifa"></small>
+                            <h4 id="fecha_Reg_tarifa"></h4>
+                            <h4 id="estatus_tarifa"></h4>
                         </div>
                     </div>
 

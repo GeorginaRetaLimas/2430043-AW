@@ -215,8 +215,8 @@
                         <h5 class="modal-title" id="modal_titulo_cita">Registro de Cita</h5>
                         
                         <div id="detalles_edicion_cita" class="hidden">
-                            <small id="fecha_Reg_cita"></small>
-                            <small id="estatus_cita"></small>
+                            <h4 id="fecha_Reg_cita"></h4>
+                            <h4 id="estatus_cita"></h4>
                         </div>
                     </div>
 

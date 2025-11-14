@@ -200,8 +200,8 @@
                         <h5 class="modal-title" id="modal_titulo_medico">Registro de Médico</h5>
                         
                         <div id="detalles_edicion_medico" class="hidden">
-                            <small id="fecha_Reg_medico"></small>
-                            <small id="estatus_medico"></small>
+                            <h4 id="fecha_Reg_medico"></h4>
+                            <h4 id="estatus_medico"></h4>
                         </div>
                     </div>
 

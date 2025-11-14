@@ -200,8 +200,8 @@
                         <h5 class="modal-title" id="modal_titulo_usuario">Registro de Usuario</h5>
                         
                         <div id="detalles_edicion_usuario" class="hidden">
-                            <small id="fecha_Reg_usuario"></small>
-                            <small id="estatus_usuario"></small>
+                            <h4 id="estatus_usuario"></h4>
+                            <h4 id="fecha_Reg_usuario"></h4>
                         </div>
                     </div>
 

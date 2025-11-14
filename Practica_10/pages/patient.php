@@ -195,8 +195,8 @@
                             <h5 class="modal-title" id="modal_titulo"></h5>
                             
                             <div id="detalles_edicion" class="hidden">
-                                <small id="fecha_Reg"></small>
-                                <small id="estatus"></small>
+                                <h4 id="fecha_Reg"></h4>
+                                <h4 id="estatus"></h4>
                             </div>
                         </div>
 

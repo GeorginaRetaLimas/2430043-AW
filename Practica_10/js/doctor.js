@@ -108,7 +108,20 @@ function mostrarEdicionMedico(id) {
     document.getElementById('cedula_medico').value = medico.CedulaProfesional || '';
     document.getElementById('telefono_medico').value = medico.Telefono || '';
     document.getElementById('correo_medico').value = medico.CorreoElectronico || '';
-    document.getElementById('especialidad_medico').value = medico.IdEspecialidad || '';
+
+    //document.getElementById('especialidad_medico').value = medico.IdEspecialidad || '';
+
+    // Intento de Especialidad Select
+
+    const especialidadSelect = document.getElementById('especialidad_medico');
+
+    especialidadesFiltro.forEach(especialidad => {
+        if(especialidad.IdEspecialidad == medico.IdEspecialidad){
+            const EspecialidadMedico = especialidad.NombreEspecialidad;
+            especialidadSelect.value = EspecialidadMedico || '';
+        }
+    });
+
     document.getElementById('horario_medico').value = medico.HorarioAtencion || '';
     document.getElementById('estatus_medico_form').value = medico.Estatus == 1 ? 'activo' : 'inactivo';
     
