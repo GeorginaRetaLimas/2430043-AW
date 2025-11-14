@@ -6,6 +6,7 @@ let especialidadesFiltro = [];
 
 // Cargar médicos y especialidades al iniciar
 document.addEventListener('DOMContentLoaded', function() {
+    // Cargamos los medicos y despues los filtros
     cargarMedicos();
     cargarEspecialidadesSelect();
     cargarEspecialidadesFiltro();
@@ -107,7 +108,6 @@ function mostrarEdicionMedico(id) {
     document.getElementById('cedula_medico').value = medico.CedulaProfesional || '';
     document.getElementById('telefono_medico').value = medico.Telefono || '';
     document.getElementById('correo_medico').value = medico.CorreoElectronico || '';
-    // La especialidad ahora viene de la relación con la tabla medico_especialidades
     document.getElementById('especialidad_medico').value = medico.IdEspecialidad || '';
     document.getElementById('horario_medico').value = medico.HorarioAtencion || '';
     document.getElementById('estatus_medico_form').value = medico.Estatus == 1 ? 'activo' : 'inactivo';

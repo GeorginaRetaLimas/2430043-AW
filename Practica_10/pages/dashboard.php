@@ -26,7 +26,7 @@
                     <i class="bi bi-list"></i>
                 </button>
 
-                <a href="dashboard.html" class="text-white text-decoration-none mb-0">
+                <a href="dashboard.php" class="text-white text-decoration-none mb-0">
                     <img src="../assets/img/logo_line_transparent.png" height="35px">
                 </a>
 
@@ -126,7 +126,7 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="../assets/carousel/imagen1.png" alt="First slide">
+                        <img class="d-block w-100" src="../assets/carousel/image.png" alt="First slide">
                     </div>
                     <div class="carousel-item">
                         <img class="d-block w-100" src="../assets/carousel/imagen2.png" alt="Second slide">

@@ -21,7 +21,7 @@
                     <i class="bi bi-list"></i>
                 </button>
 
-                <a href="dashboard.html" class="text-white text-decoration-none mb-0">
+                <a href="dashboard.php" class="text-white text-decoration-none mb-0">
                     <img src="../assets/img/logo_line_transparent.png" height="35px">
                 </a>
 

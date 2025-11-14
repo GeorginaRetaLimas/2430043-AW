@@ -45,7 +45,7 @@ function mostrarEdicionEspecialidad(id) {
     document.getElementById('detalles_edicion_especialidad').classList.remove('hidden');
     
     // Llenar formulario con datos existentes
-    document.getElementById('nombre_especialidad').value = especialidad.nombreEspecialidad || '';
+    document.getElementById('nombre_especialidad').value = especialidad.NombreEspecialidad || '';
     document.getElementById('descripcion_especialidad').value = especialidad.Descripcion || '';
     document.getElementById('estatus_especialidad_form').value = especialidad.Estatus == 1 ? 'activo' : 'inactivo';
     
@@ -76,7 +76,7 @@ function guardarEspecialidad() {
         return;
     }
 
-    if (descripcion.length < 5) {
+    if (descripcion.length < 5) { 
         Swal.fire('Error', 'La descripción debe tener al menos 5 caracteres', 'error');
         return;
     }

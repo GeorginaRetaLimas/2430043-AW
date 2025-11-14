@@ -9,10 +9,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.8/index.min.css" rel="stylesheet">
+
     <!-- Estilos globales para la web -->
     <link rel="stylesheet" href="../assets/css/style.css" type="text/css">
-
     <link rel="stylesheet" href="../assets/css/calendar.css" type="text/css">
+    
 </head>
 <body>
     <!-- Header -->
@@ -170,33 +172,10 @@
                 </div>
             </div>
 
-            <!-- Contenedor de Calendario -->
+            <!-- Calendario FullCalendar -->
             <div class="card mt-4">
                 <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h6 class="card-title mb-0">Calendario Semanal</h6>
-                        <div>
-                            <button class="btn btn-secondary btn-sm" onclick="semanaAnterior()">
-                                <i class="bi bi-chevron-left"></i>
-                            </button>
-                            <span id="rango-semana" class="mx-3 fw-bold"></span>
-                            <button class="btn btn-secondary btn-sm" onclick="semanaSiguiente()">
-                                <i class="bi bi-chevron-right"></i>
-                            </button>
-                            <button class="btn btn-cancel-primary btn-sm ms-2" onclick="irAHoy()">
-                                Hoy
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="calendario-semanal">
-                        <div class="dias-semana">
-                            <!--Dias de la semana dinamicos -->
-                        </div>
-                        <div class="cuerpo-semana">
-                            <!-- Citas dinamicas -->
-                        </div>
-                    </div>
+                    <div id='calendar'></div>
                 </div>
             </div>
 
@@ -304,14 +283,14 @@
         </div>
     </div>
 
-    <script src="../js/agenda.js"></script>
-
-    <script src="../js/calendar.js"></script>
-
-    <!-- Script para el slide Bar -->
+    <!-- Scripts de bootstrap y sweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <!-- FullCalendar script-->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+    
+    <script src="../js/agenda.js"></script>
     <script src="../js/slideBar.js"></script>
 </body>
 </html>

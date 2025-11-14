@@ -77,7 +77,7 @@ function mostrarPacientes() {
             <td>${paciente.FechaRegistro ? new Date(paciente.FechaRegistro).toLocaleDateString() : '-'}</td>
             <td><span class="badge ${paciente.Estatus === 'activo' ? 'bg-success' : 'bg-danger'}">${paciente.Estatus === 'activo' ? 'Activo' : 'Inactivo'}</span></td>
             <td>
-                <button class="btn btn-sm btn-info" onclick="mostrarDetallesPaciente(${paciente.idPaciente})">
+                <button class="btn btn-sm btn-info text-center" onclick="mostrarDetallesPaciente(${paciente.idPaciente})">
                     <i class="bi bi-eye"></i> Ver
                 </button>
             </td>
